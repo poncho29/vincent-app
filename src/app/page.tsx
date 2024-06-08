@@ -1,6 +1,11 @@
+import { Button } from "@/components/common";
 
 export default function Home() {
   return (
-    <div>Hola</div>
+    <div>
+      Hola
+
+      <Button variant="secondary">Adopta</Button>  
+    </div>
   );
 }

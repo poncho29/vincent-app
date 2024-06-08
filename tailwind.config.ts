@@ -10,7 +10,9 @@ const config: Config = {
     extend: {
       colors: {
         sky: "#85C8CB",
+        skyLight: "#A6E3E6",
         green: "#98BE32",
+        greenLight: "#C5E66D",
         gray: "#D9D9D9",
         blackLight: "#3D3C38",
       },
