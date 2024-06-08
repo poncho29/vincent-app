@@ -1,11 +1,20 @@
 import type { Metadata } from "next";
-
-
-import { Montserrat } from "next/font/google";
+import { Montserrat, Mochiy_Pop_One } from "next/font/google";
 
 import "./globals.css";
 
-const montserrat = Montserrat({ subsets: ["latin"] });
+export const montserrat = Montserrat({
+  subsets: ["latin"],
+  variable: "--font-montserrat",
+  display: "swap",
+});
+
+export const mochiyPopOne = Mochiy_Pop_One({
+  subsets: ["latin"],
+  variable: "--font-mochiypopone",
+  weight: ["400"],
+});
+
 
 export const metadata: Metadata = {
   title: "Fundación Vincent",
@@ -18,8 +27,13 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="es">
-      <body className={montserrat.className}>{children}</body>
+    <html
+      lang="es"
+      className={`${montserrat.variable} ${mochiyPopOne.variable}`}
+    >
+      <body>
+        { children }
+      </body>
     </html>
   );
 }
