@@ -1,3 +1,5 @@
+export * from './ArrowDowmIcon';
+export * from './CloseXIcon';
 export * from './ClowIcon';
 export * from './HeartIcon';
 export * from './LocationIcon';

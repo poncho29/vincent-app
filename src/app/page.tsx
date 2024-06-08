@@ -1,11 +1,5 @@
-import { Button } from "@/components/common";
+import { redirect } from "next/navigation";
 
 export default function Home() {
-  return (
-    <div>
-      Hola
-
-      <Button variant="secondary">Adopta</Button>  
-    </div>
-  );
+  redirect("/landing/");
 }
