@@ -2,6 +2,8 @@
 
 import { useEffect, useRef, useState } from "react";
 
+import { useScreenSize } from "@/hooks";
+
 import { ItemMenu } from "./ItemMenu";
 
 import { CloseXIcon, MenuIcon } from "../icons";
@@ -12,6 +14,14 @@ export const Menu = () => {
   const menuRef = useRef<HTMLElement>(null);
 
   const [toogleMenu, setToogleMenu] = useState(false);
+
+  const { width } = useScreenSize();
+
+  useEffect(() => {
+    if (width < 1024) return;
+
+    setToogleMenu(false);
+  }, [width]);
 
   useEffect(() => {
     if (!toogleMenu) return;
@@ -30,12 +40,13 @@ export const Menu = () => {
   }, [toogleMenu]);
 
   const handleToogleMenu = () => {
+    if (width >= 1024) return;
+
     setToogleMenu(!toogleMenu);
   }
 
   return (
     <div
-      
       className={`
         transition-all duration-500 ease-in-out
         ${toogleMenu ? 'absolute top-0 left-0 w-screen h-screen bg-white/60 ' : 'w-auto h-auto'}

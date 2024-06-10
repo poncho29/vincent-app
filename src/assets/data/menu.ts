@@ -1,62 +1,60 @@
 import { IMenu, ISubMenu } from "@/interfaces/components";
 
+const BASE_PATH = '/landing';
+const PATH_SUPORT = `${BASE_PATH}/apoyanos`;
+
 const subMenuApoyanos: ISubMenu[] = [
   {
     label: 'Adoptar',
-    path: '/support/adoptar',
+    path: `${PATH_SUPORT}/adoptar`,	
   },
   {
     label: 'Apadrinar',
-    path: '/support/apadrinar',
+    path: `${PATH_SUPORT}/apadrinar`,
   },
   {
     label: 'Donar',
-    path: '/support/donar',
+    path: `${PATH_SUPORT}/donar`,
   },
   {
     label: 'Empresas',
-    path: '/support/empresas',
+    path: `${PATH_SUPORT}/empresas`,
   },
   {
     label: 'Voluntarios',
-    path: '/support/voluntarios',
+    path: `${PATH_SUPORT}/voluntarios`,
   },
   {
     label: 'Hogar de paso',
-    path: '/support/hogar-de-paso',
+    path: `${PATH_SUPORT}/hogar-de-paso`,
   },
 ];
 
 export const menuRoutes: IMenu[] = [
   {
     label: 'Inicio',
-    path: '/landing',
-    children: []
+    path: `${BASE_PATH}`,
   },
   {
     label: 'Quienes somos',
-    path: '/landing/about',
-    children: []
+    path: `${BASE_PATH}/quienes-somos`,
   },
   {
     label: 'Familia Vincent',
-    path: '/landing/family',
-    children: []
+    path: `${BASE_PATH}/familia-vincent`,
   },
   {
     label: 'Apóyanos',
-    path: '/landing/support',
+    path: `${BASE_PATH}/apoyanos`,
     children: subMenuApoyanos
   },
   {
     label: 'Blog',
-    path: '/landing/blog',
-    children: []
+    path: `${BASE_PATH}/blog`,
   },
   {
     label: 'Contáctanos',
-    path: '/landing/contact',
-    children: []
+    path: `${BASE_PATH}/contactanos`,
   }
 ];
 
