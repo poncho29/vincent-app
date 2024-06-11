@@ -57,7 +57,7 @@ export const Menu = () => {
         className={`
           fixed top-[25px] left-1/2 -translate-x-1/2 z-50 w-[325px] p-4 rounded-xl shadow-md bg-white
           transition-transform duration-500 ease-in-out ${toogleMenu ? 'translate-y-0' : '-translate-y-[110%]'}
-          lg:relative lg:top-auto lg:left-auto lg:transform-none lg:w-auto lg:rounded-none lg:shadow-none
+          lg:relative lg:top-auto lg:left-auto lg:transform-none lg:w-auto lg:rounded-none lg:shadow-none lg:px-0
         `}
       >
         <ul

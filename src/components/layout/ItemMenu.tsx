@@ -37,7 +37,7 @@ export const ItemMenu = ({ route: { label, path, children }, onClick } : Props) 
   return (
     <li
       key={label}
-      className={`relative`}
+      className="relative"
       onMouseEnter={() => handleShowSubmenu(true)}
       onMouseLeave={() => handleShowSubmenu(false)}
     >
@@ -69,7 +69,7 @@ export const ItemMenu = ({ route: { label, path, children }, onClick } : Props) 
       
       <div
         className={`
-          w-full grid justify-items-center transition-all duration-200
+          w-full grid justify-items-center transition-all duration-200 lg:bg-white
           lg:absolute lg:-left-[60px] lg:w-[200px] lg:rounded-xl lg:shadow-lg lg:py-4
           ${showSubmenu ? 'grid-rows-[1fr] opacity-100 pt-2' : 'grid-rows-[0fr] opacity-0'}
         `}
