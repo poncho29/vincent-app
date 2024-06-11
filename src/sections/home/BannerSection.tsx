@@ -7,7 +7,7 @@ export const BannerSection = () => {
       bg-no-repeat md:bg-bannerLanding md:h-[385px] lg:h-[565px]"
     >
       <div
-        className="h-full max-w-[1440px] mx-auto flex flex-col items-end py-5 px-6 md:p-12
+        className="h-full max-w-section mx-auto flex flex-col items-end py-5 px-6 md:p-12
         lg:pt-[78px] lg:px-12 xl:px-[100px]"
       >
         <h1

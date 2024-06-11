@@ -5,7 +5,7 @@ import { Menu } from './Menu';
 export const Header = () => {
   return (
     <header
-      className="w-full max-w-[1440px] h-[67px] flex items-center justify-between px-6 mx-auto bg-white
+      className="w-full max-w-section h-[67px] flex items-center justify-between px-6 mx-auto bg-white
       md:px-12 lg:h-[110px] xl:px-[100px]"
     >
       <Image

@@ -2,6 +2,12 @@
 @tailwind components;
 @tailwind utilities;
 
+@layer utilities {
+  .max-w-section {
+    max-width: 1440px;
+  }
+}
+
 html {
   font-family: var(--font-montserrat);
 }
