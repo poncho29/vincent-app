@@ -3,13 +3,13 @@ import { Montserrat, Mochiy_Pop_One } from "next/font/google";
 
 import "./globals.css";
 
-export const montserrat = Montserrat({
+const montserrat = Montserrat({
   subsets: ["latin"],
   variable: "--font-montserrat",
   display: "swap",
 });
 
-export const mochiyPopOne = Mochiy_Pop_One({
+const mochiyPopOne = Mochiy_Pop_One({
   subsets: ["latin"],
   variable: "--font-mochiypopone",
   weight: ["400"],
