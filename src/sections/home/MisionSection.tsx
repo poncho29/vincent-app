@@ -1,4 +1,4 @@
-import Image from 'next/image';
+import Image from "next/image";
 
 export const MisionSection = () => {
   return (
@@ -12,19 +12,27 @@ export const MisionSection = () => {
       </h2>
 
       <div
-        className='flex flex-col gap-4 lg:flex-row-reverse lg:gap-[30px]'
+        className="flex flex-col gap-4 lg:flex-row-reverse lg:gap-8"
       >
         <div
-          className='max-w-[400px] mx-auto text-sm leading-4 lg:text-lg lg:leading-5
-          lg:max-w-none lg:grow'
+          className="max-w-[400px] mx-auto text-sm leading-4 lg:text-xl
+          lg:max-w-none lg:grow"
         >
           <p>
-            En <span className='font-semibold'>Fundación Vincent</span> rescatamos, cuidamos y encontramos hogares amorosos para los perritos que han sido abandonados en las calles. Trabajamos incansablemente para proporcionarles atención médica, alimentación, y sobre todo, mucho amor y cuidado mientras esperan ser adoptados. Nos comprometemos en darles una segunda oportunidad y  encontrarles familias que les brinden un hogar para toda la vida.
+            En <span className="font-semibold">Fundación Vincent</span> rescatamos, cuidamos y encontramos hogares amorosos para los perritos que han sido abandonados en las calles. Trabajamos incansablemente para proporcionarles atención médica, alimentación, y sobre todo, mucho amor y cuidado mientras esperan ser adoptados. Nos comprometemos en darles una segunda oportunidad y  encontrarles familias que les brinden un hogar para toda la vida.
           </p>
           <br />
-          <p>
+          <p className="mb-16">
             Tratamos de reducir el abandono y fomentar la adopción consciente, creando así un futuro más feliz y seguro para cada uno de nuestros peludos amigos ¡Únete a nosotros en nuestra labor de salvar vidas y hacer que cada colita tenga un final feliz!
           </p>
+
+          <Image
+            src="/landing/footprints-background-mobile.png"
+            alt="Footprints Background Mobile"
+            width={710}
+            height={120}
+            className="hidden mx-auto lg:block"
+          />
         </div>
 
         <Image 

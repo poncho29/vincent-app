@@ -1,9 +1,21 @@
 import { ArrowDowmIcon, ClowIcon, HeartIcon, MoneyIcon } from "@/components/icons"
 
 const supportCards = [
-  { text: 'Haz tu donación aquí', icon: <MoneyIcon className="size-10 lg:size-[70px]" /> },
-  { text: 'Aporta alimentación, medicinas, cobijas, etc. ', icon: <HeartIcon className="size-10 lg:size-[70px]" /> },
-  { text: 'Apadrina un peludito', icon: <ClowIcon className="size-10 lg:size-[70px]" /> },
+  {
+    text: 'Haz tu donación aquí',
+    customClass: 'lg:max-w-[194px]',
+    icon: <MoneyIcon className="size-10 lg:size-[70px]" />
+  },
+  {
+    text: 'Aporta alimentación, medicinas, cobijas, etc.',
+    customClass: 'lg:max-w-[270px]',
+    icon: <HeartIcon className="size-10 lg:w-[70px] lg:h-14" />
+  },
+  {
+    text: 'Apadrina un peludito',
+    customClass: 'lg:max-w-[194px]',
+    icon: <ClowIcon className="size-10 lg:w-[86px] lg:h-20" />
+  },
 ]
 
 export const SupportSection = () => {
@@ -22,7 +34,7 @@ export const SupportSection = () => {
         className="max-w-[400px] flex flex-col gap-2.5 mx-auto lg:max-w-none
         lg:flex-row lg:justify-between"
       >
-        {supportCards.map(({ text, icon }, index) => (
+        {supportCards.map(({ text, customClass, icon }) => (
           <div
             key={text}
             className="flex items-center justify-between py-2.5 px-[21.5px] rounded-[20px] bg-green
@@ -30,7 +42,7 @@ export const SupportSection = () => {
           >
             <p
               className={`max-w-[192px] text-base text-white text-center font-semibold
-              lg:max-w-[${index === 1 ? 270 : 194}px] lg:text-2xl lg:leading-6`}
+              ${customClass} lg:text-2xl lg:leading-6`}
             >
               { text }
             </p>
