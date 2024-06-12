@@ -1,4 +1,4 @@
-import { BannerSection, CarouselSection } from "@/sections";
+import { BannerSection, CarouselSection, SupportSection } from "@/sections";
 
 export default function LandingPage() {
   return (
@@ -11,11 +11,8 @@ export default function LandingPage() {
       >
         <CarouselSection />
 
-        <section>
-          <h1 className="tex-2xl">Seccion 3</h1>
-        </section>
+        <SupportSection />
       </div>
-
     </main>
   );
 }
