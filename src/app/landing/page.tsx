@@ -1,4 +1,4 @@
-import { BannerSection, CarouselSection, SupportSection } from "@/sections";
+import { BannerSection, CarouselSection, MisionSection, SupportSection } from "@/sections";
 
 export default function LandingPage() {
   return (
@@ -12,6 +12,8 @@ export default function LandingPage() {
         <CarouselSection />
 
         <SupportSection />
+
+        <MisionSection />
       </div>
     </main>
   );

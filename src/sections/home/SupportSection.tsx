@@ -9,7 +9,7 @@ const supportCards = [
 export const SupportSection = () => {
   return (
     <section
-      className="w-full max-w-section mx-auto mb-[30px] px-6 lg:mb-[55px] xl:px-[100px]"
+      className="w-full max-w-section mx-auto mb-[30px] px-6 lg:mb-[65px] xl:px-[100px]"
     >
       <h2 className="text-xl font-mochiypopone text-center lg:text-[50px] lg:leading-[44px] lg:mb-2.5">
         Apóyanos
