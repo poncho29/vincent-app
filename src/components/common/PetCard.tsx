@@ -2,17 +2,23 @@ import Image from 'next/image';
 
 import { Button } from './Button';
 
-export const PetCard = () => {
+import { Pet } from '@/interfaces';
+
+interface Props {
+  pet: Pet;
+}
+
+export const PetCard = ({ pet }: Props) => {
   return (
     <div
-      className="relative w-[247px] h-[255px] rounded-3xl shadow-lg bg-white
+      className="relative w-[250px] h-[320px] rounded-3xl shadow-lg bg-white
       lg:w-[400px] lg:h-[505px]"
     >
       <Image
-        src={"/pets/nala-mobile.png"}
+        src={"/pets/nala.png"}
         alt="Nala"
-        width={247}
-        height={199}
+        width={250}
+        height={250}
         className="z-10 lg:hidden"
       />
       
@@ -20,7 +26,7 @@ export const PetCard = () => {
         src={"/pets/nala.png"}
         alt="Nala"
         width={400}
-        height={397.5}
+        height={400}
         className="hidden z-10 lg:block"
       />
 
@@ -29,9 +35,9 @@ export const PetCard = () => {
       >
         <span
           className="inline-block w-56 text-sm text-center text-blackLight font-semibold leading-4 mb-4
-          lg:w-full lg:text-[22px] lg:mb-7"
+          lg:w-full lg:text-[22px] lg:leading-6 lg:mb-6"
         >
-          Hembra • Adulta • Raza criolla
+          Hembra • Adulta <br /> Raza criolla
         </span>
 
         <div className="flex items-center gap-5 justify-center">

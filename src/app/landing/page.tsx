@@ -1,30 +1,21 @@
-import { BannerSection } from "@/sections";
-
-import { Carrousel } from "@/components/common";
+import { BannerSection, CarouselSection } from "@/sections";
 
 export default function LandingPage() {
   return (
-    <>
+    <main className="relative">
       <BannerSection />
 
-      <section
-        className="relative w-full h-auto max-w-section mx-auto"
+      <div
+        className="absolute top-[227px] w-full h-auto mx-auto rounded-t-3xl bg-white
+        md:top-[360px] lg:top-[545px]"
       >
-        <div
-          className="absolute -top-8 w-full pt-5 pl-6 rounded-t-3xl bg-white md:rounded-[36px] md:pt-[50px]"
-        >
-          <h2
-            className="text-xl text-center leading-[22px] font-mochiypopone mb-6 md:text-3xl
-            lg:text-[50px] lg:leading-[52px]"
-          >
-            Peluditos <br />
-            esperando un hogar
-          </h2>
+        <CarouselSection />
 
-            
-          <Carrousel slides={[]} />
-        </div>
-      </section>
-    </>
+        <section>
+          <h1 className="tex-2xl">Seccion 3</h1>
+        </section>
+      </div>
+
+    </main>
   );
 }

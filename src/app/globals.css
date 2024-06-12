@@ -6,6 +6,10 @@
   .max-w-section {
     max-width: 1440px;
   }
+
+  .no-scroll::-webkit-scrollbar {
+    display: none;
+  }
 }
 
 html {

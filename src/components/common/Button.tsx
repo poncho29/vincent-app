@@ -9,6 +9,7 @@ import { HeartIcon } from "../icons";
 type ButtonProps = HTMLAttributes<HTMLButtonElement> & VariantProps<typeof buttonVariants>;
 
 interface Props extends ButtonProps {
+  showIcon?: boolean;
   children: React.ReactNode;
 }
 
@@ -30,7 +31,7 @@ const buttonVariants = cva(
   }
 )
 
-export const Button = ({ className, children, variant = 'default', ...props }: Props) => {  
+export const Button = ({ className, children, variant = 'default', showIcon = true, ...props }: Props) => {  
   return (
     <button
       { ...props }
@@ -38,7 +39,7 @@ export const Button = ({ className, children, variant = 'default', ...props }: P
     >
       { children }
       
-      { (variant === 'default' || variant === 'secondary') ? (
+      { (variant === 'default' || variant === 'secondary') && showIcon ? (
         <HeartIcon className="size-3 lg:w-[22px] lg:h-[18px]" />
       ) : null }
     </button>

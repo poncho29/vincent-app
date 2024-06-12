@@ -1,3 +1,3 @@
 export * from './Button';
-export * from './Carrousel';
+export * from './Carousel';
 export * from './PetCard';
