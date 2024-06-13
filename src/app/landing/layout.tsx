@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
 
-import { Header } from "@/components/layout";
+import { Footer, Header } from "@/components/layout";
 
 export const metadata: Metadata = {
   title: "Fundación Vincent",
@@ -17,6 +17,8 @@ export default function RootLayout({
       <Header />
 
       { children }
+
+      <Footer />
     </>
   );
 }
