@@ -19,7 +19,7 @@ export const CarouselSection = () => {
     
       <Button
         showIcon={false}
-        className="w-[140px] h-[30px] mx-auto text-base"
+        className="mx-auto  lg:w-[203px] lg:h-[55px] lg:text-2xl"
       >
         Ver todos
       </Button>

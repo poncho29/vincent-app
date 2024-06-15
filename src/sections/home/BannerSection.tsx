@@ -28,8 +28,8 @@ export const BannerSection = () => {
         </p>
 
         <div className="flex gap-3 mt-[15px] md:mt-6 lg:gap-[50px] lg:mt-[101px]">
-          <Button>Adoptar</Button>
-          <Button variant="secondary">Dona</Button>
+          <Button className='lg:w-[170px] lg:h-[50px] lg:text-2xl'>Adoptar</Button>
+          <Button variant="secondary" className='lg:w-[170px] lg:h-[50px] lg:text-2xl'>Dona</Button>
         </div>
       </div>
     </section>

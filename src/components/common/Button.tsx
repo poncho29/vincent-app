@@ -16,7 +16,7 @@ interface Props extends ButtonProps {
 const buttonVariants = cva(
   `w-[95px] h-[25px] flex items-center justify-center gap-[5px] text-white
   text-sm font-bold leading-[70px] rounded-[5px] transition-colors duration-300
-  lg:w-[170px] lg:h-[50px] lg:gap-[15px] lg:text-2xl lg:rounded-[15px]`,
+  lg:w-[140px] lg:h-[40px] lg:gap-[15px] lg:text-lg lg:rounded-lg`,
   {
     variants: {
       variant: {

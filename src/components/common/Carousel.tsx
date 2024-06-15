@@ -13,7 +13,7 @@ interface Props {
 export const Carousel = ({ pets }: Props) => {
   const { width } = useScreenSize();
 
-  const widthCarousel = width >= 1024 ? (pets.length * 420) : (pets.length * 266);
+  const widthCarousel = width >= 1024 ? (pets.length * 370) : (pets.length * 266);
 
   return (
     <div
