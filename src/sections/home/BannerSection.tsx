@@ -3,8 +3,7 @@ import { Button } from '@/components/common';
 export const BannerSection = () => {
   return (
     <section
-      className="w-full h-[257px] text-white bg-bannerLandingMobile bg-cover bg-center
-      bg-no-repeat md:bg-bannerLanding md:h-[385px] lg:h-[565px]"
+      className="w-full h-[227px] text-white md:h-[330px] lg:h-[505px]"
     >
       <div
         className="h-full max-w-section mx-auto flex flex-col items-end py-5 px-6 md:p-12
