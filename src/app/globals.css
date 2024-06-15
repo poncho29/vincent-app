@@ -10,6 +10,14 @@
   .no-scroll::-webkit-scrollbar {
     display: none;
   }
+
+  .title {
+    @apply font-mochiypopone text-xl leading-[22px] text-center lg:text-4xl
+  }
+
+  .paragraph {
+    @apply text-sm lg:text-lg;
+  }
 }
 
 html {

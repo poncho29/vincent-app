@@ -5,26 +5,27 @@ import { Menu } from './Menu';
 export const Header = () => {
   return (
     <header
-      className="sticky top-0 w-full max-w-section h-[67px] flex items-center justify-between
-      px-6 mx-auto shadow-sm z-1000 bg-white md:px-12 lg:h-[110px] xl:px-[100px]"
+      className="sticky top-0 w-full h-[67px] shadow-sm z-1000 bg-white lg:h-[110px]"
     >
-      <Image
-        src="/landing/vincent-logo-mobile.png"
-        alt="Vincent Logo"
-        width={142}
-        height={36}
-        className="block xl:hidden"
-      />
-      
-      <Image
-        src="/landing/vincent-logo.png"
-        alt="Vincent Logo"
-        width={248}
-        height={60}
-        className="hidden xl:block"
-      />
+      <div className='w-full h-full max-w-section mx-auto flex items-center justify-between px-6 md:px-12 xl:px-[100px]'>
+        <Image
+          src="/landing/vincent-logo-mobile.png"
+          alt="Vincent Logo"
+          width={142}
+          height={36}
+          className="block xl:hidden"
+        />
+        
+        <Image
+          src="/landing/vincent-logo.png"
+          alt="Vincent Logo"
+          width={248}
+          height={60}
+          className="hidden xl:block"
+        />
 
-      <Menu />
+        <Menu />
+      </div>
     </header>
   )
 }

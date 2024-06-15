@@ -1,5 +1,4 @@
-import { Button } from '@/components/common'
-import React from 'react'
+import { Button } from '@/components/common';
 
 export const HelpSection = () => {
   return (

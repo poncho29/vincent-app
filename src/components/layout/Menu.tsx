@@ -49,7 +49,7 @@ export const Menu = () => {
     <div
       className={`
         transition-all duration-500 ease-in-out
-        ${toogleMenu ? 'absolute top-0 left-0 w-screen h-screen bg-white/60 ' : 'w-auto h-auto'}
+        ${toogleMenu ? 'absolute top-0 left-0 w-full h-screen bg-white/60 ' : 'w-auto h-auto'}
       `}
     >
       <nav

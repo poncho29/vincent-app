@@ -23,6 +23,7 @@ const buttonVariants = cva(
         default: 'bg-sky hover:bg-skyLight',
         secondary: 'bg-green hover:bg-greenLight',
         outline: 'text-sky bg-transparent border-[2px] border-sky hover:text-white hover:bg-sky',
+        outlineSecondary: 'text-white bg-transparent border-[2px] border-white hover:text-sky hover:bg-white',
       },
       defaultVariants: {
         variant: 'default'
