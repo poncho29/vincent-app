@@ -5,8 +5,8 @@ import { Menu } from './Menu';
 export const Header = () => {
   return (
     <header
-      className="w-full max-w-section h-[67px] flex items-center justify-between px-6 mx-auto bg-white
-      md:px-12 lg:h-[110px] xl:px-[100px]"
+      className="sticky top-0 w-full max-w-section h-[67px] flex items-center justify-between
+      px-6 mx-auto shadow-sm z-1000 bg-white md:px-12 lg:h-[110px] xl:px-[100px]"
     >
       <Image
         src="/landing/vincent-logo-mobile.png"

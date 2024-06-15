@@ -25,6 +25,9 @@ const config: Config = {
         'bannerLanding': "url('/landing/banner.png')",
         'bannerLandingMobile': "url('/landing/banner-mobile.png')",
       },
+      zIndex: {
+        '1000': '1000',
+      }
     },
   },
   plugins: [],
