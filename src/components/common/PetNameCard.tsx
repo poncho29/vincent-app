@@ -6,7 +6,8 @@ export const PetNameCard = ({ name }: Props) => {
   return (
     <div
       className='absolute top-[140px] w-auto h-[41px] min-w-[81px] py-1 pr-1 border-y border-r
-      border-dashed border-white rounded-se-[15px] rounded-ee-[15px]'
+      border-dashed border-white rounded-se-[15px] rounded-ee-[15px] lg:h-[58px] 
+      lg:top-[228px]'
     >
       <div
         className="w-full h-full flex items-center px-2 rounded-se-[15px] rounded-ee-[15px] bg-green"

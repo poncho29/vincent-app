@@ -16,18 +16,22 @@ export const Carousel = ({ pets }: Props) => {
   const widthCarousel = width >= 1024 ? (pets.length * 370) : (pets.length * 266);
 
   return (
-    <div
-      className="w-full max-w-[1240px] mx-auto overflow-scroll no-scroll py-2 pl-6 mb-6
-      md:pl-12 lg:pl-[100px] lg:mb-[52px] xl:pl-0"
+    <section 
+      className='w-full max-w-[1240px] mx-auto pl-6 md:pl-12'
     >
       <div
-        className='w-full flex gap-4 lg:gap-5'
-        style={{ width: `${widthCarousel}px` }}
+        className="w-full overflow-x-scroll py-2 mb-6
+         lg:mb-[52px] lg:show-scroll xl:pl-0"
       >
-        {pets.map((pet, index) => (
-          <PetCard key={index} pet={pet} />
-        ))}
+        <div
+          className='w-full flex gap-4 lg:gap-5'
+          style={{ width: `${widthCarousel}px` }}
+        >
+          {pets.map((pet, index) => (
+            <PetCard key={index} pet={pet} />
+          ))}
+        </div>
       </div>
-    </div>
+    </section>
   )
 }

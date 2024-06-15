@@ -20,7 +20,7 @@ export const PetCard = ({ pet }: Props) => {
         alt="Nala"
         width={250}
         height={250}
-        className="z-10 lg:hidden"
+        className="lg:hidden"
       />
       
       <Image
@@ -28,7 +28,7 @@ export const PetCard = ({ pet }: Props) => {
         alt="Nala"
         width={350}
         height={350}
-        className="hidden z-10 lg:block"
+        className="hidden lg:block"
       />
 
       <PetNameCard name={pet.name} />
