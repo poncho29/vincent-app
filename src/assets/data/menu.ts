@@ -3,7 +3,7 @@ import { IMenu, ISubMenu } from "@/interfaces/components";
 const BASE_PATH = '/landing';
 const PATH_SUPORT = `${BASE_PATH}/apoyanos`;
 
-const subMenuApoyanos: ISubMenu[] = [
+export const subMenuApoyanos: ISubMenu[] = [
   {
     label: 'Adoptar',
     path: `${PATH_SUPORT}/adoptar`,	
