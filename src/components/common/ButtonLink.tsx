@@ -1,14 +1,15 @@
-import { type HTMLAttributes } from "react";
+import Link, { type LinkProps } from "next/link";
 
-import { cva, type VariantProps } from "class-variance-authority";
+import { VariantProps, cva } from "class-variance-authority";
 
 import { cn } from "@/utils";
 
 import { HeartIcon } from "../icons";
 
-type ButtonProps = HTMLAttributes<HTMLButtonElement> & VariantProps<typeof buttonVariants>;
+type ButtonLinkProps = LinkProps & VariantProps<typeof buttonVariants>;
 
-interface Props extends ButtonProps {
+interface Props extends ButtonLinkProps {
+  className?: string;
   showIcon?: boolean;
   children: React.ReactNode;
 }
@@ -29,15 +30,15 @@ const buttonVariants = cva('button',
   }
 )
 
-export const Button = ({
+export const ButtonLink = ({
   className,
   children,
   variant = 'default',
   showIcon = true,
   ...props
-}: Props) => {  
+}: Props) => {
   return (
-    <button
+    <Link
       { ...props }
       className={cn(buttonVariants({ variant, className }), )}
     >
@@ -46,6 +47,6 @@ export const Button = ({
       { (variant === 'default' || variant === 'secondary') && showIcon ? (
         <HeartIcon className="size-3 lg:w-[22px] lg:h-[18px]" />
       ) : null }
-    </button>
+    </Link>
   )
 }

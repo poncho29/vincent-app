@@ -71,10 +71,10 @@ export const ItemMenu = ({ route: { label, path, children }, onClick } : Props) 
         className={`
           w-full grid justify-items-center transition-all duration-200 lg:bg-white
           lg:absolute lg:-left-[60px] lg:w-[200px] lg:rounded-xl lg:shadow-lg lg:py-4
-          ${showSubmenu ? 'grid-rows-[1fr] opacity-100 pt-2' : 'grid-rows-[0fr] opacity-0'}
+          ${showSubmenu ? 'grid-rows-[1fr] opacity-100 pt-4' : 'grid-rows-[0fr] opacity-0'}
         `}
       >
-        <ul className="overflow-hidden">
+        <ul className="flex flex-col gap-4 overflow-hidden">
           {children && children.map(({ label, path }: ISubMenu) => (
             <li
               key={label}

@@ -55,13 +55,13 @@ export const Menu = () => {
       <nav
         ref={menuRef}
         className={`
-          fixed top-[25px] left-1/2 -translate-x-1/2 z-50 w-[325px] p-4 rounded-xl shadow-md bg-white
+          fixed top-[25px] left-1/2 -translate-x-1/2 z-50 w-[325px] px-4 py-6 rounded-xl shadow-md bg-white
           transition-transform duration-500 ease-in-out ${toogleMenu ? 'translate-y-0' : '-translate-y-[110%]'}
           lg:relative lg:top-auto lg:left-auto lg:transform-none lg:w-auto lg:rounded-none lg:shadow-none lg:px-0
         `}
       >
         <ul
-          className="flex flex-col items-center gap-y-[25px] lg:flex-row lg:justify-between lg:gap-x-8"
+          className="flex flex-col items-center gap-y-6 lg:flex-row lg:justify-between lg:gap-x-8"
         >
           <CloseXIcon
             className="cursor-pointer lg:hidden"

@@ -1,4 +1,7 @@
-import { Button } from '@/components/common';
+import Link from 'next/link';
+
+import { HeartIcon } from '@/components/icons';
+import { ButtonLink } from '@/components/common';
 
 export const BannerSection = () => {
   return (
@@ -27,8 +30,20 @@ export const BannerSection = () => {
         </p>
 
         <div className="flex gap-3 mt-[15px] md:mt-6 lg:gap-[50px] lg:mt-[101px]">
-          <Button className='lg:w-[170px] lg:h-[50px] lg:text-2xl'>Adoptar</Button>
-          <Button variant="secondary" className='lg:w-[170px] lg:h-[50px] lg:text-2xl'>Dona</Button>
+          <ButtonLink
+            href="/apoyanos/adoptar"
+            className='lg:w-[170px] lg:h-[50px] lg:text-2xl'
+          >
+            Adoptar
+          </ButtonLink>
+
+          <ButtonLink
+            href="/apoyanos/donar"
+            variant="secondary"
+            className='lg:w-[170px] lg:h-[50px] lg:text-2xl'
+          >
+            Donar
+          </ButtonLink>
         </div>
       </div>
     </section>

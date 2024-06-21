@@ -1,4 +1,4 @@
-import { Button, Carousel } from '@/components/common';
+import { Button, ButtonLink, Carousel } from '@/components/common';
 
 import { pets } from '@/assets';
 
@@ -17,12 +17,20 @@ export const CarouselSection = () => {
 
       <Carousel pets={pets} />
     
-      <Button
+      <ButtonLink
+        href="/apoyanos/adoptar"
+        showIcon={false}
+        variant='outline'
+        className="mx-auto lg:w-[203px] lg:h-[55px] lg:text-2xl"
+      >
+        Ver todos
+      </ButtonLink>
+      {/* <Button
         showIcon={false}
         className="mx-auto  lg:w-[203px] lg:h-[55px] lg:text-2xl"
       >
         Ver todos
-      </Button>
+      </Button> */}
     </section>
   )
 }

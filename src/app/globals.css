@@ -2,6 +2,13 @@
 @tailwind components;
 @tailwind utilities;
 
+@layer components {
+  .button {
+    @apply w-[95px] h-[25px] flex items-center justify-center gap-[5px] text-white text-sm font-bold leading-[70px]
+    outline-none rounded-[5px] transition-colors duration-300 lg:w-[140px] lg:h-[40px] lg:gap-[15px] lg:text-lg lg:rounded-lg;
+  }
+}
+
 @layer utilities {
   .max-w-section {
     max-width: 1440px;
@@ -12,11 +19,28 @@
   }
 
   .title {
-    @apply font-mochiypopone text-xl leading-[22px] text-center lg:text-4xl
+    @apply font-mochiypopone text-xl leading-[22px] text-center lg:text-4xl;
   }
 
   .paragraph {
     @apply text-sm lg:text-lg;
+  }
+
+  /* Button Variants */
+  .default {
+    @apply bg-sky hover:bg-skyLight;
+  }
+
+  .secondary {
+    @apply bg-green hover:bg-greenLight;
+  }
+
+  .outline {
+    @apply text-sky bg-transparent border-[2px] border-sky hover:text-white hover:bg-sky;
+  }
+
+  .outline-secondary {
+    @apply text-white bg-transparent border-[2px] border-white hover:text-sky hover:bg-white;
   }
 }
 
