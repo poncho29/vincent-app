@@ -6,7 +6,7 @@ export const MisionSection = () => {
       className="w-full max-w-section mx-auto mb-[30px] px-6 lg:mb-[65px] xl:px-[100px]"
     >
       <h2
-        className="text-xl font-mochiypopone text-center mb-5 lg:text-[50px] lg:leading-[44px] lg:mb-14"
+        className="title mb-5 lg:mb-14"
       >
         Nuestra misión
       </h2>
@@ -15,8 +15,7 @@ export const MisionSection = () => {
         className="flex flex-col gap-4 lg:flex-row-reverse lg:gap-8"
       >
         <div
-          className="max-w-[400px] mx-auto text-sm leading-4 lg:text-xl
-          lg:max-w-none lg:grow"
+          className="max-w-[400px] mx-auto paragraph lg:max-w-none lg:grow"
         >
           <p>
             En <span className="font-semibold">Fundación Vincent</span> rescatamos, cuidamos y encontramos

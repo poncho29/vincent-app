@@ -1,6 +1,3 @@
-import Link from 'next/link';
-
-import { HeartIcon } from '@/components/icons';
 import { ButtonLink } from '@/components/common';
 
 export const BannerSection = () => {
@@ -26,7 +23,8 @@ export const BannerSection = () => {
           className="w-full max-w-[261px] text-sm text-end font-medium leading-[14px] sm:max-w-[385px]
           md:h-[68px] md:max-w-[662px] md:text-[22px] md:leading-6"
         >
-          Únete a nosotros en nuestra misión de salvar vidas peludas y encontrar hogares llenos de amor. Juntos, hacemos la diferencia en las vidas de estos increíbles perritos.
+          Únete a nosotros en nuestra misión de salvar vidas peludas y encontrar hogares llenos de amor.
+          Juntos, hacemos la diferencia en las vidas de estos increíbles perritos.
         </p>
 
         <div className="flex gap-3 mt-[15px] md:mt-6 lg:gap-[50px] lg:mt-[101px]">

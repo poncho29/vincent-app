@@ -8,7 +8,7 @@ export const CompanieSection = () => {
       className="w-full max-w-section flex flex-col items-center mx-auto mb-[30px] px-6 lg:mb-[65px] xl:px-[100px]"
     >
       <h2
-        className="text-xl font-mochiypopone text-center mb-4 lg:text-[50px] lg:leading-[44px] lg:mb-8"
+        className="title mb-4 lg:mb-8"
       >
         Empresas <br className='lg:hidden' /> comprometidas
       </h2>
@@ -30,15 +30,16 @@ export const CompanieSection = () => {
       />
 
       <div
-        className="max-w-[400px] text-sm leading-4 text-center mb-4
-        lg:max-w-[978px] lg:text-xl lg:mb-8"
+        className="max-w-[400px] paragraph text-center mb-4 lg:max-w-[800px] lg:mb-8"
       >
         <p>
-          Gracias a cada empresa colaboradora, podemos seguir salvando vidas y construyendo futuros llenos de amor y responsabilidad.
+          Gracias a cada empresa colaboradora, podemos seguir salvando vidas y construyendo
+          futuros llenos de amor y responsabilidad.
         </p>
         <br />
         <p className="font-semibold">
-          ¡Únete como empresa a nuestro compromiso de hacer del mundo un lugar mejor para nuestros amigos de cuatro patas!
+          ¡Únete como empresa a nuestro compromiso de hacer del mundo un lugar mejor para
+          nuestros amigos de cuatro patas!
         </p>
       </div>
 
