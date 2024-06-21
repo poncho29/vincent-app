@@ -5,7 +5,8 @@ import { pets } from '@/assets';
 export const CarouselSection = () => {
   return (
     <section
-      className="w-full max-w-section mx-auto pt-5 pb-6 md:rounded-[36px] lg:py-[65px]"
+      className="w-full max-w-section mx-auto pt-5 pb-6 md:rounded-[36px]
+      lg:py-[65px]"
     >
       <h2
         className="title mb-6 md:text-3xl lg:mb-[42px]"

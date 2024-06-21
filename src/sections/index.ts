@@ -9,3 +9,8 @@ export * from './home/SupportSection';
 // Quienes somos sections
 export * from './quienes-somos/WelcomeSection';
 export * from './quienes-somos/SupportAboutSection';
+
+// Familia vincent sections
+export * from './familia-vincent/BannerFamilySection';
+export * from './familia-vincent/ResumeSection';
+export * from './familia-vincent/SponsorSection';

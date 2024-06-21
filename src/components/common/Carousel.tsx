@@ -17,7 +17,7 @@ export const Carousel = ({ pets }: Props) => {
 
   return (
     <section 
-      className='w-full max-w-[1240px] mx-auto pl-6 md:pl-12'
+      className='w-full max-w-[1240px] mx-auto pl-6 md:pl-12 xl:pl-0'
     >
       <div
         className="w-full overflow-x-scroll py-2 mb-6
