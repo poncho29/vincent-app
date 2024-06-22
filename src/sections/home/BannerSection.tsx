@@ -29,14 +29,14 @@ export const BannerSection = () => {
 
         <div className="flex gap-3 mt-[15px] md:mt-6 lg:gap-[50px] lg:mt-[101px]">
           <ButtonLink
-            href="/apoyanos/adoptar"
+            href="/adoptar"
             className='lg:w-[170px] lg:h-[50px] lg:text-2xl'
           >
             Adoptar
           </ButtonLink>
 
           <ButtonLink
-            href="/apoyanos/donar"
+            href="/donar"
             variant="secondary"
             className='lg:w-[170px] lg:h-[50px] lg:text-2xl'
           >

@@ -23,8 +23,12 @@ export const menuRoutes: IMenu[] = [
     path: '/',
   },
   {
-    label: 'Adopta o Apadrina',
+    label: 'Adoptar',
     path: `/adoptar`,	
+  },
+  {
+    label: 'Apadrinar',
+    path: `/apadrinar`,	
   },
   {
     label: 'Donar',

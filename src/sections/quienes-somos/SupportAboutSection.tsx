@@ -1,21 +1,20 @@
-import { Button } from "@/components/common";
+import { ButtonLink } from "@/components/common";
 import { ClowIcon, HeartIcon, MoneyIcon } from "@/components/icons";
-import Link from "next/link";
 
 const supportCards = [
   {
     text: 'Donar',
-    href: '/landing/apoyanos/donar',
+    href: '/donar',
     icon: <MoneyIcon className="size-10 lg:size-[70px]" />
   },
   {
     text: 'Adoptar',
-    href: '/landing/apoyanos/adoptar',
+    href: '/adoptar',
     icon: <HeartIcon className="w-10 h-9 lg:size-[70px]" />
   },
   {
     text: 'Apadrinar',
-    href: '/landing/apoyanos/apadrinar',
+    href: '/apadrinar',
     icon: <ClowIcon className="w-10 h-9 lg:w-[75px] lg:h-[70px]" />
   },
 ]
@@ -71,14 +70,13 @@ export const SupportAboutSection = () => {
               >
                 { icon }
 
-                <Link href={href}>
-                  <Button
-                    variant="outlineSecondary"
-                    className="w-[142px] h-[30px] text-base lg:w-[203px] lg:h-[55px] lg:text-lg"
-                  >
-                    { text }
-                  </Button>
-                </Link>
+                <ButtonLink
+                  href={href}
+                  variant="outlineSecondary"
+                  className="w-[142px] h-[30px] text-base lg:w-[203px] lg:h-[55px] lg:text-lg"
+                >
+                  { text }
+                </ButtonLink>
               </div>
             ))}
           </div>

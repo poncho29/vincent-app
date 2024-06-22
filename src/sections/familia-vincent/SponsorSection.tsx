@@ -21,7 +21,7 @@ export const SponsorSection = () => {
       <Carousel pets={pets} />
     
       <ButtonLink
-        href="/apoyanos/adoptar"
+        href="/adoptar"
         showIcon={false}
         variant='outline'
         className="mx-auto lg:w-[203px] lg:h-[55px] lg:text-2xl"

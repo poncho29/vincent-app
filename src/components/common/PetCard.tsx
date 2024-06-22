@@ -4,6 +4,7 @@ import { Button } from './Button';
 
 import { Pet } from '@/interfaces';
 import { PetNameCard } from './PetNameCard';
+import { ButtonLink } from './ButtonLink';
 
 interface Props {
   pet: Pet;
@@ -46,8 +47,8 @@ export const PetCard = ({ pet }: Props) => {
         </p>
 
         <div className="flex items-center gap-5 justify-center">
-          <Button>Adoptar</Button>
-          <Button variant="outline">Apadrinar</Button>
+          <ButtonLink href="/adoptar">Adoptar</ButtonLink>
+          <ButtonLink href="/apadrinar" variant="outline">Apadrinar</ButtonLink>
         </div>
       </div>
     </div>
