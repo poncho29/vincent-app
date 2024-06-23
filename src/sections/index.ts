@@ -3,6 +3,9 @@ export * from './adoptar/MessageSection';
 export * from './adoptar/PetListSection';
 export * from './adoptar/SuccessStoriesSection';
 
+// Pet detail sections
+export * from './pet-detail/PetDetailSection';
+
 // Home sections
 export * from './home/BannerSection';
 export * from './home/CarouselSection';

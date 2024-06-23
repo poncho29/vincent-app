@@ -47,7 +47,7 @@ export const PetCard = ({ pet, className }: Props) => {
         </p>
 
         <div className="flex items-center gap-5 justify-center">
-          <ButtonLink href="/adoptar">Adoptar</ButtonLink>
+          <ButtonLink href={`/adoptar/${pet.slug}`}>Adoptar</ButtonLink>
           <ButtonLink href="/apadrinar" variant="outline">Apadrinar</ButtonLink>
         </div>
       </div>
