@@ -1,27 +1,27 @@
 import Image from 'next/image';
 
-import { Button } from './Button';
+import { ButtonLink } from './ButtonLink';
+import { PetNameCard } from './PetNameCard';
 
 import { Pet } from '@/interfaces';
-import { PetNameCard } from './PetNameCard';
-import { ButtonLink } from './ButtonLink';
 
 interface Props {
   pet: Pet;
+  className?: string;
 }
 
-export const PetCard = ({ pet }: Props) => {
+export const PetCard = ({ pet, className }: Props) => {
   return (
     <div
-      className="relative w-[250px] h-[320px] rounded-3xl shadow-md bg-white
-      lg:w-[350px] lg:h-[444px]"
+      className={`relative w-[250px] h-[320px] rounded-3xl shadow-md bg-white
+      lg:w-[350px] lg:h-[444px] ${ className }`}	
     >
       <Image
         src={pet.images[0]}
         alt="Nala"
         width={250}
         height={250}
-        className="lg:hidden"
+        className="block lg:hidden"
       />
       
       <Image
