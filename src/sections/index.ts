@@ -5,6 +5,8 @@ export * from './adoptar/SuccessStoriesSection';
 
 // Pet detail sections
 export * from './pet-detail/PetDetailSection';
+export * from './pet-detail/RequirementSection'
+export * from './pet-detail/ImportantDetailSection';
 
 // Home sections
 export * from './home/BannerSection';

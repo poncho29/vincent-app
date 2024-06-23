@@ -1,6 +1,6 @@
 import { notFound } from "next/navigation";
 
-import { PetDetailSection } from "@/sections";
+import { ImportantDetailSection, PetDetailSection, RequirementSection } from "@/sections";
 
 import { pets } from "@/assets";
 
@@ -20,6 +20,10 @@ export default function PetDetailPage({ params }: Props) {
   return (
     <main>
       <PetDetailSection pet={currentPet} />
+
+      <RequirementSection />
+
+      <ImportantDetailSection />
     </main>
   );
 }
