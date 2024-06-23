@@ -79,7 +79,7 @@ export const Menu = () => {
       </nav>
 
       <MenuIcon
-        className={`cursor-pointer lg:hidden ${toogleMenu ? 'absolute top-6 right-6' : ''}`}
+        className={`cursor-pointer lg:hidden ${toogleMenu ? 'absolute top-6 right-6 md:right-12' : ''}`}
         onClick={handleToogleMenu}
       />
     </div>
