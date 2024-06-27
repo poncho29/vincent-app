@@ -1,5 +1,6 @@
 import {
   ChangeLivesSection,
+  FrequentQuestionsSection,
   HowWorkSection,
   SponsorRequirementSection
 } from "@/sections";
@@ -12,6 +13,8 @@ export default function SponsorPage() {
       <SponsorRequirementSection />
 
       <HowWorkSection />
+
+      <FrequentQuestionsSection />
     </main>
   );
 }

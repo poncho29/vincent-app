@@ -7,6 +7,7 @@ export * from './adoptar/SuccessStoriesSection';
 export * from './apadrinar/ChangeLivesSection';
 export * from './apadrinar/SponsorRequirementSection';
 export * from './apadrinar/HowWorkSection';
+export * from './apadrinar/FrequentQuestionsSection';
 
 // Pet detail sections
 export * from './pet-detail/PetDetailSection';
