@@ -1,7 +1,12 @@
-// Adopt sections
+// Adoptar sections
 export * from './adoptar/MessageSection';
 export * from './adoptar/PetListSection';
 export * from './adoptar/SuccessStoriesSection';
+
+// Apadrina sections
+export * from './apadrinar/ChangeLivesSection';
+export * from './apadrinar/SponsorRequirementSection';
+export * from './apadrinar/HowWorkSection';
 
 // Pet detail sections
 export * from './pet-detail/PetDetailSection';

@@ -1,8 +1,17 @@
+import {
+  ChangeLivesSection,
+  HowWorkSection,
+  SponsorRequirementSection
+} from "@/sections";
 
 export default function SponsorPage() {
   return (
-    <div>
-      <h1>Hello Sponsor Page</h1>
-    </div>
+    <main>
+      <ChangeLivesSection />
+
+      <SponsorRequirementSection />
+
+      <HowWorkSection />
+    </main>
   );
 }
