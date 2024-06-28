@@ -4,9 +4,9 @@ export const HowWorkSection = () => {
   return (
     <section
       className="w-full max-w-[375px] mx-auto mb-8 p-6 
-      lg:max-w-section lg:px-12 xl:px-[100px] lg:mb-14"
+      lg:max-w-section lg:py-0 lg:px-12 xl:px-[100px] lg:mb-14"
     >
-      <h2 className="title mb-4 !text-start lg:mb-6">
+      <h2 className="title mb-4 lg:mb-6">
         ¿Cómo funciona?
       </h2>
 
@@ -14,7 +14,7 @@ export const HowWorkSection = () => {
         El proceso de apadrinamiento es simple y gratificante:
       </p>
 
-      <div className="mb-4">
+      <div className="mb-4 lg:mb-8">
         <p className="paragraph mb-1">
           <span className="uppercase font-bold">paso 1: </span>
           Elige un peludo de nuestra lista de perros disponibles, puedes ir a la
@@ -42,11 +42,14 @@ export const HowWorkSection = () => {
         </p>
       </div>
 
-      <h2 className="font-bold text-center mb-6">
+      <h2
+        className="font-bold text-center text-blackLight mb-6 mx-auto
+        lg:max-w-[590px] lg:mb-10 lg:text-2xl"
+      >
         “Recuerda que puedes visitar a tu apadrinado y pasearlo si lo deseas”
       </h2>
 
-      <div className="flex flex-col items-center gap-4">
+      <div className="flex flex-col items-center justify-center gap-4 lg:flex-row">
         <Button
           className="w-36 h-[30px] lg:w-56 lg:h-12"
         >

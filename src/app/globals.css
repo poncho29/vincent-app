@@ -19,11 +19,11 @@
   }
 
   .title {
-    @apply font-mochiypopone text-xl leading-[22px] text-center lg:text-4xl;
+    @apply font-mochiypopone text-xl leading-[22px] text-center text-blackLight lg:text-4xl;
   }
 
   .paragraph {
-    @apply text-sm lg:text-lg;
+    @apply text-sm text-blackLight lg:text-lg;
   }
 
   /* Button Variants */

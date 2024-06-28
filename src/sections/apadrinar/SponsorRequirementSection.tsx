@@ -2,7 +2,7 @@
 export const SponsorRequirementSection = () => {
   return (
     <section
-      className='w-full mx-auto bg-green'
+      className='w-full mx-auto bg-green lg:hidden'
     >
       <div
         className='w-full max-w-[375px] mx-auto p-6 text-white
