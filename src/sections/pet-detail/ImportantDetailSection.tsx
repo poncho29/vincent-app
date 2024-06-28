@@ -9,7 +9,7 @@ export const ImportantDetailSection = () => {
         className='w-full max-w-[375px] mx-auto p-6
         lg:max-w-section lg:px-12 lg:py-12 xl:px-[100px]'
       >
-        <h2 className='mb-5 title text-green uppercase lg:max-w-none lg:mb-8'>
+        <h2 className='mb-5 title !text-green uppercase lg:max-w-none lg:mb-8'>
           ¡¡importante!!
         </h2>
 

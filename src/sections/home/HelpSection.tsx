@@ -13,12 +13,12 @@ export const HelpSection = () => {
           lg:w-[990px] lg:h-[417px] lg:py-6 lg:px-[95px]"
         >
           <h2
-            className="title text-white mb-5"
+            className="title !text-white mb-5"
           >
             Necesitamos tu <br className="hidden lg:block" /> ayuda
           </h2>
 
-          <div className="paragraph text-white text-center mb-5">
+          <div className="paragraph !text-white text-center mb-5">
             <p>
               ¡Queremos contar contigo para seguir cambiando vidas!
               En Fundación Vincent, promovemos los hogares de paso para brindar refugio temporal a nuestros queridos peludos. Si tienes espacio en tu hogar y amor para compartir de forma temporal, te invitamos a unirte a nuestra familia de Hogares de paso.

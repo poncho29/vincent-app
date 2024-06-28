@@ -31,11 +31,11 @@ export const SupportAboutSection = () => {
           className="w-full max-w-[375px] mx-auto p-6 lg:max-w-[730px] lg:bg-green
           lg:rounded-lg lg:py-[30px] lg:px-14"
         >
-          <h2 className='title text-white mb-4'>
+          <h2 className='title !text-white mb-4'>
             Únete a nuestra causa
           </h2>
 
-          <div className='paragraph text-center text-white font-medium mb-4'>
+          <div className='paragraph text-center !text-white font-medium mb-4'>
             <p>
               En Fundación Vincent, creemos que juntos podemos hacer la diferencia.
               Te invitamos a unirte a nuestra causa, ya sea adoptando, siendo voluntario
@@ -51,7 +51,7 @@ export const SupportAboutSection = () => {
           </div>
 
           <h4
-            className='title text-white mb-4 lg:max-w-[517px] lg:text-2xl lg:mx-auto'
+            className='title !text-white mb-4 lg:max-w-[517px] lg:text-2xl lg:mx-auto'
           >
             ¡Juntos, podemos construir un futuro mejor para los perros necesitados!
           </h4>
@@ -60,7 +60,7 @@ export const SupportAboutSection = () => {
 
       <div className='w-full bg-sky'>
         <div className="w-full max-w-section mx-auto p-6 lg:pt-32 lg:pb-10">
-          <h2 className='title text-white mb-6 lg:mb-9'>Apóyanos</h2>
+          <h2 className='title !text-white mb-6 lg:mb-9'>Apóyanos</h2>
 
           <div className="flex flex-col gap-4 lg:flex-row lg:justify-center lg:gap-x-36">
             {supportCards.map(({ text, href, icon }) => (

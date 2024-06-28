@@ -32,7 +32,7 @@ export const menuRoutes: IMenu[] = [
   },
   {
     label: 'Donar',
-    path: `${PATH_SUPORT}/donar`,
+    path: '/donar',
   },
 
   {
