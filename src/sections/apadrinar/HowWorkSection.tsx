@@ -3,7 +3,7 @@ import { Button, ButtonLink } from "@/components/common"
 export const HowWorkSection = () => {
   return (
     <section
-      className="w-full max-w-[375px] mx-auto mb-8 p-6 
+      className="w-full max-w-[375px] mx-auto p-6 
       lg:max-w-section lg:py-0 lg:px-12 xl:px-[100px] lg:mb-14"
     >
       <h2 className="title mb-4 lg:mb-6">

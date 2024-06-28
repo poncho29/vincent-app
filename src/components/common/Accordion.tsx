@@ -39,7 +39,7 @@ export const Accordion = ({ title, text, status = false, onChange }: Props) => {
         className="flex items-center justify-between"
         onClick={handleChange}
       >
-        <p className={`paragraph font-medium ${isOpen ? '!text-white' : ''}`}>
+        <p className={`w-[95%] paragraph font-medium ${isOpen ? '!text-white' : ''}`}>
           { title }
         </p>
         <ArrowDowmIcon
