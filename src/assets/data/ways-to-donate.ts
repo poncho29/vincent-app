@@ -1,6 +1,8 @@
+import { IDonateForm } from "@/interfaces";
+
 import { MoneyIcon } from "@/components/icons";
 
-export const WaysToDonateData = [
+export const WaysToDonateData: IDonateForm[] = [
   {
     titleWay: 'Donaciones económicas',
     descriptionWay: 'Para realizar donaciones económicas puedes hacerlo por los siguentes medios:',

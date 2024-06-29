@@ -1,7 +1,35 @@
-import React from 'react'
+import type { TDonateItem } from "@/interfaces";
 
-export const DonateItem = () => {
+interface Props {
+  donateInfo: TDonateItem;
+}
+
+export const DonateItem = ({ donateInfo }: Props) => {
+  const IconComponent = donateInfo.icon;
+
   return (
-    <div>DonateItem</div>
+    <div className="flex flex-col gap-3">
+      <IconComponent />
+
+      <div>
+        <h4
+          className="paragraph !text-white font-bold"
+        >
+          { donateInfo.title }
+        </h4>
+
+        {donateInfo.headline && (
+          <p>{ donateInfo.headline }</p>
+        )}
+
+        {donateInfo.accountNuber && (
+          <p>{ donateInfo.accountNuber }</p>
+        )}
+
+        {donateInfo.text && (
+          <p>{ donateInfo.text }</p>
+        )}
+      </div>
+    </div>
   )
 }

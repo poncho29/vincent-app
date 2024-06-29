@@ -1,3 +1,5 @@
+import { DonateItem } from '@/components/common';
+
 import  { WaysToDonateData } from '@/assets';
 
 export const WaysToDonate = () => {
@@ -23,6 +25,9 @@ export const WaysToDonate = () => {
             </p>
           </div>
 
+          {WaysToDonateData[0].options.map((donateInfo, index) => (
+            <DonateItem key={index} donateInfo={donateInfo} />
+          ))}
         </div>
       </div>
     </section>
