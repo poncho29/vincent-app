@@ -27,7 +27,7 @@ export const WaysToDonate = () => {
 
           <div
             className='flex flex-col gap-5 lg:flex-row lg:flex-wrap lg:mx-auto
-            lg:justify-center lg:gap-y-8'
+            lg:justify-center lg:gap-y-8 lg:px-10 xl:gap-20'
           >
             {WaysToDonateData[0].options.map((donateInfo, index) => (
               <DonateItem key={index} donateInfo={donateInfo} />
@@ -46,7 +46,7 @@ export const WaysToDonate = () => {
 
           <div
             className='flex flex-col gap-5 lg:flex-row lg:flex-wrap lg:mx-auto
-            lg:justify-center lg:gap-y-8'
+            lg:justify-center lg:gap-y-8 xl:gap-20'
           >
             {WaysToDonateData[1].options.map((donateInfo, index) => (
               <DonateItem key={index} donateInfo={donateInfo} />

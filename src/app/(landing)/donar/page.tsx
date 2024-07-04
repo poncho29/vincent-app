@@ -1,6 +1,10 @@
 import { Metadata } from "next";
 
-import { HelpSaveLivesSection, WaysToDonate } from "@/sections";
+import {
+  FoundationNeedSection,
+  HelpSaveLivesSection,
+  WaysToDonate
+} from "@/sections";
 
 export const metadata: Metadata = {
   title: "Donar - Ayudanos a salvar vidas",
@@ -15,6 +19,8 @@ export default function DonatePage() {
       <HelpSaveLivesSection />
   
       <WaysToDonate />
+
+      <FoundationNeedSection />
     </main>
   );
 }

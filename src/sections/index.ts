@@ -10,6 +10,7 @@ export * from './apadrinar/HowWorkSection';
 export * from './apadrinar/FrequentQuestionsSection';
 
 // Donate sections
+export * from './donar/FoundationNeedSection';
 export * from './donar/HelpSaveLivesSection';
 export * from './donar/WaysToDonate';
 
