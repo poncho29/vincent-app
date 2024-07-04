@@ -1,6 +1,14 @@
 import { IDonateForm } from "@/interfaces";
 
-import { MoneyIcon } from "@/components/icons";
+import {
+  BancolombiaIcon,
+  BonusIcon,
+  CartIcon,
+  CashIcon,
+  ComuldesaIcon,
+  NequiIcon,
+  SuppliesIcon
+} from "@/components/icons";
 
 export const WaysToDonateData: IDonateForm[] = [
   {
@@ -8,32 +16,32 @@ export const WaysToDonateData: IDonateForm[] = [
     descriptionWay: 'Para realizar donaciones económicas puedes hacerlo por los siguentes medios:',
     options: [
       {
-        icon: MoneyIcon,
+        icon: BancolombiaIcon,
         title: 'Bancolombia Ahorros',
         headline: 'Fundación Vincent rescate animal',
-        accountNuber: '29000000933'
+        accountNumber: '29000000933'
       },
       {
-        icon: MoneyIcon,
+        icon: ComuldesaIcon,
         title: 'Coomuldesa Ahorros',
         headline: 'Fundación Vincent rescate animal',
-        accountNuber: '12.00211494.36'
+        accountNumber: '12.00211494.36'
       },
       {
-        icon: MoneyIcon,
+        icon: NequiIcon,
         title: 'Nequi',
         headline: 'Fundación Vincent rescate animal',
-        accountNuber: '316 414 8818'
+        accountNumber: '316 414 8818'
       },
       {
-        icon: MoneyIcon,
+        icon: CashIcon,
         title: 'Efectivo',
         text: 'Directamente en la fundación o en la Calle 11 # 15-19 Socorro Santander'
       },
       {
-        icon: MoneyIcon,
+        icon: BonusIcon,
         title: 'Bonos',
-        text: '(consultas medicas, baños etc.)'
+        subtitle: '(consultas medicas, baños etc.)',
       }
     ]
   },
@@ -42,13 +50,15 @@ export const WaysToDonateData: IDonateForm[] = [
     descriptionWay: 'Si quieres realizar donaciones de insumos, puedes realizarlos directamente en la fundación o en la Calle 11 # 15-19 Socorro Santander.',
     options: [
       {
-        icon: MoneyIcon,
-        title: 'Comprar insumos (purina, camas, medicamentos, etc.)',
+        icon: CartIcon,
+        title: 'Comprar insumos',
+        subtitle: '(purina, camas, medicamentos, etc.)',
         text: 'Podrás enviarlos a la fundación o en la Calle 11 # 15-19 Socorro Santander'
       },
       {
-        icon: MoneyIcon,
-        title: 'Insumos reutilizados (cobijas, camas, toallas, etc.)',
+        icon: SuppliesIcon,
+        title: 'Insumos reutilizados',
+        subtitle: '(cobijas, camas, toallas, etc.)',
         text: 'Podrás enviarlos a la fundación o en la Calle 11 # 15-19 Socorro Santander'
       },
     ]

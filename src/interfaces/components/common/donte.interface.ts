@@ -1,10 +1,10 @@
-import React from "react";
 
 export type TDonateItem = {
   icon: React.FC;
   title: string;
+  subtitle?: string;
   headline?: string;
-  accountNuber?: string;
+  accountNumber?: string;
   text?: string;
 }
 
