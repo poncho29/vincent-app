@@ -14,6 +14,9 @@ export * from './donar/FoundationNeedSection';
 export * from './donar/HelpSaveLivesSection';
 export * from './donar/WaysToDonate';
 
+// Companies sections
+export * from './empresas/CompaniesResumeSection';
+
 // Pet detail sections
 export * from './pet-detail/PetDetailSection';
 export * from './pet-detail/RequirementSection'
