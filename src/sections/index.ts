@@ -16,6 +16,7 @@ export * from './donar/WaysToDonate';
 
 // Companies sections
 export * from './empresas/CompaniesResumeSection';
+export * from './empresas/WarningSection';
 
 // Pet detail sections
 export * from './pet-detail/PetDetailSection';

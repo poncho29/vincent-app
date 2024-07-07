@@ -1,6 +1,6 @@
 import { Metadata } from "next";
 
-import { CompaniesResumeSection } from "@/sections";
+import { CompaniesResumeSection, WarningSection } from "@/sections";
 
 export const metadata: Metadata = {
   title: "Empresas Comprometidas",
@@ -11,6 +11,8 @@ export default function CompaniesPage() {
   return (
     <main>
       <CompaniesResumeSection />
+
+      <WarningSection />
     </main>
   );
 }
