@@ -23,6 +23,11 @@ export * from './familia-vincent/BannerFamilySection';
 export * from './familia-vincent/ResumeSection';
 export * from './familia-vincent/SponsorSection';
 
+// Hogar de paso sections
+export * from './hogar-de-paso/StepHomeSection';
+export * from './hogar-de-paso/HowToBeHomeSection';
+export * from './hogar-de-paso/FrequentQuestionsHomeSection';
+
 // Home sections
 export * from './home/BannerSection';
 export * from './home/CarouselSection';

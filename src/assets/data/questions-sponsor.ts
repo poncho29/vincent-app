@@ -1,6 +1,6 @@
 import { IAccordion } from "@/interfaces";
 
-export const initialQuestions: IAccordion[] = [
+export const questionsSponsor: IAccordion[] = [
   {
     id: 1,
     title: "¿Qué diferencia hay entre apadrinar y donar?",
@@ -37,4 +37,4 @@ export const initialQuestions: IAccordion[] = [
     text: "Por motivos de seguridad y bienestar de los peludos, no divulgamos la ubicación exacta de nuestra fundación para evitar abandonos irresponsables en nuestras instalaciones. Sin embargo, cuando se inicia algunos de los procesos de apoyo, puedes solicitar una visita contactándonos directamente.",
     status: false
   }
-]
+];

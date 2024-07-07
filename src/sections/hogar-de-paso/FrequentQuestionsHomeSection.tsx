@@ -4,10 +4,10 @@ import { useMultiAccordion } from "@/hooks";
 
 import { Accordion } from "@/components/common";
 
-import { questionsSponsor } from "@/assets";
+import { questionHomeStep } from "@/assets";
 
-export const FrequentQuestionsSection = () => {
-  const { questions, handleChangeAccordion } = useMultiAccordion({ initialQuestions: questionsSponsor });
+export const FrequentQuestionsHomeSection = () => {
+  const { questions, handleChangeAccordion } = useMultiAccordion({ initialQuestions: questionHomeStep });
 
   return (
     <section
