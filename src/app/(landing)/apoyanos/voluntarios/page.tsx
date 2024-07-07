@@ -1,8 +1,20 @@
+import { Metadata } from "next";
+
+import { JoinUpSection, VolunteerFormsSection, WhatYouNeedSection } from "@/sections";
+
+export const metadata: Metadata = {
+  title: "Voluntarios",
+  description: "Ayuda a Crear un Futuro Mejor para Nuestros Peludos Amigos"
+};
 
 export default function VolunteersPage() {
   return (
-    <div>
-      <h1>Hello volunteers Page</h1>
-    </div>
+    <main>
+      <JoinUpSection />
+
+      <WhatYouNeedSection />
+
+      <VolunteerFormsSection />
+    </main>
   );
 }
