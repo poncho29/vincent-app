@@ -1,5 +1,4 @@
-import { ButtonLink } from '@/components/common'
-import React from 'react'
+import { ButtonLink } from '@/components/common';
 
 export const WhatYouNeedSection = () => {
   return (
