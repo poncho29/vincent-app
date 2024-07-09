@@ -9,6 +9,8 @@
     "lint": "next lint"
   },
   "dependencies": {
+    "@egjs/flicking-plugins": "^4.7.1",
+    "@egjs/react-flicking": "^4.11.3",
     "class-variance-authority": "^0.7.0",
     "clsx": "^2.1.1",
     "next": "14.2.3",

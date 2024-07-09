@@ -1,9 +1,10 @@
 import {
   BannerSection,
-  CarouselSection,
+  // CarouselSection,
   CompanieSection,
   HelpSection,
   MisionSection,
+  SliderPets,
   SupportSection
 } from "@/sections";
 
@@ -20,7 +21,9 @@ export default function LandingPage() {
       <BannerSection />
 
       <div className="w-full h-full mx-auto rounded-3xl bg-white md:rounded-[60px]">
-        <CarouselSection />
+        <SliderPets />
+
+        {/* <CarouselSection /> */}
 
         <SupportSection />
 

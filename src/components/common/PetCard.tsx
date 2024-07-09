@@ -1,3 +1,5 @@
+import React from 'react';
+
 import Image from 'next/image';
 
 import { ButtonLink } from './ButtonLink';
@@ -10,9 +12,10 @@ interface Props {
   className?: string;
 }
 
-export const PetCard = ({ pet, className }: Props) => {
+export const PetCard = React.forwardRef<HTMLDivElement, Props>(({ pet, className }, ref) => {
   return (
     <div
+    ref={ref}
       className={`relative w-[250px] h-[320px] rounded-3xl shadow-md bg-white
       lg:w-[350px] lg:h-[444px] ${ className }`}	
     >
@@ -21,7 +24,7 @@ export const PetCard = ({ pet, className }: Props) => {
         alt="Nala"
         width={250}
         height={250}
-        className="block lg:hidden"
+        className="block no-drag lg:hidden"
       />
       
       <Image
@@ -29,7 +32,7 @@ export const PetCard = ({ pet, className }: Props) => {
         alt="Nala"
         width={350}
         height={350}
-        className="hidden lg:block"
+        className="hidden no-drag lg:block"
       />
 
       <PetNameCard name={pet.name} />
@@ -53,4 +56,6 @@ export const PetCard = ({ pet, className }: Props) => {
       </div>
     </div>
   )
-}
+});
+
+PetCard.displayName = 'PetCard';

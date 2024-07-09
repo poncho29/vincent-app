@@ -18,6 +18,11 @@
     display: none;
   }
 
+  .no-drag {
+    user-select: none;
+    -webkit-user-drag: none;
+  }
+
   .title {
     @apply font-mochiypopone text-xl leading-[22px] text-center text-blackLight lg:text-4xl;
   }

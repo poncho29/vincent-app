@@ -1,0 +1,13 @@
+.flicking-camera {
+  display: flex;
+  gap: 1rem;
+  padding: 1rem 0;
+}
+
+.is-circle {
+  background-color: #85C8CB !important;
+}
+
+.flicking-arrow-disabled {
+  background-color: #0a0a0a1a !important;
+}
