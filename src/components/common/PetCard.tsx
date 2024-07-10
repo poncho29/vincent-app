@@ -28,7 +28,7 @@ export const PetCard = React.forwardRef<HTMLDivElement, Props>(({ pet, className
       />
       
       <Image
-        src={pet.images[0]}
+        src={pet.images[0] || '/common/default-pet.webp'}
         alt="Nala"
         width={350}
         height={350}
