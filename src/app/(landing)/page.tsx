@@ -1,6 +1,5 @@
 import {
   BannerSection,
-  // CarouselSection,
   CompanieSection,
   HelpSection,
   MisionSection,
@@ -22,8 +21,6 @@ export default function LandingPage() {
 
       <div className="w-full h-full mx-auto rounded-3xl bg-white md:rounded-[60px]">
         <SliderPets />
-
-        {/* <CarouselSection /> */}
 
         <SupportSection />
 
