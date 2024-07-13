@@ -4,4 +4,5 @@ export * from './ButtonLink';
 export * from './Carousel';
 export * from './DonateItem';
 export * from './PetCard';
-export * from './PetNameCard'
+export * from './PetNameCard';
+export * from './Spinner';

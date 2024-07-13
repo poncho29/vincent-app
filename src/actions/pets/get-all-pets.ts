@@ -7,9 +7,13 @@ interface Props {
   offset?: number;
 }
 
-export const getAllPets = async ({ limit = 10, offset = 0 }: Props): Promise<Pet[]> => {
+export const getAllPets = async ({
+  limit = 12,
+  offset = 0 
+}: Props): Promise<{ pets: Pet[], total: number }> => {
   try {
-    const resp = await fetch(`${process.env.API_URL_BASE}/pets?limit=${limit}&offset=${offset}`, {
+    const URL = `${process.env.API_URL_BASE}`
+    const resp = await fetch(`${URL}/pets?limit=${limit}&offset=${offset}`, {
       method: 'GET',
       headers: {
         'Content-Type': 'application/json'
@@ -21,15 +25,15 @@ export const getAllPets = async ({ limit = 10, offset = 0 }: Props): Promise<Pet
       throw new Error('Network response was not ok');
     }
 
-    const pets: Pet[] = await resp.json();
+    const { pets, total }: { pets: Pet[], total: number} = await resp.json();
 
     pets.forEach((pet: Pet) => {
       pet.images = pet.images.map((image: string) => `${process.env.CLOUDINARY_URL_BUCKET}/${image}`);
     });
 
-    return pets;
+    return { pets, total };
   } catch (error) {
     console.log('Error fetching pets:', error);
-    return [];
+    return { pets: [], total: 0 };
   }
 }

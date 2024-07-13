@@ -1,6 +1,6 @@
 import Image from 'next/image';
 
-import { Button } from '@/components/common';
+import { Button, ButtonLink } from '@/components/common';
 
 export const CompanieSection = () => {
   return (
@@ -43,12 +43,13 @@ export const CompanieSection = () => {
         </p>
       </div>
 
-      <Button
+      <ButtonLink
         showIcon={false}
+        href='/apoyanos/empresas'
         className='w-[142px] h-[30px] text-base lg:w-[203px] lg:h-[55px] lg:text-xl'
       >
         Quiero unirme
-      </Button>
+      </ButtonLink>
     </section>
   )
 }
