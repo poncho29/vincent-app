@@ -44,10 +44,10 @@ export const menuRoutes: IMenu[] = [
     label: 'Quienes somos',
     path: '/quienes-somos',
   },
-  {
-    label: 'Contáctanos',
-    path: '/contactanos',
-  }
+  // {
+  //   label: 'Contáctanos',
+  //   path: '/contactanos',
+  // }
 ];
 
 

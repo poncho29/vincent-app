@@ -9,7 +9,7 @@ export const metadata: Metadata = {
 
 export default function VolunteersPage() {
   return (
-    <main>
+    <main className="animate-fade">
       <JoinUpSection />
 
       <WhatYouNeedSection />

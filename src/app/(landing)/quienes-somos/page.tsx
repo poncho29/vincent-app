@@ -2,7 +2,7 @@ import { SupportAboutSection, WelcomeSection } from "@/sections";
 
 export default function AboutPage() {
   return (
-    <main>
+    <main className="animate-fade">
       <WelcomeSection />
 
       <SupportAboutSection />
