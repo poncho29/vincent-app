@@ -13,11 +13,13 @@
     "@egjs/react-flicking": "^4.11.3",
     "class-variance-authority": "^0.7.0",
     "clsx": "^2.1.1",
+    "formik": "^2.4.6",
     "next": "14.2.3",
     "react": "^18",
     "react-dom": "^18",
     "tailwind-merge": "^2.3.0",
-    "tailwindcss-animated": "^1.1.2"
+    "tailwindcss-animated": "^1.1.2",
+    "yup": "^1.4.0"
   },
   "devDependencies": {
     "@types/node": "^20",

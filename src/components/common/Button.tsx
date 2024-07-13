@@ -1,4 +1,4 @@
-import { type HTMLAttributes } from "react";
+import type { ButtonHTMLAttributes  } from "react";
 
 import { cva, type VariantProps } from "class-variance-authority";
 
@@ -6,7 +6,7 @@ import { cn } from "@/utils";
 
 import { HeartIcon } from "../icons";
 
-type ButtonProps = HTMLAttributes<HTMLButtonElement> & VariantProps<typeof buttonVariants>;
+type ButtonProps = ButtonHTMLAttributes<HTMLButtonElement> & VariantProps<typeof buttonVariants>;
 
 interface Props extends ButtonProps {
   showIcon?: boolean;
