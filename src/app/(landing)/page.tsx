@@ -1,5 +1,3 @@
-import { getAllPets } from "@/actions";
-
 import {
   BannerSection,
   CompanieSection,
@@ -10,9 +8,6 @@ import {
 } from "@/sections";
 
 export default async function LandingPage() {
-  const allPets = await getAllPets({});
-  console.log(allPets);
-
   return (
     <main 
       className="relative"
@@ -25,7 +20,7 @@ export default async function LandingPage() {
       <BannerSection />
 
       <div className="w-full h-full mx-auto rounded-3xl bg-white md:rounded-[60px]">
-        <SliderPets pets={allPets} />
+        <SliderPets />
 
         <SupportSection />
 

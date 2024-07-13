@@ -5,18 +5,13 @@ import { Arrow } from "@egjs/flicking-plugins";
 
 import { PetCard } from "@/components/common";
 
-// import { pets } from '@/assets';
+import { pets } from '@/assets';
 
 import "@egjs/react-flicking/dist/flicking.css";
 import "@egjs/flicking-plugins/dist/arrow.css";
 import './slider-pets.css';
-import { Pet } from "@/interfaces";
 
-interface Props {
-  pets: Pet[];
-}
-
-export const SliderPets = ({ pets }: Props) => {
+export const SliderPets = () => {
   const plugins = [new Arrow()];
 
   return (
