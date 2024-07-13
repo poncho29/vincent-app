@@ -7,28 +7,25 @@ interface Props {
   offset?: number;
 }
 
-const API_URL_BASE = process.env.API_URL_BASE
-
 export const getAllPets = async ({ limit = 10, offset = 0 }: Props): Promise<Pet[]> => {
-  if (isNaN(limit)) limit = 10;
-  if (limit < 1) limit = 10;
-
-  if (isNaN(offset)) offset = 0;
-  if (offset < 0) offset = 0;
-
   try {
-    const resp = await fetch(`${API_URL_BASE}/pets?limit=${limit}&offset=${offset}`, {
+    const resp = await fetch(`${process.env.API_URL_BASE}/pets?limit=${limit}&offset=${offset}`, {
       method: 'GET',
       headers: {
         'Content-Type': 'application/json'
-      }
+      },
+      cache: "no-cache"
     });
 
     if (!resp.ok) {
       throw new Error('Network response was not ok');
     }
 
-    const pets = await resp.json();
+    const pets: Pet[] = await resp.json();
+
+    pets.forEach((pet: Pet) => {
+      pet.images = pet.images.map((image: string) => `${process.env.CLOUDINARY_URL_BUCKET}/${image}`);
+    });
 
     return pets;
   } catch (error) {

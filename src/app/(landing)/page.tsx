@@ -11,7 +11,6 @@ import {
 
 export default async function LandingPage() {
   const allPets = await getAllPets({});
-  console.log(allPets);
 
   return (
     <main 

@@ -23,7 +23,7 @@ export const SupportSection = () => {
     <section
       className="w-full max-w-section mx-auto mb-[30px] px-6 lg:mb-[65px] xl:px-[100px]"
     >
-      <h2 className="title lg:mb-2.5">
+      <h2 className="title mb-2 lg:mb-2.5">
         Apóyanos
       </h2>
       <h4 className="text-sm text-center mb-6 lg:text-2xl lg:leading-[44px] lg:mb-11">

@@ -38,11 +38,12 @@ export const PetCard = React.forwardRef<HTMLDivElement, Props>(({ pet, className
       <PetNameCard name={pet.name} />
 
       <div
-        className="absolute bottom-5 left-1/2 transform -translate-x-1/2 lg:bottom-4"
+        className="w-full absolute bottom-5 left-1/2 transform -translate-x-1/2 bg-white
+        rounded-t-[36px] lg:bottom-4"
       >
         <p
           className="inline-block w-56 paragraph text-center text-blackLight font-semibold
-          leading-4 mb-2 *:capitalize lg:w-full lg:mb-4"
+          leading-4 mb-2 pt-4 *:capitalize lg:w-full lg:mb-4"
         >
           <span>{ pet.sex.sex }</span> • &nbsp;
           <span>{ pet.size.size }</span> <br />
