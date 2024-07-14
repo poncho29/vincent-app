@@ -11,7 +11,7 @@ interface Props {
 
 export const HeaderSidebar = ({ toggleSidebar, onToggleSidebar }: Props) => {
   return (
-    <div className="h-8 flex items-center justify-between">
+    <div className="h-10 flex items-center justify-between">
       <figure className={`transition-all duration-300 ${toggleSidebar ? 'w-0' : 'w-auto'}`}>
         <Image
           src="/landing/vincent-logo-mobile.png"

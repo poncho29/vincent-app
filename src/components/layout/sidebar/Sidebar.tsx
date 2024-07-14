@@ -10,16 +10,15 @@ import { LinkSidebar } from "./LinkSidebar";
 
 import { HeaderSidebar } from "./HeaderSidebar";
 import { ButtonLogout } from "./ButtonLogout";
-
-import { adminMenu } from "@/assets";
 import { ButtonMenu } from "./ButtonMenu";
 
+import { adminMenu } from "@/assets";
+
 export const Sidebar = () => {
-  const [toggleSidebar, setToggleSidebar] = useState(true);
-
   const { width } = useScreenSize();
-
   const isMobile = width < 768;
+
+  const [toggleSidebar, setToggleSidebar] = useState(true);
 
   return (
     <>
@@ -36,7 +35,7 @@ export const Sidebar = () => {
           {
             'w-16 p-3': !isMobile && toggleSidebar,
             'w-72 p-4':  !isMobile && !toggleSidebar,
-            'absolute w-full p-4 md:w-72': isMobile,
+            'absolute w-full p-4 z-50 md:w-72': isMobile,
             'translate-x-0': isMobile && !toggleSidebar,
             '-translate-x-[110%]': isMobile && toggleSidebar,
           }

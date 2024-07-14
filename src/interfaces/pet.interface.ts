@@ -16,6 +16,13 @@ export interface Pet {
   images:     string[];
 }
 
+export interface PetTable extends Omit<Pet, 'slug' | 'user' | 'images' | 'type' | 'sex' | 'size' | 'stage'> {
+  type:   string;
+  sex:    string;
+  size:   string;
+  stage:  string;
+}
+
 export interface Sex {
   id:     string;
   sex:    string;

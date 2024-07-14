@@ -1,9 +1,9 @@
 import { InputHTMLAttributes } from "react"
 
 interface Props extends InputHTMLAttributes<HTMLInputElement> {
-  label: string;
-  msgError: string | undefined;
-  touched: boolean | undefined;
+  label?: string;
+  msgError?: string | undefined;
+  touched?: boolean | undefined;
 }
 
 export const Input = ({label, msgError = '', touched = false, ...props}: Props) => {

@@ -3,6 +3,8 @@ export * from './Button';
 export * from './ButtonLink';
 export * from './Carousel';
 export * from './DonateItem';
+export * from './Pagination';
 export * from './PetCard';
 export * from './PetNameCard';
 export * from './Spinner';
+export * from './Table';
