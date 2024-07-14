@@ -1,25 +1,28 @@
+'use client';
+
 import Image from 'next/image';
 
-import { IoReorderThree } from 'react-icons/io5';
+import { ButtonMenu } from './ButtonMenu';
 
-export const HeaderSidebar = () => {
+interface Props {
+  toggleSidebar: boolean;
+  onToggleSidebar: () => void;
+}
+
+export const HeaderSidebar = ({ toggleSidebar, onToggleSidebar }: Props) => {
   return (
     <div className="h-8 flex items-center justify-between">
-      <Image
-        src="/landing/vincent-logo-mobile.png"
-        width={120}
-        height={80}
-        alt="logo"
-      />
-
-      <button
-        className="p-1 rounded-md transition-all duration-300 bg-sky hover:bg-skyLight"
-      >
-        <IoReorderThree
-          size={24}
-          // onClick={() => {}}
+      <figure className={`transition-all duration-300 ${toggleSidebar ? 'w-0' : 'w-auto'}`}>
+        <Image
+          src="/landing/vincent-logo-mobile.png"
+          width={120}
+          height={80}
+          alt="logo"
+          className='overflow-hidden'
         />
-      </button>
+      </figure>
+
+      <ButtonMenu onToggleSidebar={onToggleSidebar} />
     </div>
   )
 }

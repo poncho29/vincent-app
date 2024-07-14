@@ -2,9 +2,13 @@
 
 import { useRouter } from 'next/navigation';
 
-import { IoLogOut } from 'react-icons/io5'
+import { IoLogOut } from 'react-icons/io5';
 
-export const ButtonLogout = () => {
+interface Props {
+  toggleSidebar: boolean;
+}
+
+export const ButtonLogout = ({ toggleSidebar }: Props) => {
   const router = useRouter();
 
   return (
@@ -13,7 +17,7 @@ export const ButtonLogout = () => {
       onClick={() => router.push('/')}
     >
       <IoLogOut size={28} className="rotate-[-180deg]" />
-      <span>Salir</span>
+      <span className={`transition-all duration-300 ${toggleSidebar ? 'hidden' : 'block'}`}>Salir</span>
     </button>
   )
 }

@@ -1,6 +1,5 @@
 export * from "./pet.interface";
 export * from "./role.interface";
-export * from "./route.interface";
 export * from "./story.interface";
 export * from "./user.interface";
 

@@ -1,16 +1,19 @@
 'use client';
 
+import { usePathname } from "next/navigation";
 import Link from "next/link";
 
-import { IRoute } from "@/interfaces";
-import { usePathname } from "next/navigation";
 import { cn } from "@/utils";
 
+import { IAdminMenu } from "@/interfaces";
+
 interface Props {
-  route: IRoute;
+  route: IAdminMenu;
+  toggleSidebar: boolean;
+  onToggleSidebar: () => void;
 }
 
-export const LinkSidebar = ({ route }: Props) => {
+export const LinkSidebar = ({ route, toggleSidebar, onToggleSidebar }: Props) => {
   const pathname = usePathname();
 
   return (
@@ -23,8 +26,11 @@ export const LinkSidebar = ({ route }: Props) => {
           'font-bold bg-sky': pathname === route.path
         }
       )}
+      onClick={onToggleSidebar}
     >
-      <span>
+      <span
+        className={`transition-all duration-300 ${toggleSidebar ? 'hidden' : 'block'}`}
+      >
         { route.name }
       </span>
 

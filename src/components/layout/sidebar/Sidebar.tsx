@@ -1,41 +1,71 @@
-import { IoLayers } from "react-icons/io5";
-import { MdPets } from "react-icons/md";
+'use client';
+
+import { useState } from "react";
+
+import { cn } from "@/utils";
+
+import { useScreenSize } from "@/hooks";
 
 import { LinkSidebar } from "./LinkSidebar";
 
-import { IRoute } from "@/interfaces";
-import { ButtonLogout } from "./ButtonLogout";
 import { HeaderSidebar } from "./HeaderSidebar";
+import { ButtonLogout } from "./ButtonLogout";
 
-export const routes: IRoute[] = [
-  {
-    path: '/admin/mascotas',
-    name: 'Mascotas',
-    icon: <MdPets size={24} className="text-blackLight" />
-  },
-  {
-    path: '/admin/usuarios',
-    name: 'Usuarios',
-    icon: <IoLayers size={24} className="text-blackLight" />
-  }
-];
+import { adminMenu } from "@/assets";
+import { ButtonMenu } from "./ButtonMenu";
 
 export const Sidebar = () => {
+  const [toggleSidebar, setToggleSidebar] = useState(true);
+
+  const { width } = useScreenSize();
+
+  const isMobile = width < 768;
+
   return (
-    <div className='w-72 h-screen flex flex-col p-4 bg-slate-300'>
-      <HeaderSidebar />
+    <>
+      {isMobile && (
+        <ButtonMenu
+          isMobile={isMobile}
+          onToggleSidebar={() => setToggleSidebar(!toggleSidebar)}
+        />
+      )}
 
-      <hr className='w-full my-4' />
+      <div
+        className={cn(
+          'h-screen flex flex-col bg-slate-300 transition-all duration-300',
+          {
+            'w-16 p-3': !isMobile && toggleSidebar,
+            'w-72 p-4':  !isMobile && !toggleSidebar,
+            'absolute w-full p-4 md:w-72': isMobile,
+            'translate-x-0': isMobile && !toggleSidebar,
+            '-translate-x-[110%]': isMobile && toggleSidebar,
+          }
+        )}
+      >
+        <HeaderSidebar
+          toggleSidebar={toggleSidebar}
+          onToggleSidebar={() => setToggleSidebar(!toggleSidebar)}
+        />
 
-      <div className="grow flex flex-col gap-1">
-        {routes.map((route) => (
-          <LinkSidebar route={route} key={route.path} />
-        ))}
+        <hr className='w-full my-4' />
+
+        <div className="grow flex flex-col gap-1">
+          {adminMenu.map((route) => (
+            <LinkSidebar
+              route={route}
+              key={route.path}
+              toggleSidebar={toggleSidebar}
+              onToggleSidebar={() => {
+                isMobile && setToggleSidebar(!toggleSidebar);
+              }}
+            />
+          ))}
+        </div>
+        
+        <hr className='w-full my-4' />
+
+        <ButtonLogout toggleSidebar={toggleSidebar} />
       </div>
-      
-      <hr className='w-full my-4' />
-
-      <ButtonLogout />
-    </div>
+    </>
   )
 }
