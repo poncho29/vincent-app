@@ -5,15 +5,17 @@ import { Pet } from "@/interfaces";
 interface Props {
   limit?: number;
   offset?: number;
+  all?: boolean;
 }
 
 export const getAllPets = async ({
   limit = 12,
-  offset = 0 
+  offset = 0 ,
+  all,
 }: Props): Promise<{ pets: Pet[], total: number }> => {
   try {
     const URL = `${process.env.API_URL_BASE}`
-    const resp = await fetch(`${URL}/pets?limit=${limit}&offset=${offset}`, {
+    const resp = await fetch(`${URL}/pets?limit=${limit}&offset=${offset}&all=${all}`, {
       method: 'GET',
       headers: {
         'Content-Type': 'application/json'

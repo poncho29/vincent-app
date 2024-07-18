@@ -1,3 +1,7 @@
+// Admin mascotas
+export * from './admin/mascotas/TablePets';
+
+
 // Adoptar sections
 export * from './adoptar/MessageSection';
 export * from './adoptar/PetListSection';

@@ -9,6 +9,7 @@ import { Button } from "./Button";
 
 import { Column } from "../../interfaces";
 import { Switch } from "../form";
+import { ButtonLink } from "./ButtonLink";
 
 interface Props <T>{
   data: T[];
@@ -19,6 +20,11 @@ interface Props <T>{
     onClick: (item: T) => void;
   }[];
   searchableFields?: (keyof T)[];
+  btnCreate?: {
+    href: string;
+    text: string;
+    textMobile?: string;
+  }
 }
 
 export const Table = <T,>({
@@ -26,6 +32,7 @@ export const Table = <T,>({
   columns,
   controls = [],
   searchableFields = [],
+  btnCreate
 }: Props<T>) => {
   const {
     filteredData,
@@ -86,15 +93,33 @@ export const Table = <T,>({
 
   return (
     <div className="w-full overflow-x-auto shadow-md bg-sky sm:rounded-lg">
-      {searchableFields.length > 0 && (
-        <div className="w-full flex items-center justify-end gap-2 px-6 py-4">
-          <input
-            type="search"
-            placeholder="Buscar..."
-            className="p-1  border border-slate-200 rounded-lg focus:outline-none"
-            value={search}
-            onChange={handleSetSearch}
-          />
+      { (btnCreate || searchableFields.length > 0) && (
+        <div className="w-full flex items-center justify-between gap-2 px-6 py-4">
+          {btnCreate && (
+            <ButtonLink
+              href={btnCreate?.href || '#'}
+              showIcon={false}
+              className="w-1/2 h-10 max-w-40 md:w-full"
+              variant='outlineSecondary'
+            >
+              <span className="block md:hidden">
+                { btnCreate?.textMobile || 'Crear' }
+              </span>
+              <span className="hidden md:block">
+                { btnCreate?.text || 'Crear' }
+              </span>
+            </ButtonLink>
+          )}
+          
+          {searchableFields.length > 0 && (
+            <input
+              type="search"
+              placeholder="Buscar..."
+              className="w-1/2 max-w-sm px-4 py-2 border border-skyLight rounded-lg focus:outline-sky lg:w-full"
+              value={search}
+              onChange={handleSetSearch}
+            />
+          )}
         </div>
       )}
 
@@ -136,41 +161,53 @@ export const Table = <T,>({
           </tr>
         </thead>
         <tbody>
-          {paginatedData.map((item, index) => (
-            <tr
-              key={index}
-              className="text-gray-900 border-b bg-white"
-            >
-              {columns.map(({ accessor }) => (
+          { paginatedData.length === 0 ? (
+              <tr>
                 <td
-                  key={String(accessor)}
-                  className="text-nowrap capitalize px-4 py-2"
+                  colSpan={columns.length + (controls.length > 0 ? 1 : 0)}
+                  className="h-72 text-2xl text-center text-gray-900 font-medium bg-white"
                 >
-                  {renderRow(item[accessor])}
+                  No hay resultados
                 </td>
-              ))}
-              {controls.length > 0 && (
-                <td
-                  key="controls-body"
-                  className="flex justify-center gap-2 px-4 py-2"
+              </tr>
+            ) : (
+              paginatedData.map((item, index) => (
+                <tr
+                  key={index}
+                  className="text-gray-900 border-b bg-white"
                 >
-                  {controls.map(({ text, icon, onClick }) => (
-                    <Button
-                      key={text}
-                      showIcon={false}
-                      className={`flex items-center gap-2 ${getStyle(icon)}`}
-                      onClick={() => onClick(item)}
+                  {columns.map(({ accessor }) => (
+                    <td
+                      key={String(accessor)}
+                      className="text-nowrap capitalize px-4 py-2"
                     >
-                      { icon && renderIcon(icon) }
-                      <span className="text-xs lg:text-base">
-                        { text }
-                      </span>
-                    </Button>
+                      {renderRow(item[accessor])}
+                    </td>
                   ))}
-                </td>
-              )}
-            </tr>
-          ))}
+                  {controls.length > 0 && (
+                    <td
+                      key="controls-body"
+                      className="flex justify-center gap-2 px-4 py-2"
+                    >
+                      {controls.map(({ text, icon, onClick }) => (
+                        <Button
+                          key={text}
+                          showIcon={false}
+                          className={`flex items-center gap-2 ${getStyle(icon)}`}
+                          onClick={() => onClick(item)}
+                        >
+                          { icon && renderIcon(icon) }
+                          <span className="text-xs lg:text-base">
+                            { text }
+                          </span>
+                        </Button>
+                      ))}
+                    </td>
+                  )}
+                </tr>
+              ))
+            )
+          }
         </tbody>
       </table>
 

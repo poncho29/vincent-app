@@ -16,7 +16,7 @@ export interface Pet {
   images:     string[];
 }
 
-export interface PetTable extends Omit<Pet, 'slug' | 'user' | 'images' | 'type' | 'sex' | 'size' | 'stage'> {
+export interface PetTable extends Omit<Pet, 'user' | 'images' | 'type' | 'sex' | 'size' | 'stage'> {
   type:   string;
   sex:    string;
   size:   string;

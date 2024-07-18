@@ -23,7 +23,7 @@ export const LinkSidebar = ({ route, toggleSidebar, onToggleSidebar }: Props) =>
       className={cn(
         'flex items-center justify-between p-2 rounded-md cursor-pointer transition-all duration-300 hover:bg-sky',
         {
-          'font-bold bg-sky': pathname === route.path
+          'font-bold bg-sky': pathname.includes(route.path)
         }
       )}
       onClick={onToggleSidebar}
