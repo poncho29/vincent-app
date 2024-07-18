@@ -8,6 +8,7 @@ import { Pagination } from "./Pagination";
 import { Button } from "./Button";
 
 import { Column } from "../../interfaces";
+import { Switch } from "../form";
 
 interface Props <T>{
   data: T[];
@@ -75,7 +76,7 @@ export const Table = <T,>({
     if (value === null || value === undefined) {
       return '';
     } else if (typeof value === 'boolean') {
-      return value ? 'Activo' : 'Inactivo';
+      return <Switch disabled value={value} />
     } else if (typeof value === 'string' || typeof value === 'number') {
       return value;
     } else {
@@ -143,7 +144,7 @@ export const Table = <T,>({
               {columns.map(({ accessor }) => (
                 <td
                   key={String(accessor)}
-                  className="text-nowrap px-4 py-2"
+                  className="text-nowrap capitalize px-4 py-2"
                 >
                   {renderRow(item[accessor])}
                 </td>

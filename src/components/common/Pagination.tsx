@@ -35,9 +35,9 @@ export const Pagination = ({
     </select>
 
     <div className='flex gap-1 text-blackLight'>
-      <div className="w-12 flex items-center justify-between gap-1 cursor-default sm:min-w-24">
+      <div className="flex items-center justify-between gap-1 cursor-default sm:min-w-24">
         <span className="hidden font-semibold md:block">Página</span>
-        <strong>
+        <strong className="block w-12">
           { page } of { totalPages }
         </strong>
       </div>
