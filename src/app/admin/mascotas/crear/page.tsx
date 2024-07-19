@@ -1,11 +1,14 @@
-'use client';
-
 import { MdPets } from "react-icons/md";
+
+import { getAllSexes, getAllTypes } from "@/actions";
 
 import { ImageUploader, Input, Select, Switch } from "@/components/form";
 import { PageContent } from "@/components/layout";
 
-export default function CreatePetPage() {
+export default async function CreatePetPage() {
+  const typesOptions = await getAllTypes();
+  const sexOptions = await getAllSexes();
+
   return (
     <PageContent
       pageName="Crear Mascota"
@@ -62,23 +65,14 @@ export default function CreatePetPage() {
             id="type"
             name="type"
             label="Tipo de mascota"
-            options={[
-              { value: '', label: 'Seleccione el tipo de mascota' },
-              { value: 'dog', label: 'Perro' },
-              { value: 'cat', label: 'Gato' },
-              { value: 'other', label: 'Otro' },
-            ]}
+            options={typesOptions}
           />
           
           <Select 
             id="sex"
             name="sex"
             label="Sexo de la mascota"
-            options={[
-              { value: '', label: 'Seleccione el sexo de la mascota' },
-              { value: 'male', label: 'Macho' },
-              { value: 'female', label: 'Hembra' },
-            ]}
+            options={sexOptions}
           />
 
           <Select 
@@ -107,8 +101,8 @@ export default function CreatePetPage() {
 
           <ImageUploader
             label="Imagenes de la mascota"
-            initialImages={[`${process.env.NEXT_PUBLIC_CLOUDINARY_URL_BUCKET}/vincent/qkmal3cyi5ianv8r75rl`]}
-            onImagesChange={(images) => console.log(images)}
+            // initialImages={[`${process.env.NEXT_PUBLIC_CLOUDINARY_URL_BUCKET}/vincent/qkmal3cyi5ianv8r75rl`]}
+            // onImagesChange={(images) => console.log(images)}
           />
         </div>
 

@@ -31,6 +31,7 @@ export const Select = ({
         {...props}
         className="w-full px-4 py-2 rounded-lg border border-sky focus:outline-sky"
       >
+        <option value="">Seleccione una opción</option>
         {options.map((option) => (
           <option
             key={option.value}
