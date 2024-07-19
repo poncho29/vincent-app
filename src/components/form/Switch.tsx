@@ -1,40 +1,29 @@
 import { cn } from "@/utils";
+import { InputHTMLAttributes } from "react";
 
-interface Props {
+interface Props extends InputHTMLAttributes<HTMLInputElement> {
   label?: string;
-  value: boolean;
-  readonly?: boolean;
-  disabled?: boolean;
-  className?: string;
   onChange?: () => void;
 }
 
 export const Switch = ({
   label,
-  value,
-  className,
-  readonly = false,
-  disabled = false,
-  onChange = () => {}
+  ...props
 }: Props) => {
   return (
     <label
-      htmlFor="switch"
+      htmlFor={props.id}
       className={cn(
         'inline-flex items-center cursor-pointer',
         {
-          'cursor-default': disabled
+          'cursor-default': props.disabled
         }
       )}
     >
       <input
-        id="switch"
-        readOnly={readonly}
-        disabled={disabled}
+        {...props}
         type="checkbox"
         className="sr-only peer"
-        checked={value}
-        onChange={onChange}
       />
 
       <div className="relative w-11 h-6 bg-gray rounded-full peer peer-checked:after:translate-x-full rtl:peer-checked:after:-translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:start-[2px] after:bg-white after:border-gray-300 after:border-none after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-green"></div>
