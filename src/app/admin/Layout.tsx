@@ -1,5 +1,7 @@
 import type { Metadata } from "next";
 
+import { AuthProvider } from "@/context";
+
 import { Sidebar } from "@/components/layout";
 
 export const metadata: Metadata = {
@@ -13,12 +15,14 @@ export default function AdminLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <main className="w-screen h-screen flex">
-      <Sidebar />
+    <AuthProvider>
+      <main className="w-screen h-screen flex">
+        <Sidebar />
 
-      <div className="w-full h-screen overflow-x-hidden overflow-y-auto">
-        { children }
-      </div>
-    </main>
+        <div className="w-full h-screen overflow-x-hidden overflow-y-auto">
+          { children }
+        </div>
+      </main>
+    </AuthProvider>
   );
 }

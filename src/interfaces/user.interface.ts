@@ -9,3 +9,9 @@ export interface User {
   roles:    Roles[];
   isActive: boolean;
 }
+
+export interface UserLogin {
+  id:       string;
+  email:    string;
+  token:    string;
+}

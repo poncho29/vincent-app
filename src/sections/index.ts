@@ -1,7 +1,12 @@
+/**************** AUTH SECTIONS ******************* */
+// Auth sections
+export * from './auth/login/LoginForm';
+
+/**************** ADMIN SECTIONS ******************* */
 // Admin mascotas
 export * from './admin/mascotas/TablePets';
 
-
+/**************** LANDING SECTIONS ******************* */
 // Adoptar sections
 export * from './adoptar/MessageSection';
 export * from './adoptar/PetListSection';
