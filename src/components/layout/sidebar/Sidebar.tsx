@@ -1,6 +1,6 @@
 'use client';
 
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 import { cn } from "@/utils";
 
@@ -16,9 +16,13 @@ import { adminMenu } from "@/assets";
 
 export const Sidebar = () => {
   const { width } = useScreenSize();
-  const isMobile = width < 768;
-
-  const [toggleSidebar, setToggleSidebar] = useState(true);
+  const isMobile = width === 0 ? false : width < 768;
+  
+  const [toggleSidebar, setToggleSidebar] = useState(false);
+  
+  useEffect(() => {
+    if (width < 1024) setToggleSidebar(true)
+  }, [width]);
 
   return (
     <>
