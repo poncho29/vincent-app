@@ -12,7 +12,7 @@ export default async function CreatePetPage() {
   return (
     <PageContent
       pageName="Crear Mascota"
-      pageIcon={<MdPets className="size-7 text-blackLight lg:size-10" />}
+      pageIcon={<MdPets className="size-7 text-blackLight" />}
     >
       <form className="w-full">
 

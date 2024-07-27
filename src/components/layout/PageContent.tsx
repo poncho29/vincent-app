@@ -22,14 +22,14 @@ export const PageContent = ({
 }: Props) => {
   return (
     <div
-      className="w-full flex flex-col p-4 lg:p-6"
+      className="w-full flex flex-col"
     >
-      <div className="flex items-center gap-4 mb-6 lg:mb-10">
-        <h2 className="title">
+      <div className="sticky top-0 z-40 w-full flex items-center gap-2 p-5 bg-slate-300 md:static">
+        { pageIcon }
+
+        <h2 className="font-mochiypopone text-xl">
           { pageName }
         </h2>
-
-        { pageIcon }
       </div>
 
       {loader && <Spinner className="mx-auto" />}
@@ -49,7 +49,7 @@ export const PageContent = ({
       {!error && !loader && children && (
         <div
           className={cn(
-            'w-full flex flex-col items-center',
+            'w-full flex flex-col items-center p-4',
             classContent
           )}
         >
