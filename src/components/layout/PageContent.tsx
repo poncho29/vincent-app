@@ -21,7 +21,9 @@ export const PageContent = ({
   classContent = "",
 }: Props) => {
   return (
-    <div className="w-full h-full flex flex-col p-4 py-6 lg:p-6">
+    <div
+      className="w-full flex flex-col p-4 lg:p-6"
+    >
       <div className="flex items-center gap-4 mb-6 lg:mb-10">
         <h2 className="title">
           { pageName }
@@ -34,10 +36,9 @@ export const PageContent = ({
 
       {error && !loader && (
         <div
-          className="w-full h-[calc(100vh-100px)] flex flex-col items-center gap-4
-          lg:h-[calc(100vh-128px)]"
+          className="w-full flex flex-col items-center gap-4 mt-20"
         >
-          <MdError size={32} className="text-red-500 mt-20" />
+          <MdError size={32} className="text-red-500" />
           <p className="text-center text-red-500 font-semibold">
             Ha ocurrido un error al cargar la página <br />
             Por favor, recargue la página
@@ -45,14 +46,16 @@ export const PageContent = ({
         </div>
       )}
 
-      <div
-        className={cn(
-          'w-full h-[calc(100vh-100px)] flex flex-col items-center gap-4 lg:h-[calc(100vh-128px)]',
-          classContent
-        )}
-      >
-        { !error && !loader && children }
-      </div>
+      {!error && !loader && children && (
+        <div
+          className={cn(
+            'w-full flex flex-col items-center',
+            classContent
+          )}
+        >
+          { children }
+        </div>
+      )}
     </div>
   )
 }

@@ -4,8 +4,9 @@ import { getAllPets } from "@/actions";
 
 import { PageContent } from "@/components/layout";
 
-import { PetTable } from "@/interfaces";
 import { TablePets } from "@/sections";
+
+import { PetTable } from "@/interfaces";
 
 export default async function PetsPage() {
   const { pets } = await getAllPets({ all: true });
@@ -27,9 +28,12 @@ export default async function PetsPage() {
   return (
     <PageContent
       pageName="Mascotas"
+      error={true}
       pageIcon={<MdPets className="size-7 text-blackLight lg:size-10" />}
     >
       <TablePets data={dataTable} />
+
+      <div className="w-full h-28 bg-slate-400 mt-8"></div>
     </PageContent>
   );
 }
