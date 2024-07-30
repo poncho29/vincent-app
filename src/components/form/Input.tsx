@@ -4,14 +4,18 @@ interface Props extends InputHTMLAttributes<HTMLInputElement> {
   label?: string;
   msgError?: string | undefined;
   touched?: boolean | undefined;
+  showPassword?: boolean;
   inputClass?: string;
+  onShowPassword?: () => void;
 }
 
 export const Input = ({
   label,
   msgError = '',
   touched = false,
+  showPassword = false,
   inputClass = 'border-none',
+  onShowPassword = () => {},
   ...props
 }: Props) => {
   return (
@@ -19,9 +23,18 @@ export const Input = ({
       {label && (
         <label
           htmlFor={props.id}
-          className="font-medium"
+          className="flex items-center justify-between font-medium"
         >
           {label}
+
+          {(props.type === 'password' || (props.type === 'text' && showPassword)) && (
+            <span
+              className="text-xs text-gray-500 cursor-pointer select-none"
+              onClick={onShowPassword}
+            >
+              {!showPassword ? 'Mostrar' : 'Ocultar'} contraseña
+            </span>
+          )}
         </label>
       )}
 

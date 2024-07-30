@@ -19,6 +19,7 @@ export const LoginForm = () => {
 
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
+  const [togglePassword, setTogglePassword] = useState(false);
   
   const formik = useFormik({
     initialValues: {
@@ -46,6 +47,10 @@ export const LoginForm = () => {
       }
     },
   });
+
+  const handleTogglePassword = () => {
+    setTogglePassword(!togglePassword);
+  }
   
   return (
     <form onSubmit={formik.handleSubmit}>
@@ -65,14 +70,16 @@ export const LoginForm = () => {
 
       <Input
         id="password"
-        type="password"
+        type={togglePassword ? 'text' : 'password'}
         name="password"
         label="Contraseña"
         placeholder="Ingresar contraseña"
         disabled={loading}
+        showPassword={togglePassword}
         value={formik.values.password}
         onChange={formik.handleChange}
         onBlur={formik.handleBlur}
+        onShowPassword={handleTogglePassword}
         touched={formik.touched.password}
         msgError={formik.errors.password}
       />
