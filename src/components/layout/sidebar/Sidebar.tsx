@@ -21,7 +21,9 @@ export const Sidebar = () => {
   const [toggleSidebar, setToggleSidebar] = useState(false);
   
   useEffect(() => {
-    if (width < 1024) setToggleSidebar(true)
+    if (width === 0) return;
+
+    if (width < 1024) setToggleSidebar(true);
   }, [width]);
 
   return (

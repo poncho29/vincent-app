@@ -1,13 +1,19 @@
-import { OptionSelect, Type } from "@/interfaces";
+'use server';
 
-export const getAllTypes = async (): Promise<OptionSelect[]> => {
+import { cookies } from 'next/headers';
+
+import { Type } from "@/interfaces";
+
+export const getAllTypes = async (): Promise<Type[]> => {
+  const URL = `${process.env.API_URL_BASE}`
+  const token = cookies().get('authToken')?.value;
+
   try {
-    const URL = `${process.env.API_URL_BASE}`
     const resp = await fetch(`${URL}/type-pet`, {
       method: 'GET',
       headers: {
         'Content-Type': 'application/json',
-        'authorization': `Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6ImFlZTVjOTJiLWQxNTUtNGFmZC1iZTg5LWM1MjM4NGRlYzY0MyIsImlhdCI6MTcyMTM1NTQ1MywiZXhwIjoxNzIxMzYyNjUzfQ.Yig8sk5wql7Rr3cxqjSi_4A4o2IRGG7U30JX9yMvodc`
+        'authorization': `Bearer ${token}`
       },
       cache: "no-cache"
     });
@@ -17,16 +23,10 @@ export const getAllTypes = async (): Promise<OptionSelect[]> => {
     }
 
     const typesPets: Type[] = await resp.json();
-    console.log(typesPets);
 
-    const typesOptions: OptionSelect[] = typesPets.map((type: Type) => ({
-      value: type.id,
-      label: type.type
-    }));
-
-    return typesOptions;
+    return typesPets;
   } catch (error) {
-    console.log('Error fetching types:', error);
+    console.log('Error fetching types of pets:', error);
     return [];
   }
 }

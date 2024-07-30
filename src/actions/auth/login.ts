@@ -1,7 +1,5 @@
 'use server';
 
-import Cookies from 'js-cookie';
-
 import { UserLogin } from "@/interfaces";
 
 const BASE_URL = process.env.API_URL_BASE;

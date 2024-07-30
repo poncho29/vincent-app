@@ -1,13 +1,19 @@
-import { OptionSelect, Sex } from "@/interfaces";
+'use server';
 
-export const getAllSexes = async (): Promise<OptionSelect[]> => {
+import { cookies } from 'next/headers';
+
+import { Sex } from "@/interfaces";
+
+export const getAllSexes = async (): Promise<Sex[]> => {
+  const URL = `${process.env.API_URL_BASE}`;
+  const token = cookies().get('authToken')?.value;
+
   try {
-    const URL = `${process.env.API_URL_BASE}`
     const resp = await fetch(`${URL}/sex`, {
       method: 'GET',
       headers: {
         'Content-Type': 'application/json',
-        'authorization': `Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6ImFlZTVjOTJiLWQxNTUtNGFmZC1iZTg5LWM1MjM4NGRlYzY0MyIsImlhdCI6MTcyMTM1NTQ1MywiZXhwIjoxNzIxMzYyNjUzfQ.Yig8sk5wql7Rr3cxqjSi_4A4o2IRGG7U30JX9yMvodc`
+        'authorization': `Bearer ${token}`
       },
       cache: "no-cache"
     });
@@ -18,14 +24,9 @@ export const getAllSexes = async (): Promise<OptionSelect[]> => {
 
     const sexPets: Sex[] = await resp.json();
 
-    const sexOptions: OptionSelect[] = sexPets.map((sex: Sex) => ({
-      value: sex.id,
-      label: sex.sex
-    }));
-
-    return sexOptions;
+    return sexPets;
   } catch (error) {
-    console.log('Error fetching types:', error);
+    console.log('Error fetching sex of pets:', error);
     return [];
   }
 }

@@ -2,19 +2,15 @@
 
 import { useState } from 'react';
 
-import { useRouter } from 'next/navigation';
-
 import { useFormik } from 'formik';
 import * as Yup from 'yup';
 
 import { useAuth } from '@/context';
 
-import { Button } from '@/components/common'
-import { Input } from '@/components/form'
+import { Button } from '@/components/common';
+import { Input } from '@/components/form';
 
 export const LoginForm = () => {
-  const router = useRouter();
-
   const { login } = useAuth();
 
   const [loading, setLoading] = useState(false);

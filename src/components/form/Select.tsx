@@ -21,7 +21,7 @@ export const Select = ({
       {label && (
         <label
           htmlFor={props.id}
-          className="font-medium"
+          className="inline-block h-6 font-medium"
         >
           {label}
         </label>
@@ -29,13 +29,14 @@ export const Select = ({
 
       <select
         {...props}
-        className="w-full px-4 py-2 rounded-lg border border-sky focus:outline-sky"
+        className="w-full h-[42px] px-4 py-2 rounded-lg border border-sky focus:outline-sky"
       >
         <option value="">Seleccione una opción</option>
         {options.map((option) => (
           <option
             key={option.value}
             value={option.value}
+            className="capitalize"
           >
             {option.label}
           </option>

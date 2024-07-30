@@ -29,14 +29,15 @@ export const ImageUploader = ({
       }));
       setImages(initialImagesWithId);
     }
-  }, []); // Se ejecuta solo una vez al montar el componente
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
 
   useEffect(() => {
     // Llamar al callback onImagesChange cada vez que las imágenes cambien
     if (onImagesChange) {
       onImagesChange(images);
     }
-  }, [images, onImagesChange]);
+  }, [images]);
 
   const handleImageChange = (e: ChangeEvent<HTMLInputElement>) => {
     if (e.target.files) {
@@ -56,7 +57,7 @@ export const ImageUploader = ({
         }
       });
 
-      // Reset the input value to allow re-uploading the same file
+      // Restablecer el valor de entrada para permitir volver a cargar el mismo archivo
       e.target.value = '';
     }
   };
@@ -72,8 +73,12 @@ export const ImageUploader = ({
   const handleRemoveImage = (id: string) => {
     setImages((prevImages) => prevImages.filter((image) => image.id !== id));
     const imageToRemove = images.find((image) => image.id === id);
-    if (imageToRemove && imageToRemove.isLocal) URL.revokeObjectURL(imageToRemove.url); // Revoke URL when image is removed
-    setError(null); // Reset error when an image is removed
+
+    // Revocar URL cuando se elimina la imagen
+    if (imageToRemove && imageToRemove.isLocal) URL.revokeObjectURL(imageToRemove.url);
+
+    // Restablecer el error cuando se elimina una imagen
+    setError(null);
   };
 
   const renderPhotos = (source: { id: string; url: string }[]) => {
@@ -97,8 +102,9 @@ export const ImageUploader = ({
 
   return (
     <div className="flex flex-col">
-      <div className="mb-4 flex items-center">
-        <label className="mr-4">{label}</label>
+      <div className="mb-2 flex items-center">
+        <label className="mr-4 text-sm font-medium lg:text-base">{label}</label>
+
         <input
           type="file"
           id="file"
@@ -108,17 +114,19 @@ export const ImageUploader = ({
           accept="image/*"
           disabled={images.length >= maxImages}
         />
+
         <label
           htmlFor="file"
-          className={`cursor-pointer px-4 py-2 rounded-md text-white ${
-            images.length >= maxImages ? 'bg-gray-500 cursor-not-allowed' : 'bg-blue-500'
-          }`}
+          className={`
+            w-36 px-4 py-2 rounded-md text-sm text-white cursor-pointer lg:w-40 lg:text-base
+            ${images.length >= maxImages ? 'bg-gray-500 cursor-not-allowed' : 'bg-blue-500'}
+          `}
         >
           Select Images
         </label>
       </div>
 
-      {error && <p className="text-red-500 mb-4">{error}</p>}
+      {error && <p className="text-red-500 mb-2">{error}</p>}
 
       <div className="flex flex-wrap">
         {renderPhotos(images)}

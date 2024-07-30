@@ -33,6 +33,7 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
     Cookies.set('user', JSON.stringify(user), { path: '/' });
   }, [user]);
 
+
   useEffect(() => {
     if (pathname === '/auth/login') return;
 
@@ -41,7 +42,7 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
       const tokenTimestamp = Cookies.get('tokenTimestamp');
 
       if (!authToken || !tokenTimestamp) {
-        router.push('/auth/login');
+        logout();
         return;
       }
   
@@ -55,17 +56,13 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
           Cookies.set('authToken', data.token, { path: '/' });
           Cookies.set('tokenTimestamp', Date.now().toString(), { path: '/' });
         } catch (error) {
-          setUser(null);
-          router.push('/auth/login');
+          logout();
         }
       }
     };
 
-    const interval = setInterval(validateToken, 60000); // Verificar cada minuto
-
     validateToken();
 
-    return () => clearInterval(interval);
   // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [pathname]);
 
