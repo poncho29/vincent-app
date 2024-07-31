@@ -2,7 +2,11 @@
 export * from './auth/login';
 export * from './auth/check-token';
 
+// File
+export * from './file/upload-file';
+
 // Pets
+export * from './pets/create-pet';
 export * from './pets/get-all-pets';
 export * from './pets/get-pet'; 
 

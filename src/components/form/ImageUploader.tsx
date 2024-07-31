@@ -1,41 +1,70 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 /* eslint-disable @next/next/no-img-element */
 'use client';
 
-import React, { useState, ChangeEvent, useEffect } from 'react';
+import React, { useState, ChangeEvent, useEffect, useRef } from 'react';
+
+const URL_BUCKET = process.env.NEXT_PUBLIC_CLOUDINARY_URL_BUCKET;
 
 interface Props {
   label?: string;
   maxImages?: number;
+  disabled?: boolean;
   initialImages?: string[];
-  onImagesChange?: (images: { id: string; url: string; isLocal: boolean }[]) => void;
+  msgError?: string | undefined;
+  onImagesChange?: (images: string[]) => void;
 }
 
 export const ImageUploader = ({
   label,
   maxImages = 3,
+  disabled = false,
   initialImages = [],
+  msgError,
   onImagesChange
 }: Props) => {
-  const [images, setImages] = useState<{ id: string; url: string; isLocal: boolean }[]>([]);
-  const [error, setError] = useState<string | null>(null);
+  const isFirstRender = useRef(false);
 
+  const [images, setImages] = useState<{ id: string; url: string; isLocal: boolean }[]>([]);
+  const [error, setError] = useState<string | null | undefined>(msgError);
+  
   useEffect(() => {
     // Convertir las imágenes iniciales a la estructura usada en el estado
     if (initialImages.length > 0) {
-      const initialImagesWithId = initialImages.map((url) => ({
-        id: url,
-        url: url,
-        isLocal: false
-      }));
+      
+      const initialImagesWithId = initialImages.map((url, index) => {
+        console.log(index)
+        const idImage = url.split('/').pop();
+        const urlComplete = `${URL_BUCKET}/${url}`;
+        
+        return {
+          id: idImage || index.toString(),
+          url: urlComplete,
+          isLocal: false
+        }
+      });
+      
+      console.log(initialImagesWithId)
       setImages(initialImagesWithId);
     }
-  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   useEffect(() => {
+    if (msgError) setError(msgError);
+  }, [msgError]);
+
+  useEffect(() => {
+    if (!isFirstRender.current) {
+      isFirstRender.current = true;
+      return;
+    }
+
+    if (images.length === 0) return;
+    
     // Llamar al callback onImagesChange cada vez que las imágenes cambien
     if (onImagesChange) {
-      onImagesChange(images);
+      const cleanImages = images.map(image => image.url);
+      onImagesChange(cleanImages);
     }
   }, [images]);
 
@@ -49,7 +78,7 @@ export const ImageUploader = ({
       setImages((prevImages) => {
         const newImages = prevImages.concat(filesArray);
         if (newImages.length > maxImages) {
-          setError(`You can only upload up to ${maxImages} images.`);
+          setError(`Solo puedes subir hasta ${maxImages} imágenes.`);
           return prevImages;
         } else {
           setError(null);
@@ -61,14 +90,6 @@ export const ImageUploader = ({
       e.target.value = '';
     }
   };
-
-  useEffect(() => {
-    return () => {
-      images.forEach((image) => {
-        if (image.isLocal) URL.revokeObjectURL(image.url);
-      });
-    };
-  }, [images]);
 
   const handleRemoveImage = (id: string) => {
     setImages((prevImages) => prevImages.filter((image) => image.id !== id));
@@ -112,21 +133,25 @@ export const ImageUploader = ({
           onChange={handleImageChange}
           className="hidden"
           accept="image/*"
-          disabled={images.length >= maxImages}
+          disabled={images.length >= maxImages || disabled}
         />
 
         <label
           htmlFor="file"
           className={`
-            w-36 px-4 py-2 rounded-md text-sm text-white cursor-pointer lg:w-40 lg:text-base
-            ${images.length >= maxImages ? 'bg-gray-500 cursor-not-allowed' : 'bg-blue-500'}
+            w-32 px-4 py-2 rounded-md text-sm text-center text-white font-semibold
+            lg:w-40 lg:text-base
+            ${images.length >= maxImages || disabled
+              ? 'bg-slate-300 cursor-not-allowed'
+              : 'bg-sky cursor-pointer'
+            }
           `}
         >
-          Select Images
+          Seleccionar
         </label>
       </div>
 
-      {error && <p className="text-red-500 mb-2">{error}</p>}
+      {error && <p className="text-xs text-rose-500 mb-2">{error}</p>}
 
       <div className="flex flex-wrap">
         {renderPhotos(images)}

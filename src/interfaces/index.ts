@@ -1,3 +1,4 @@
+export * from "./file.interface";
 export * from "./pet.interface";
 export * from "./role.interface";
 export * from "./story.interface";
