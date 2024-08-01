@@ -9,7 +9,7 @@ export const createPet = async (pet: PetTable): Promise<{ success: boolean, erro
   const token = cookies().get('authToken')?.value;
 
   try {
-    const resp = await fetch(`${URL}/pet`, {
+    const resp = await fetch(`${URL}/pets`, {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
@@ -19,14 +19,15 @@ export const createPet = async (pet: PetTable): Promise<{ success: boolean, erro
       cache: "no-cache"
     });
 
-    if (!resp.ok) {
-      throw new Error('Network response was not ok');
+    const data = await resp.json();
+
+    if (data?.error) {
+      throw new Error(`status: ${data.statusCode} - ${data.message}`);
     }
     
-    console.log('Response:', resp);
     return { success: true, error: null };
   } catch (error) {
-    console.log('Error fetching pets:', error);
-    return { success: false, error: 'Error creating pet' };
+    const message = error instanceof Error ? error.message : 'Error creating pet';
+    return { success: false, error: message };
   }
 }

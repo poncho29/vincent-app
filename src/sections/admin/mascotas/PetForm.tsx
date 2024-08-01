@@ -4,10 +4,11 @@ import { useState } from "react";
 
 import { useRouter } from "next/navigation";
 
+import toast from 'react-hot-toast';
 import { useFormik } from "formik";
 import * as Yup from 'yup';
 
-import { uploadFile } from "@/actions";
+import { createPet, uploadFile } from "@/actions";
 
 import { ImageUploader, Input, Select, Switch } from "@/components/form";
 import { Button } from "@/components/common";
@@ -35,8 +36,8 @@ const initialValues: PetTable = {
   sex: '',
   size: '',
   stage: '',
-  // images: []
-  images: ['vincent/qkmal3cyi5ianv8r75rl', 'vincent/pwxsgth0nd2paomn8alw']
+  images: []
+  // images: ['vincent/qkmal3cyi5ianv8r75rl', 'vincent/pwxsgth0nd2paomn8alw']
 }
 
 export const PetForm = ({
@@ -79,12 +80,13 @@ export const PetForm = ({
       try {
         if (localImages.length > 0) {
           const preparedImages = await Promise.all(localImages.map(async (image, index) => {
-            const file = await urlToFile(image, `image_${index}.jpg`);
+            const file = await urlToFile(image, `image_${index}`);
 
             const formData = new FormData();
             formData.append('file', file);
 
             const resp = await uploadFile(formData);
+            console.log(resp)
 
             if (resp && resp.public_id) {
               return resp.public_id;
@@ -98,9 +100,20 @@ export const PetForm = ({
           values.images = [...remoteImages];
         }
 
-        console.log(values);
+        const { id, ...pet } = values;
+
+        const resp = await createPet(pet);
+
+        if (!resp.success) {
+          console.log(resp);
+          throw new Error(resp.error || 'Error creando la mascota');
+        }
+
+        toast.success('Mascota creada exitosamente');
+        router.push('/admin/mascotas');
       } catch (error) {
         console.error('Error creando la mascota', error);
+        toast.error('Error creando la mascota');
         setError('Error creando la mascota');
       } finally {
         setLoading(false);

@@ -1,5 +1,7 @@
 import type { Metadata } from "next";
 
+import toast, { Toaster } from 'react-hot-toast';
+
 import { AuthProvider } from "@/context";
 
 import { Sidebar } from "@/components/layout";
@@ -23,6 +25,8 @@ export default function AdminLayout({
           { children }
         </div>
       </main>
+
+      <Toaster />
     </AuthProvider>
   );
 }
