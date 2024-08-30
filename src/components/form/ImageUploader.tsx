@@ -4,7 +4,11 @@
 
 import React, { useState, ChangeEvent, useEffect, useRef } from 'react';
 
+import { IoMdAlert } from 'react-icons/io';
+
 const URL_BUCKET = process.env.NEXT_PUBLIC_CLOUDINARY_URL_BUCKET;
+const MAX_HEIGHT = 350;
+const MAX_WIDTH = 350;
 
 interface Props {
   label?: string;
@@ -70,20 +74,44 @@ export const ImageUploader = ({
 
   const handleImageChange = (e: ChangeEvent<HTMLInputElement>) => {
     if (e.target.files) {
-      const filesArray = Array.from(e.target.files).map((file) => ({
-        id: URL.createObjectURL(file),
-        url: URL.createObjectURL(file),
-        isLocal: true
-      }));
-      setImages((prevImages) => {
-        const newImages = prevImages.concat(filesArray);
-        if (newImages.length > maxImages) {
-          setError(`Solo puedes subir hasta ${maxImages} imágenes.`);
-          return prevImages;
-        } else {
-          setError(null);
-          return newImages;
-        }
+      const filesArray = Array.from(e.target.files);
+
+      filesArray.forEach((file) => {
+        const image = new Image();
+        const objectUrl = URL.createObjectURL(file);
+
+        image.onload = () => {
+          // Validar las dimensiones de la imagen
+          if (image.width !== MAX_WIDTH || image.height !== MAX_HEIGHT) {
+            setError(`La imagen debe tener un tamaño de ${MAX_WIDTH}x${MAX_HEIGHT} píxeles.`);
+            URL.revokeObjectURL(objectUrl); // Limpiar la URL creada
+            return;
+          }
+
+          // Si la imagen cumple con las dimensiones, añadirla al estado
+          setImages((prevImages) => {
+            const newImages = prevImages.concat({
+              id: objectUrl,
+              url: objectUrl,
+              isLocal: true,
+            });
+
+            if (newImages.length > maxImages) {
+              setError(`Solo puedes subir hasta ${maxImages} imágenes.`);
+              return prevImages;
+            } else {
+              setError(null);
+              return newImages;
+            }
+          });
+        };
+
+        image.onerror = () => {
+          setError('Error al cargar la imagen.');
+          URL.revokeObjectURL(objectUrl); // Limpiar la URL creada
+        };
+
+        image.src = objectUrl;
       });
 
       // Restablecer el valor de entrada para permitir volver a cargar el mismo archivo
@@ -104,10 +132,10 @@ export const ImageUploader = ({
 
   const renderPhotos = (source: { id: string; url: string }[]) => {
     return source.map((photo) => (
-      <div key={photo.id} className="relative m-2">
+      <div key={photo.id} className="relative">
         <img
           alt="pet image"
-          className="w-32 h-32 object-cover border-2 border-sky"
+          className="w-28 h-28 object-cover border-2 border-sky lg:w-32 lg:h-32"
           src={photo.url}
         />
         <button
@@ -122,9 +150,12 @@ export const ImageUploader = ({
   };
 
   return (
-    <div className="flex flex-col">
-      <div className="mb-2 flex items-center">
-        <label className="mr-4 text-sm font-medium lg:text-base">{label}</label>
+    <div className="flex flex-col p-5 border border-sky rounded-lg">
+      <div className="flex items-center justify-between gap-2">
+        <label className="flex items-center text-xs font-medium sm:gap-2 md:text-sm lg:text-base">
+          <span className='inline-block w-[90%]'>{label}</span>
+          <IoMdAlert className='!size-5' />
+        </label>
 
         <input
           type="file"
@@ -139,8 +170,8 @@ export const ImageUploader = ({
         <label
           htmlFor="file"
           className={`
-            w-32 px-4 py-2 rounded-md text-sm text-center text-white font-semibold
-            lg:w-40 lg:text-base
+            w-32 px-4 py-2 rounded-md text-xs text-center text-white font-semibold
+            md:text-sm lg:w-40 lg:text-base
             ${images.length >= maxImages || disabled
               ? 'bg-slate-300 cursor-not-allowed'
               : 'bg-sky cursor-pointer'
@@ -153,7 +184,9 @@ export const ImageUploader = ({
 
       {error && <p className="text-xs text-rose-500 mb-2">{error}</p>}
 
-      <div className="flex flex-wrap">
+      <div
+        className={`flex flex-wrap justify-around gap-4 lg:flex-nowrap lg:gap-8 ${images.length > 0 ? 'mt-2' : 0}`}
+      >
         {renderPhotos(images)}
       </div>
     </div>
