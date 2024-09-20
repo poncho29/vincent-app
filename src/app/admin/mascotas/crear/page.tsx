@@ -13,10 +13,14 @@ import { PageContent } from "@/components/layout";
 import { PetForm } from "@/sections";
 
 export default async function CreatePetPage() {
-  const allTypes = await getAllTypes();
-  const allSexes = await getAllSexes();
-  const allSizes = await getAllSizes();
-  const allStages = await getAllStages();
+  const allTypesP = getAllTypes();
+  const allSexesP = getAllSexes();
+  const allSizesp = getAllSizes();
+  const allStagesp = getAllStages();
+
+  const [allTypes, allSexes, allSizes, allStages] = await Promise.all([
+    allTypesP, allSexesP, allSizesp, allStagesp
+  ]);
 
   const typeOptions = createTypeOptionsForSelect(allTypes);
   const sexOptions = createSexOptionsForSelect(allSexes);

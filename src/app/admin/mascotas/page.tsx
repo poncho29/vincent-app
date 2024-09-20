@@ -6,12 +6,12 @@ import { PageContent } from "@/components/layout";
 
 import { TablePets } from "@/sections";
 
-import { PetTable } from "@/interfaces";
+import { Pet, PetTable } from "@/interfaces";
 
 export default async function PetsPage() {
   const { pets } = await getAllPets({ all: true });
 
-  const dataTable: PetTable[] = pets.map((pet) => ({
+  const dataTable: PetTable[] = pets.map((pet: Pet) => ({
     id: pet.id,
     slug: pet.slug,
     name: pet.name,

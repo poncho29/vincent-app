@@ -15,7 +15,7 @@ export const getAllTypes = async (): Promise<Type[]> => {
         'Content-Type': 'application/json',
         'authorization': `Bearer ${token}`
       },
-      cache: "no-cache"
+      cache: 'no-store'
     });
 
     if (!resp.ok) {

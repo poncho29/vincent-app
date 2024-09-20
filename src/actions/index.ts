@@ -9,6 +9,7 @@ export * from './file/upload-file';
 export * from './pets/create-pet';
 export * from './pets/get-all-pets';
 export * from './pets/get-pet'; 
+export * from './pets/update-pet';
 
 // Types of pet
 export * from './sex-of-pet/get-all-sexes';

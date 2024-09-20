@@ -1,47 +1,35 @@
 'use client';
 
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 import { useRouter } from "next/navigation";
 
 import toast from 'react-hot-toast';
 import { useFormik } from "formik";
-import * as Yup from 'yup';
 
-import { createPet, uploadFile } from "@/actions";
+import { createPet, updatePet, uploadFile } from "@/actions";
+
+import { initialValues, validationSchema } from './pet-form.helper';
+
+import { urlToFile } from "@/utils";
 
 import { ImageUploader, Input, Select, Switch } from "@/components/form";
 import { Button } from "@/components/common";
 
-import { OptionSelect, PetTable } from '@/interfaces';
-import { urlToFile } from "@/utils";
+import { OptionSelect, Pet, PetForm as IPetForm } from '@/interfaces';
 
 interface Props {
-  pet?: PetTable | null;
+  pet?: Pet | null;
+  isEditing?: boolean;
   typeOptions: OptionSelect[];
   sexOptions: OptionSelect[];
   sizeOptions: OptionSelect[];
   stageOptions: OptionSelect[];
 }
 
-const initialValues: PetTable = {
-  id: '',
-  name: '',
-  slug: '',
-  race: '',
-  adopted: false,
-  sterilized: false,
-  vacine: false,
-  type: '',
-  sex: '',
-  size: '',
-  stage: '',
-  images: []
-  // images: ['vincent/qkmal3cyi5ianv8r75rl', 'vincent/pwxsgth0nd2paomn8alw']
-}
-
 export const PetForm = ({
   pet,
+  isEditing = false,
   typeOptions,
   sexOptions,
   sizeOptions,
@@ -49,44 +37,56 @@ export const PetForm = ({
 }: Props) => {
   const router = useRouter();
 
-  const [loading, setLoading] = useState(false);
-  const [error, setError] = useState<string | null>(null);
+  const [isLoading, setIsLoading] = useState(false);
+  const [isLoadingEdit, setIsLoadingEdit] = useState(isEditing);
+
+  useEffect(() => {
+    if (pet) {
+      delete pet.user;
+      
+      const parsedPet = {
+        ...pet,
+        sex: pet.sex.id,
+        size: pet.size.id,
+        type: pet.type.id,
+        stage: pet.stage.id,
+        images: pet.images.map((image) => ({
+          id: image.split('/').pop() || '',
+          url: image,
+          isLocal: false
+        }))
+      }
+
+      formik.setValues(parsedPet);
+      setIsLoadingEdit(false);
+    }
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [pet]);
   
   const formik = useFormik({
     initialValues: initialValues,
-    validationSchema: Yup.object().shape({
-      name: Yup.string().required('El nombre es obligatorio'),
-      slug: Yup.string().required('El apodo es obligatorio'),
-      race: Yup.string().required('La raza es obligatoria'),
-      type: Yup.string().required('El tipo es obligatorio'),
-      sex: Yup.string().required('El sexo es obligatorio'),
-      size: Yup.string().required('El tamaño es obligatorio'),
-      stage: Yup.string().required('El estado es obligatorio'),
-      images: Yup.array()
-        .min(1, 'Debe agregar al menos una imagen')
-        .required('Las imágenes son obligatorias'),
-    }),
-    onSubmit: async (values: PetTable) => {
-      setLoading(true);
+    validationSchema,
+    onSubmit: async (values: IPetForm) => {
+      setIsLoading(true);
 
+      let imagesToUpload: string[] = [];
       const { images } = values;
 
       // const firstImage = images?.[0] || '';
       const remoteImages = images
-        ?.filter((image) => image.includes('https'))
-        .map((image) => `vincent/${image.split('/').pop()}`) || [];
-      const localImages = images?.filter((image) => !image.includes('https')) || [];
+        ?.filter((image) => !image.isLocal)
+        .map((image) => `vincent/${image.url.split('/').pop()}`) || [];
+      const localImages = images?.filter((image) => image.isLocal) || [];
 
       try {
         if (localImages.length > 0) {
           const preparedImages = await Promise.all(localImages.map(async (image, index) => {
-            const file = await urlToFile(image, `image_${index}`);
+            const file = await urlToFile(image.url, `image_${index}`);
 
             const formData = new FormData();
             formData.append('file', file);
 
             const resp = await uploadFile(formData);
-            console.log(resp)
 
             if (resp && resp.public_id) {
               return resp.public_id;
@@ -95,32 +95,44 @@ export const PetForm = ({
             }
           }));
 
-          values.images = [...remoteImages, ...preparedImages];
+          imagesToUpload = [...remoteImages, ...preparedImages];
         } else {
-          values.images = [...remoteImages];
+          imagesToUpload = [...remoteImages];
         }
 
-        const { id, ...pet } = values;
+        const newPet = {
+          ...values,
+          images: imagesToUpload
+        }
 
-        const resp = await createPet(pet);
+        if (!isEditing) {
+          delete newPet.id;
+          const resp = await createPet(newPet);
+          
+          if (!resp.success)
+            throw new Error(resp.error || 'Error creando la mascota');
 
-        if (!resp.success) {
-          console.log(resp);
+          toast.success('Mascota creada exitosamente');
+        }
+
+        const resp = await updatePet(newPet);
+
+        if (!resp.success)
           throw new Error(resp.error || 'Error creando la mascota');
-        }
 
-        toast.success('Mascota creada exitosamente');
         router.push('/admin/mascotas');
       } catch (error) {
         console.error('Error creando la mascota', error);
         toast.error('Error creando la mascota');
-        setError('Error creando la mascota');
       } finally {
-        setLoading(false);
+        setIsLoading(false);
       }
     },
   });
 
+  if (isLoadingEdit) {
+    return <div className="w-full max-w-md lg:max-w-[1240px]">Loading...</div>
+  }
 
   return (
     <form
@@ -135,7 +147,7 @@ export const PetForm = ({
             placeholder="Ingrese el nombre de la mascota"
             label="Nombre de la mascota"
             inputClass="!border !border-sky"
-            disabled={loading}
+            disabled={isLoading}
             value={formik.values.name}
             onChange={formik.handleChange}
             onBlur={formik.handleBlur}
@@ -149,7 +161,7 @@ export const PetForm = ({
             label="Apodo de la mascota"
             placeholder="Ingrese el apodo de la mascota"
             inputClass="!border !border-sky"
-            disabled={loading}
+            disabled={isLoading}
             value={formik.values.slug}
             onChange={formik.handleChange}
             onBlur={formik.handleBlur}
@@ -163,7 +175,7 @@ export const PetForm = ({
             label="Raza de la mascota"
             placeholder="Ingrese la raza de la mascota"
             inputClass="!border !border-sky"
-            disabled={loading}
+            disabled={isLoading}
             value={formik.values.race}
             onChange={formik.handleChange}
             onBlur={formik.handleBlur}
@@ -176,7 +188,7 @@ export const PetForm = ({
               id="adopted"
               name="adopted"
               label="¿Está adoptada?"
-              disabled={loading}
+              disabled={isLoading}
               checked={formik.values.adopted}
               onChange={() => formik.setFieldValue('adopted', !formik.values.adopted)}
             />
@@ -185,7 +197,7 @@ export const PetForm = ({
               id="sterilized"
               name="sterilized"
               label="¿Está esterilizada?"
-              disabled={loading}
+              disabled={isLoading}
               checked={formik.values.sterilized}
               onChange={() => formik.setFieldValue('sterilized', !formik.values.sterilized)}
             />
@@ -194,7 +206,7 @@ export const PetForm = ({
               id="vacine"
               name="vacine"
               label="¿Está vacunada?"
-              disabled={loading}
+              disabled={isLoading}
               checked={formik.values.vacine}
               onChange={() => formik.setFieldValue('vacine', !formik.values.vacine)}
             />
@@ -206,7 +218,7 @@ export const PetForm = ({
             id="type"
             name="type"
             label="Tipo de mascota"
-            disabled={loading}
+            disabled={isLoading}
             options={typeOptions}
             value={formik.values.type}
             onChange={(e) => {
@@ -222,7 +234,7 @@ export const PetForm = ({
             id="sex"
             name="sex"
             label="Sexo de la mascota"
-            disabled={loading}
+            disabled={isLoading}
             options={sexOptions}
             value={formik.values.sex}
             onChange={(e) => {
@@ -238,7 +250,7 @@ export const PetForm = ({
             id="size"
             name="size"
             label="Tamaño de la mascota"
-            disabled={loading}
+            disabled={isLoading}
             options={sizeOptions}
             value={formik.values.size}
             onChange={(e) => {
@@ -254,7 +266,7 @@ export const PetForm = ({
             id="stage"
             name="stage"
             label="Etapa de la mascota"
-            disabled={loading}
+            disabled={isLoading}
             options={stageOptions}
             value={formik.values.stage}
             onChange={(e) => {
@@ -268,12 +280,10 @@ export const PetForm = ({
 
           <ImageUploader
             label="Imagenes de la mascota"
-            disabled={loading}
+            disabled={isLoading}
             initialImages={formik.values.images}
             msgError={formik.errors.images}
-            onImagesChange={(images) => {
-              formik.setFieldValue('images', images);
-            }}
+            onImagesChange={(images) => formik.setFieldValue('images', images)}
           />
         </div>
       </div>
@@ -283,7 +293,7 @@ export const PetForm = ({
           type="button"
           variant="outline"
           showIcon={false}
-          disabled={loading}
+          disabled={isLoading}
           onClick={() => router.push('/admin/mascotas')}
         >
           Cancelar
@@ -292,9 +302,9 @@ export const PetForm = ({
         <Button
           type="submit"
           showIcon={false}
-          disabled={loading}
+          disabled={isLoading}
         >
-          Crear
+          {pet ? 'Actualizar' : 'Crear'}
         </Button>
       </div>
     </form>

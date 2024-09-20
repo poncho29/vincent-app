@@ -26,7 +26,7 @@ export default function AdminLayout({
         </div>
       </main>
 
-      <Toaster />
+      <Toaster position="bottom-right" />
     </AuthProvider>
   );
 }

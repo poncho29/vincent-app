@@ -83,7 +83,7 @@ export const Table = <T,>({
     if (value === null || value === undefined) {
       return '';
     } else if (typeof value === 'boolean') {
-      return <Switch disabled value={value} />
+      return <Switch disabled checked={value} />
     } else if (typeof value === 'string' || typeof value === 'number') {
       return value;
     } else {

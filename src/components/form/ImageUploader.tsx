@@ -6,6 +6,8 @@ import React, { useState, ChangeEvent, useEffect, useRef } from 'react';
 
 import { IoMdAlert } from 'react-icons/io';
 
+import { ImageForm } from '@/interfaces';
+
 const URL_BUCKET = process.env.NEXT_PUBLIC_CLOUDINARY_URL_BUCKET;
 const MAX_HEIGHT = 350;
 const MAX_WIDTH = 350;
@@ -14,9 +16,9 @@ interface Props {
   label?: string;
   maxImages?: number;
   disabled?: boolean;
-  initialImages?: string[];
+  initialImages?: ImageForm[];
   msgError?: string | undefined;
-  onImagesChange?: (images: string[]) => void;
+  onImagesChange?: (images: ImageForm[]) => void;
 }
 
 export const ImageUploader = ({
@@ -29,48 +31,43 @@ export const ImageUploader = ({
 }: Props) => {
   const isFirstRender = useRef(false);
 
-  const [images, setImages] = useState<{ id: string; url: string; isLocal: boolean }[]>([]);
+  const [images, setImages] = useState<ImageForm[]>(initialImages);
   const [error, setError] = useState<string | null | undefined>(msgError);
   
-  useEffect(() => {
+  // useEffect(() => {
     // Convertir las imágenes iniciales a la estructura usada en el estado
-    if (initialImages.length > 0) {
+    // if (initialImages.length > 0) {
+      // setImages(initialImages);
       
-      const initialImagesWithId = initialImages.map((url, index) => {
-        console.log(index)
-        const idImage = url.split('/').pop();
-        const urlComplete = `${URL_BUCKET}/${url}`;
+      // const initialImagesWithId = initialImages.map((url, index) => {
+      //   console.log(index)
+      //   const idImage = url.split('/').pop();
+      //   const urlComplete = `${URL_BUCKET}/${url}`;
         
-        return {
-          id: idImage || index.toString(),
-          url: urlComplete,
-          isLocal: false
-        }
-      });
+      //   return {
+      //     id: idImage || index.toString(),
+      //     url: urlComplete,
+      //     isLocal: false
+      //   }
+      // });
       
-      console.log(initialImagesWithId)
-      setImages(initialImagesWithId);
+      // console.log(initialImagesWithId)
+      // setImages(initialImagesWithId);
+    // }
+  // }, []);
+
+  useEffect(() => {
+    if (images.length === 0) return;
+
+    // Envia las imagenes al componente padre
+    if (onImagesChange) {
+      onImagesChange(images);
     }
-  }, []);
+  }, [images]);
 
   useEffect(() => {
     if (msgError) setError(msgError);
   }, [msgError]);
-
-  useEffect(() => {
-    if (!isFirstRender.current) {
-      isFirstRender.current = true;
-      return;
-    }
-
-    if (images.length === 0) return;
-    
-    // Llamar al callback onImagesChange cada vez que las imágenes cambien
-    if (onImagesChange) {
-      const cleanImages = images.map(image => image.url);
-      onImagesChange(cleanImages);
-    }
-  }, [images]);
 
   const handleImageChange = (e: ChangeEvent<HTMLInputElement>) => {
     if (e.target.files) {
@@ -88,7 +85,7 @@ export const ImageUploader = ({
             return;
           }
 
-          // Si la imagen cumple con las dimensiones, añadirla al estado
+          // Si cumple con las dimensiones, añadirla al estado
           setImages((prevImages) => {
             const newImages = prevImages.concat({
               id: objectUrl,
@@ -114,7 +111,7 @@ export const ImageUploader = ({
         image.src = objectUrl;
       });
 
-      // Restablecer el valor de entrada para permitir volver a cargar el mismo archivo
+      // Restablecer el valor para permitir volver a cargar el mismo archivo
       e.target.value = '';
     }
   };
@@ -124,14 +121,15 @@ export const ImageUploader = ({
     const imageToRemove = images.find((image) => image.id === id);
 
     // Revocar URL cuando se elimina la imagen
-    if (imageToRemove && imageToRemove.isLocal) URL.revokeObjectURL(imageToRemove.url);
+    if (imageToRemove && imageToRemove.isLocal)
+      URL.revokeObjectURL(imageToRemove.url);
 
     // Restablecer el error cuando se elimina una imagen
     setError(null);
   };
 
-  const renderPhotos = (source: { id: string; url: string }[]) => {
-    return source.map((photo) => (
+  const renderPhotos = (photos: ImageForm[]) => {
+    return photos.map((photo) => (
       <div key={photo.id} className="relative">
         <img
           alt="pet image"
