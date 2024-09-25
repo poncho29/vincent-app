@@ -7,7 +7,7 @@ import { useRouter } from "next/navigation";
 import toast from 'react-hot-toast';
 import { useFormik } from "formik";
 
-import { createPet, updatePet, uploadFile } from "@/actions";
+import { createPet, deleteFile, updatePet, uploadFile } from "@/actions";
 
 import { initialValues, validationSchema } from './pet-form.helper';
 
@@ -39,6 +39,7 @@ export const PetForm = ({
 
   const [isLoading, setIsLoading] = useState(false);
   const [isLoadingEdit, setIsLoadingEdit] = useState(isEditing);
+  const [imagesToDelete, setImagesToDelete] = useState<string[]>([]);
 
   useEffect(() => {
     if (pet) {
@@ -72,7 +73,6 @@ export const PetForm = ({
       let imagesToUpload: string[] = [];
       const { images } = values;
 
-      // const firstImage = images?.[0] || '';
       const remoteImages = images
         ?.filter((image) => !image.isLocal)
         .map((image) => `vincent/${image.url.split('/').pop()}`) || [];
@@ -100,6 +100,17 @@ export const PetForm = ({
           imagesToUpload = [...remoteImages];
         }
 
+        if (imagesToDelete.length > 0) {
+          await Promise.all(imagesToDelete.map(async (image) => {
+            const resp = await deleteFile(image);
+
+            if (!resp.ok) {
+              toast.error('Error al borrar la imagen');
+              throw new Error('File deletion failed');
+            }
+          }));
+        }
+
         const newPet = {
           ...values,
           images: imagesToUpload
@@ -122,13 +133,16 @@ export const PetForm = ({
 
         router.push('/admin/mascotas');
       } catch (error) {
-        console.error('Error creando la mascota', error);
         toast.error('Error creando la mascota');
       } finally {
         setIsLoading(false);
       }
     },
   });
+
+  const handleDeleteImage = (image: string) => {
+    setImagesToDelete((prev) => [...prev, image]);
+  };
 
   if (isLoadingEdit) {
     return <div className="w-full max-w-md lg:max-w-[1240px]">Loading...</div>
@@ -284,6 +298,7 @@ export const PetForm = ({
             initialImages={formik.values.images}
             msgError={formik.errors.images}
             onImagesChange={(images) => formik.setFieldValue('images', images)}
+            onDeleteImage={handleDeleteImage}
           />
         </div>
       </div>

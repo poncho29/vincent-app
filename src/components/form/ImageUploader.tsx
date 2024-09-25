@@ -2,15 +2,14 @@
 /* eslint-disable @next/next/no-img-element */
 'use client';
 
-import React, { useState, ChangeEvent, useEffect, useRef } from 'react';
+import React, { useState, ChangeEvent, useEffect } from 'react';
 
 import { IoMdAlert } from 'react-icons/io';
 
 import { ImageForm } from '@/interfaces';
 
-const URL_BUCKET = process.env.NEXT_PUBLIC_CLOUDINARY_URL_BUCKET;
-const MAX_HEIGHT = 350;
-const MAX_WIDTH = 350;
+// const MAX_HEIGHT = 350;
+// const MAX_WIDTH = 350;
 
 interface Props {
   label?: string;
@@ -19,6 +18,7 @@ interface Props {
   initialImages?: ImageForm[];
   msgError?: string | undefined;
   onImagesChange?: (images: ImageForm[]) => void;
+  onDeleteImage?: (id: string) => void;
 }
 
 export const ImageUploader = ({
@@ -27,34 +27,11 @@ export const ImageUploader = ({
   disabled = false,
   initialImages = [],
   msgError,
-  onImagesChange
+  onImagesChange,
+  onDeleteImage,
 }: Props) => {
-  const isFirstRender = useRef(false);
-
   const [images, setImages] = useState<ImageForm[]>(initialImages);
   const [error, setError] = useState<string | null | undefined>(msgError);
-  
-  // useEffect(() => {
-    // Convertir las imágenes iniciales a la estructura usada en el estado
-    // if (initialImages.length > 0) {
-      // setImages(initialImages);
-      
-      // const initialImagesWithId = initialImages.map((url, index) => {
-      //   console.log(index)
-      //   const idImage = url.split('/').pop();
-      //   const urlComplete = `${URL_BUCKET}/${url}`;
-        
-      //   return {
-      //     id: idImage || index.toString(),
-      //     url: urlComplete,
-      //     isLocal: false
-      //   }
-      // });
-      
-      // console.log(initialImagesWithId)
-      // setImages(initialImagesWithId);
-    // }
-  // }, []);
 
   useEffect(() => {
     if (images.length === 0) return;
@@ -79,11 +56,11 @@ export const ImageUploader = ({
 
         image.onload = () => {
           // Validar las dimensiones de la imagen
-          if (image.width !== MAX_WIDTH || image.height !== MAX_HEIGHT) {
-            setError(`La imagen debe tener un tamaño de ${MAX_WIDTH}x${MAX_HEIGHT} píxeles.`);
-            URL.revokeObjectURL(objectUrl); // Limpiar la URL creada
-            return;
-          }
+          // if (image.width !== MAX_WIDTH || image.height !== MAX_HEIGHT) {
+          //   setError(`La imagen debe tener un tamaño de ${MAX_WIDTH}x${MAX_HEIGHT} píxeles.`);
+          //   URL.revokeObjectURL(objectUrl); // Limpiar la URL creada
+          //   return;
+          // }
 
           // Si cumple con las dimensiones, añadirla al estado
           setImages((prevImages) => {
@@ -119,6 +96,8 @@ export const ImageUploader = ({
   const handleRemoveImage = (id: string) => {
     setImages((prevImages) => prevImages.filter((image) => image.id !== id));
     const imageToRemove = images.find((image) => image.id === id);
+
+    if (onDeleteImage && !imageToRemove?.isLocal) onDeleteImage(id);
 
     // Revocar URL cuando se elimina la imagen
     if (imageToRemove && imageToRemove.isLocal)

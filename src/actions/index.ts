@@ -4,6 +4,7 @@ export * from './auth/check-token';
 
 // File
 export * from './file/upload-file';
+export * from './file/delete-file';
 
 // Pets
 export * from './pets/create-pet';

@@ -15,7 +15,6 @@ export const uploadFile = async (data: FormData): Promise<FileResponse | null> =
         'authorization': `Bearer ${token}`
       },
       body: data,
-      cache: "no-cache"
     });
 
     if (!resp.ok) {
@@ -26,7 +25,6 @@ export const uploadFile = async (data: FormData): Promise<FileResponse | null> =
 
     return file;
   } catch (error) {
-    console.log('Error fetching pets:', error);
     return null;
   }
 }
