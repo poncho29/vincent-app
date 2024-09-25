@@ -25,7 +25,7 @@ export const getAllPets = async ({ limit = 10, offset = 0 }: Props): Promise<Pet
     });
 
     if (!resp.ok) {
-      throw new Error('Network response was not ok');
+      throw new Error('Network response was not ok.');
     }
 
     const pets = await resp.json();
