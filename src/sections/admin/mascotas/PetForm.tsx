@@ -112,7 +112,7 @@ export const PetForm = ({
           if (!resp.success)
             throw new Error(resp.error || 'Error creando la mascota');
 
-          toast.success('Mascota creada exitosamente');
+          toast.success('Mascota creada exitosamente.');
         }
 
         const resp = await updatePet(newPet);
