@@ -21,7 +21,7 @@ export const login = async ({ email, password }: Props) => {
 
     if (!res.ok) {
       const errorResponse = await res.json();
-      throw new Error(errorResponse.message || 'Invalid credentials');
+      throw new Error(errorResponse.message || 'Invalid credentials.');
     }
 
     const user: UserLogin = await res.json();
