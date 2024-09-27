@@ -9,7 +9,6 @@ interface Props {
   loader?: boolean;
   error?: boolean;
   children: React.ReactNode;
-  classContent?: string;
 }
 
 export const PageContent = ({
@@ -17,14 +16,13 @@ export const PageContent = ({
   pageIcon,
   loader = false,
   error = false,
-  children,
-  classContent = "",
+  children
 }: Props) => {
   return (
     <div
-      className="w-full flex flex-col"
+      className="w-full h-screen overflow-y-auto"
     >
-      <div className="sticky top-0 z-40 w-full flex items-center gap-2 p-5 bg-slate-300 md:static">
+      <div className="sticky top-0 z-40 w-full flex items-center gap-2 p-5 bg-slate-300">
         { pageIcon }
 
         <h2 className="font-mochiypopone text-xl">
@@ -32,30 +30,31 @@ export const PageContent = ({
         </h2>
       </div>
 
-      {loader && <Spinner className="mx-auto" />}
+      <div
+        className={cn(
+          'w-full h-auto p-4',
+          {
+            'flex justify-center mt-20': loader,
+            'flex flex-col items-center justify-center gap-5 mt-20': error && !loader,
+          }
+        )}
+      >
+        {loader && <Spinner className="mx-auto" />}
 
-      {error && !loader && (
-        <div
-          className="w-full flex flex-col items-center gap-4 mt-20"
-        >
-          <MdError size={32} className="text-red-500" />
-          <p className="text-center text-red-500 font-semibold">
-            Ha ocurrido un error al cargar la página <br />
-            Por favor, recargue la página
-          </p>
-        </div>
-      )}
+        {error && !loader && (
+          <>
+            <MdError size={32} className="text-red-500" />
+            <p className="text-center text-red-500 font-semibold">
+              Ha ocurrido un error al cargar la página <br />
+              Por favor, recargue la página
+            </p>
+          </>
+        )}
 
-      {!error && !loader && children && (
-        <div
-          className={cn(
-            'w-full flex flex-col items-center p-4',
-            classContent
-          )}
-        >
-          { children }
-        </div>
-      )}
+        {!error && !loader && children && (
+          <>{children}</>
+        )}
+      </div>
     </div>
   )
 }

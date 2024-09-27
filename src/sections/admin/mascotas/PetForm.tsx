@@ -150,7 +150,7 @@ export const PetForm = ({
 
   return (
     <form
-      className="w-full max-w-md lg:max-w-[1240px]"
+      className="w-full max-w-md mx-auto lg:max-w-[1240px]"
       onSubmit={formik.handleSubmit}
     >
       <div className="flex flex-col gap-4 mb-6 lg:flex-row">

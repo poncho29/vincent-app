@@ -2,6 +2,10 @@
 
 import { useRouter } from 'next/navigation';
 
+import toast from 'react-hot-toast';
+
+import { deletePet } from '@/actions';
+
 import { Table } from '@/components/common';
 
 import { Column, PetTable } from '@/interfaces';
@@ -54,6 +58,26 @@ interface Props {
 export const TablePets = ({ data }: Props) => {
   const router = useRouter();
 
+  const handleDeletePet = async (id: string | undefined) => {
+    if (!id) {
+      toast.error('Error al borrar la mascota');
+      return;
+    };
+
+    const toastId = toast.loading('Borrando mascota...');
+    const response = await deletePet(id);
+
+    if (!response.ok) {
+      toast.remove(toastId);
+      toast.error('Error al borrar la mascota');
+      return;
+    }
+
+    toast.remove(toastId);
+    toast.success('Mascota borrada');
+    router.refresh();
+  }
+
   return (
     <Table
       data={data}
@@ -73,7 +97,7 @@ export const TablePets = ({ data }: Props) => {
         {
           icon: 'delete',
           text: 'Eliminar',
-          onClick: (item) => console.log(item)
+          onClick: (item) => handleDeletePet(item.id)
         }
       ]}
     />

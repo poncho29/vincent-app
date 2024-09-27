@@ -12,13 +12,7 @@ export default async function PetsPage() {
   const { pets } = await getAllPets({ all: true });
 
   const dataTable: PetTable[] = pets.map((pet: Pet) => ({
-    id: pet.id,
-    slug: pet.slug,
-    name: pet.name,
-    adopted: pet.adopted,
-    sterilized: pet.sterilized,
-    vacine: pet.vacine,
-    race: pet.race,
+    ...pet,
     type: pet.type.type,
     sex: pet.sex.sex,
     size: pet.size.size,

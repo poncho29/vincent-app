@@ -8,6 +8,7 @@ export * from './file/delete-file';
 
 // Pets
 export * from './pets/create-pet';
+export * from './pets/delete-pet';
 export * from './pets/get-all-pets';
 export * from './pets/get-pet'; 
 export * from './pets/update-pet';

@@ -21,9 +21,7 @@ export default function AdminLayout({
       <main className="w-full h-screen flex">
         <Sidebar />
 
-        <div className="w-full h-screen overflow-x-hidden overflow-y-auto">
-          { children }
-        </div>
+        { children }
       </main>
 
       <Toaster position="bottom-right" />
