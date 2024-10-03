@@ -1,59 +1,42 @@
-'use client';
+import { MdDeleteForever, MdEditSquare, MdRemoveRedEye } from 'react-icons/md';
 
-import { MdDeleteForever, MdEditSquare, MdRemoveRedEye } from "react-icons/md";
+import { ButtonLink, SearchTable } from '../common';
+import { Switch } from '../form';
 
-import { usePagination, useTableFilter } from "../../hooks";
-
-import { Pagination } from "./Pagination";
-import { ButtonLink } from "./ButtonLink";
-import { Button } from "./Button";
-import { Switch } from "../form";
-
-import { Column } from "../../interfaces";
+import { Column } from '@/interfaces';
 
 interface Props <T>{
   data: T[];
   columns: Column<T>[];
-  controls?: {
-    text: string;
-    icon: 'edit' | 'delete' | 'view';
-    onClick: (item: T) => void;
-  }[];
   searchableFields?: (keyof T)[];
   btnCreate?: {
     href: string;
     text: string;
     textMobile?: string;
-  }
-  isLoading?: boolean;
+  },
+  controls?: (item: T) => React.ReactNode;
+  isLoading?: boolean
 }
 
-export const Table = <T,>({
+export const TableSSR = <T,>({
   data,
   columns,
-  controls = [],
+  controls = () => null,
   searchableFields = [],
   btnCreate,
   isLoading = false
 }: Props<T>) => {
-  const {
-    filteredData,
-    renderColumns,
-    search,
-    handleSetSearch,
-    handleSetColumn
-  } = useTableFilter({
-    data,
-    columns,
-    searchableFields
-  });
-
-  const {
-    paginatedData,
-    pagination,
-    handleChangePage,
-    handleChangePageSize
-  } = usePagination({ data: filteredData, pageSize: 5 });
+  const renderRow = (value: unknown): React.ReactNode => {
+    if (value === null || value === undefined) {
+      return '';
+    } else if (typeof value === 'boolean') {
+      return <Switch disabled checked={value} />
+    } else if (typeof value === 'string' || typeof value === 'number') {
+      return value;
+    } else {
+      return '';
+    }
+  };  
 
   const getStyle = (icon: 'edit' | 'delete' | 'view') => {
     switch (icon) {
@@ -80,66 +63,46 @@ export const Table = <T,>({
         return null;
     }
   }
-
-  const renderRow = (value: unknown): React.ReactNode => {
-    if (value === null || value === undefined) {
-      return '';
-    } else if (typeof value === 'boolean') {
-      return <Switch disabled checked={value} />
-    } else if (typeof value === 'string' || typeof value === 'number') {
-      return value;
-    } else {
-      return '';
-    }
-  };  
-
+  
   return (
     <div className="w-full overflow-x-auto shadow-md bg-sky sm:rounded-lg">
-      { (btnCreate || searchableFields.length > 0) && (
-        <div className="w-full flex items-center justify-between gap-2 px-6 py-4">
-          {btnCreate && (
-            <ButtonLink
-              href={btnCreate?.href || '#'}
-              showIcon={false}
-              className="w-1/2 h-10 max-w-40 md:w-full"
-              variant='outlineSecondary'
-            >
-              <span className="block md:hidden">
-                { btnCreate?.textMobile || 'Crear' }
-              </span>
-              <span className="hidden md:block">
-                { btnCreate?.text || 'Crear' }
-              </span>
-            </ButtonLink>
-          )}
-          
-          {searchableFields.length > 0 && (
-            <input
-              type="search"
-              placeholder="Buscar..."
-              className="w-1/2 max-w-sm px-4 py-2 border border-skyLight rounded-lg focus:outline-sky lg:w-full"
-              value={search}
-              onChange={handleSetSearch}
-            />
-          )}
-        </div>
-      )}
+      <div
+        className="w-full flex items-center justify-between gap-2 px-6 py-4"
+      >
+        {btnCreate && (
+          <ButtonLink
+            href={btnCreate?.href || '#'}
+            showIcon={false}
+            className="w-1/2 h-10 max-w-40 md:w-full"
+            variant='outlineSecondary'
+          >
+            <span className="block md:hidden">
+              { btnCreate?.textMobile || 'Crear' }
+            </span>
+            <span className="hidden md:block">
+              { btnCreate?.text || 'Crear' }
+            </span>
+          </ButtonLink>
+        )}
+        
+        <SearchTable />
+      </div>
 
       <table className="w-full text-sm text-left rtl:text-right">
         <thead className="h-10">
           <tr
             className="text-xs text-blackLight uppercase bg-sky-800"
           >
-            {renderColumns.map((col) => (
+            {columns.map((col) => (
               <th
                 key={col.header}
                 scope="col"
                 className={`text-nowrap px-4 py-2 ${col.sorteable ? 'cursor-pointer' : 'cursor-default'}`}
-                onClick={() => col.sorteable && handleSetColumn(col)}
+                // onClick={() => col.sorteable && handleSetColumn(col)}
               >
                 { col.header }
                 
-                {col.sorteable && col.sortOrder && (
+                {/* {col.sorteable && col.sortOrder && (
                   <span
                     className="ml-2"
                   >
@@ -148,7 +111,7 @@ export const Table = <T,>({
                       col.sortOrder === 'desc' ? '▼' : null
                     }
                   </span>
-                )}
+                )} */}
               </th>
             ))}
             {controls.length > 0 && (
@@ -173,7 +136,7 @@ export const Table = <T,>({
                   Cargando...
                 </td>
               </tr>
-            ) : !isLoading && paginatedData.length === 0 ? (
+            ) : !isLoading && data.length === 0 ? (
               <tr>
                 <td
                   colSpan={columns.length + (controls.length > 0 ? 1 : 0)}
@@ -183,7 +146,7 @@ export const Table = <T,>({
                 </td>
               </tr>
             ) : (
-              paginatedData.map((item, index) => (
+              data.map((item, index) => (
                 <tr
                   key={index}
                   className="text-gray-900 border-b bg-white"
@@ -196,24 +159,12 @@ export const Table = <T,>({
                       {renderRow(item[accessor])}
                     </td>
                   ))}
-                  {controls.length > 0 && (
+                  {controls && (
                     <td
                       key="controls-body"
                       className="flex justify-center gap-2 px-4 py-2"
                     >
-                      {controls.map(({ text, icon, onClick }) => (
-                        <Button
-                          key={text}
-                          showIcon={false}
-                          className={`flex items-center gap-2 ${getStyle(icon)}`}
-                          onClick={() => onClick(item)}
-                        >
-                          { icon && renderIcon(icon) }
-                          <span className="text-xs lg:text-base">
-                            { text }
-                          </span>
-                        </Button>
-                      ))}
+                      {controls(item)}
                     </td>
                   )}
                 </tr>
@@ -222,14 +173,6 @@ export const Table = <T,>({
           }
         </tbody>
       </table>
-
-      <Pagination
-        page={pagination.page}
-        totalPages={pagination.totalPage}
-        pageSize={pagination.pageSize}
-        onChangePage={handleChangePage}
-        onChangePageSize={handleChangePageSize}
-      />
     </div>
   )
 }

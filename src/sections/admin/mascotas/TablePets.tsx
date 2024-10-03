@@ -1,14 +1,16 @@
 'use client';
 
+import { useEffect, useState } from 'react';
+
 import { useRouter } from 'next/navigation';
 
 import toast from 'react-hot-toast';
 
-import { deletePet } from '@/actions';
+import { deletePet, getAllPets } from '@/actions';
 
-import { Table } from '@/components/common';
+import { Spinner, Table } from '@/components/common';
 
-import { Column, PetTable } from '@/interfaces';
+import { Column, Pet, PetTable } from '@/interfaces';
 
 const petsColumns: Column<PetTable>[] = [
   {
@@ -51,12 +53,33 @@ const petsColumns: Column<PetTable>[] = [
 
 export const storeSearchableFields: (keyof PetTable)[] = ['name', 'race', 'size', 'stage'];
 
-interface Props {
-  data: PetTable[];
-}
-
-export const TablePets = ({ data }: Props) => {
+export const TablePets = () => {
   const router = useRouter();
+
+  const [data, setData] = useState<PetTable[]>([]);
+  const [isLoading, setIsLoading] = useState(false);
+
+  useEffect(() => {
+    handleGetPets();
+  }, []);
+
+  const handleGetPets = async () => {
+    setIsLoading(true);
+
+    const { pets } = await getAllPets({ all: true });
+
+    const dataTable: PetTable[] = pets.map((pet: Pet) => ({
+      ...pet,
+      type: pet.type.type,
+      sex: pet.sex.sex,
+      size: pet.size.size,
+      stage: pet.stage.stage
+    }));
+
+    setIsLoading(false);
+
+    setData(dataTable);
+  };
 
   const handleDeletePet = async (id: string | undefined) => {
     if (!id) {
@@ -64,18 +87,24 @@ export const TablePets = ({ data }: Props) => {
       return;
     };
 
-    const toastId = toast.loading('Borrando mascota...');
     const response = await deletePet(id);
 
     if (!response.ok) {
-      toast.remove(toastId);
       toast.error('Error al borrar la mascota');
       return;
     }
 
-    toast.remove(toastId);
     toast.success('Mascota borrada');
-    router.refresh();
+
+    await handleGetPets();
+  }
+
+  if (isLoading) {
+    return (
+      <div className="flex items-center justify-center h-screen">
+        <Spinner />
+      </div>
+    )
   }
 
   return (
