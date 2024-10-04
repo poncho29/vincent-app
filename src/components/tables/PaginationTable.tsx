@@ -13,7 +13,7 @@ interface Props {
   onChangePageSize: (e: number) => void;
 }
 
-export const Pagination = ({
+export const PaginationTable = ({
   page,
   totalPages,
   pageSize,

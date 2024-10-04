@@ -1,9 +1,9 @@
-import { MdDeleteForever, MdEditSquare, MdRemoveRedEye } from 'react-icons/md';
-
-import { ButtonLink, SearchTable } from '../common';
+import { SearchTable } from './SearchTable';
+import { ButtonLink } from '../common';
 import { Switch } from '../form';
 
 import { Column } from '@/interfaces';
+import React from 'react';
 
 interface Props <T>{
   data: T[];
@@ -14,17 +14,19 @@ interface Props <T>{
     text: string;
     textMobile?: string;
   },
+  isLoading?: boolean;
+  // searcher: React.ReactNode,
   controls?: (item: T) => React.ReactNode;
-  isLoading?: boolean
 }
 
 export const TableSSR = <T,>({
   data,
   columns,
-  controls = () => null,
   searchableFields = [],
   btnCreate,
-  isLoading = false
+  isLoading = false,
+  // searcher,
+  controls = () => null,
 }: Props<T>) => {
   const renderRow = (value: unknown): React.ReactNode => {
     if (value === null || value === undefined) {
@@ -37,32 +39,6 @@ export const TableSSR = <T,>({
       return '';
     }
   };  
-
-  const getStyle = (icon: 'edit' | 'delete' | 'view') => {
-    switch (icon) {
-      case 'edit':
-        return '!bg-yellow-500 hover:!bg-yellow-600';
-      case 'delete':
-        return '!bg-red-500 hover:!bg-red-600';
-      case 'view':
-        return '';
-      default:
-        return null;
-    }
-  }
-
-  const renderIcon = (icon: 'edit' | 'delete' | 'view') => {
-    switch (icon) {
-      case 'edit':
-        return <MdEditSquare size={20} />;
-      case 'delete':
-        return <MdDeleteForever size={20} />;
-      case 'view':
-        return <MdRemoveRedEye size={20} />
-      default:
-        return null;
-    }
-  }
   
   return (
     <div className="w-full overflow-x-auto shadow-md bg-sky sm:rounded-lg">
@@ -85,7 +61,7 @@ export const TableSSR = <T,>({
           </ButtonLink>
         )}
         
-        <SearchTable />
+        {/* {searcher} */}
       </div>
 
       <table className="w-full text-sm text-left rtl:text-right">
@@ -159,6 +135,7 @@ export const TableSSR = <T,>({
                       {renderRow(item[accessor])}
                     </td>
                   ))}
+                  
                   {controls && (
                     <td
                       key="controls-body"
@@ -173,6 +150,10 @@ export const TableSSR = <T,>({
           }
         </tbody>
       </table>
+
+      <div className='w-full'>
+          
+      </div>
     </div>
   )
 }

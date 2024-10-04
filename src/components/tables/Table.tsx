@@ -4,10 +4,11 @@ import { MdDeleteForever, MdEditSquare, MdRemoveRedEye } from "react-icons/md";
 
 import { usePagination, useTableFilter } from "../../hooks";
 
-import { Pagination } from "./Pagination";
-import { ButtonLink } from "./ButtonLink";
-import { Button } from "./Button";
+
+import { PaginationTable } from "./PaginationTable";
+import { Button, ButtonLink } from "../common";
 import { Switch } from "../form";
+
 
 import { Column } from "../../interfaces";
 
@@ -223,7 +224,7 @@ export const Table = <T,>({
         </tbody>
       </table>
 
-      <Pagination
+      <PaginationTable
         page={pagination.page}
         totalPages={pagination.totalPage}
         pageSize={pagination.pageSize}

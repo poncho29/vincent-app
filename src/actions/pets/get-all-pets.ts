@@ -11,10 +11,12 @@ interface Props {
 export const getAllPets = async ({
   limit = 12,
   offset = 0 ,
-  all,
+  all = false,
 }: Props): Promise<{ pets: Pet[], total: number }> => {
+  console.log(limit, offset, all)
   try {
-    const URL = `${process.env.API_URL_BASE}`
+    const URL = `${process.env.API_URL_BASE}`;
+    
     const resp = await fetch(`${URL}/pets?limit=${limit}&offset=${offset}&all=${all}`, {
       method: 'GET',
       headers: {

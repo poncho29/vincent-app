@@ -2,9 +2,11 @@ import { MdEditSquare, MdPets } from "react-icons/md";
 
 import { getAllPets } from "@/actions";
 
-import { ButtonLink, ButtonDeleteTable } from "@/components/common";
 import { PageContent } from "@/components/layout";
-import { TableSSR } from "@/components/tables";
+import { ButtonLink } from "@/components/common";
+import { SearchTable, TableSSR } from "@/components/tables";
+
+import { ButtonDeletePet } from "./components";
 
 import { Column, Pet, PetTable } from "@/interfaces";
 
@@ -47,8 +49,19 @@ const petsColumns: Column<PetTable>[] = [
   }
 ];
 
-export default async function PetsPage() {
-  const { pets } = await getAllPets({ all: true });
+interface Props {
+  params: {
+    limit?: number;
+    offset?: number;
+  };
+}
+
+export default async function PetsPage({ params }: Props) {
+  const { limit = 5, offset = 0 } = params;
+
+  const { pets, total } = await getAllPets({ limit, offset });
+
+  console.log(total)
 
   const dataTable: PetTable[] = pets.map((pet: Pet) => ({
     ...pet,
@@ -71,29 +84,30 @@ export default async function PetsPage() {
           text: 'Crear mascota',
           textMobile: 'Crear'
         }}
-        controls={(item) => {
-          return (
-            <>
-              <ButtonLink
-                key='button-edit-pet'
-                showIcon={false}
-                className={`flex items-center gap-2 !bg-yellow-500 hover:!bg-yellow-600`}
-                href={`/admin/mascotas/editar/${item.id}`}
-              >
-                { <MdEditSquare size={20} /> }
-                <span className="text-xs lg:text-base">
-                  Editar
-                </span>
-              </ButtonLink>
+        // searcher={
+        //   <SearchTable />
+        // }
+        controls={(item) => (
+          <>
+            <ButtonLink
+              key='button-edit-pet'
+              showIcon={false}
+              className={`flex items-center gap-2 !bg-yellow-500 hover:!bg-yellow-600`}
+              href={`/admin/mascotas/editar/${item.id}`}
+            >
+              { <MdEditSquare size={20} /> }
+              <span className="text-xs lg:text-base">
+                Editar
+              </span>
+            </ButtonLink>
 
-              <ButtonDeleteTable
-                key='button-delete-pet'
-                id={item.id || ''}
-                text="Eliminar"
-              />
-            </>
-          )
-        }}
+            <ButtonDeletePet
+              key='button-delete-pet'
+              id={item.id || ''}
+              text="Eliminar"
+            />
+          </>
+        )}
       />
     </PageContent>
   );

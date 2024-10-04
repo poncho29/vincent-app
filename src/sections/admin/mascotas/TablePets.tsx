@@ -8,7 +8,8 @@ import toast from 'react-hot-toast';
 
 import { deletePet, getAllPets } from '@/actions';
 
-import { Spinner, Table } from '@/components/common';
+import { Spinner,  } from '@/components/common';
+import { Table } from '@/components/tables';
 
 import { Column, Pet, PetTable } from '@/interfaces';
 
