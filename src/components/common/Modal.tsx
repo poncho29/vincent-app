@@ -19,11 +19,11 @@ export const Modal = ({
 }: Props) => {
   return (
     <div
-    className={`
-      fixed top-0 left-0 w-full h-screen items-center justify-center p-4 z-[100] 
-      bg-black/60 transition-opacity duration-300 ease-in-out 
-      ${isOpen ? 'opacity-100' : 'opacity-0 pointer-events-none'}
-    `}
+      className={`
+        fixed top-0 left-0 w-full h-screen items-center justify-center p-4 z-[100] 
+        bg-black/60 transition-opacity duration-300 ease-in-out 
+        ${isOpen ? 'opacity-100' : 'opacity-0 pointer-events-none'}
+      `}
     >
       <div
         className={`

@@ -50,18 +50,17 @@ const petsColumns: Column<PetTable>[] = [
 ];
 
 interface Props {
-  params: {
+  searchParams: {
     limit?: number;
-    offset?: number;
+    page?: number;
   };
 }
 
-export default async function PetsPage({ params }: Props) {
-  const { limit = 5, offset = 0 } = params;
+export default async function PetsPage({ searchParams }: Props) {
+  const limit = searchParams.limit ? Number(searchParams.limit) : 6;
+  const page = searchParams.page ? Number(searchParams.page) : 1;
 
-  const { pets, total } = await getAllPets({ limit, offset });
-
-  console.log(total)
+  const { pets, totalPages } = await getAllPets({ limit, page });
 
   const dataTable: PetTable[] = pets.map((pet: Pet) => ({
     ...pet,
@@ -87,6 +86,10 @@ export default async function PetsPage({ params }: Props) {
         // searcher={
         //   <SearchTable />
         // }
+        pagination={{
+          page,
+          totalPages
+        }}
         controls={(item) => (
           <>
             <ButtonLink

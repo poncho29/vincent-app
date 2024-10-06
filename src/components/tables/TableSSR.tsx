@@ -4,6 +4,7 @@ import { Switch } from '../form';
 
 import { Column } from '@/interfaces';
 import React from 'react';
+import { PaginationTableSSR } from './PaginationTableSSR';
 
 interface Props <T>{
   data: T[];
@@ -14,6 +15,10 @@ interface Props <T>{
     text: string;
     textMobile?: string;
   },
+  pagination: {
+    page: number;
+    totalPages: number;
+  }
   isLoading?: boolean;
   // searcher: React.ReactNode,
   controls?: (item: T) => React.ReactNode;
@@ -24,6 +29,7 @@ export const TableSSR = <T,>({
   columns,
   searchableFields = [],
   btnCreate,
+  pagination,
   isLoading = false,
   // searcher,
   controls = () => null,
@@ -41,7 +47,7 @@ export const TableSSR = <T,>({
   };  
   
   return (
-    <div className="w-full overflow-x-auto shadow-md bg-sky sm:rounded-lg">
+    <div className="w-full shadow-md bg-sky sm:rounded-lg">
       <div
         className="w-full flex items-center justify-between gap-2 px-6 py-4"
       >
@@ -64,96 +70,100 @@ export const TableSSR = <T,>({
         {/* {searcher} */}
       </div>
 
-      <table className="w-full text-sm text-left rtl:text-right">
-        <thead className="h-10">
-          <tr
-            className="text-xs text-blackLight uppercase bg-sky-800"
-          >
-            {columns.map((col) => (
-              <th
-                key={col.header}
-                scope="col"
-                className={`text-nowrap px-4 py-2 ${col.sorteable ? 'cursor-pointer' : 'cursor-default'}`}
-                // onClick={() => col.sorteable && handleSetColumn(col)}
-              >
-                { col.header }
-                
-                {/* {col.sorteable && col.sortOrder && (
-                  <span
-                    className="ml-2"
-                  >
-                    {
-                      col.sortOrder === 'asc' ? '▲' : 
-                      col.sortOrder === 'desc' ? '▼' : null
-                    }
-                  </span>
-                )} */}
-              </th>
-            ))}
-            {controls.length > 0 && (
-              <th
-                key="controls-head"
-                scope="col"
-                className="text-center text-nowrap px-4 py-2 cursor-default"
-              >
-                Acciones
-              </th>
-            )}
-          </tr>
-        </thead>
-        <tbody>
-          {
-            isLoading ? (
-              <tr>
-                <td
-                  colSpan={columns.length + (controls.length > 0 ? 1 : 0)}
-                  className="h-72 text-2xl text-center text-gray-900 font-medium bg-white"
+      
+      <div className='overflow-x-auto'>
+        <table className="w-full text-sm text-left rtl:text-right">
+          <thead className="h-10">
+            <tr
+              className="text-xs text-blackLight uppercase bg-sky-800"
+            >
+              {columns.map((col) => (
+                <th
+                  key={col.header}
+                  scope="col"
+                  className={`text-nowrap px-4 py-2 ${col.sorteable ? 'cursor-pointer' : 'cursor-default'}`}
+                  // onClick={() => col.sorteable && handleSetColumn(col)}
                 >
-                  Cargando...
-                </td>
-              </tr>
-            ) : !isLoading && data.length === 0 ? (
-              <tr>
-                <td
-                  colSpan={columns.length + (controls.length > 0 ? 1 : 0)}
-                  className="h-72 text-2xl text-center text-gray-900 font-medium bg-white"
-                >
-                  No hay resultados
-                </td>
-              </tr>
-            ) : (
-              data.map((item, index) => (
-                <tr
-                  key={index}
-                  className="text-gray-900 border-b bg-white"
-                >
-                  {columns.map(({ accessor }) => (
-                    <td
-                      key={String(accessor)}
-                      className="text-nowrap capitalize px-4 py-2"
-                    >
-                      {renderRow(item[accessor])}
-                    </td>
-                  ))}
+                  { col.header }
                   
-                  {controls && (
-                    <td
-                      key="controls-body"
-                      className="flex justify-center gap-2 px-4 py-2"
+                  {/* {col.sorteable && col.sortOrder && (
+                    <span
+                      className="ml-2"
                     >
-                      {controls(item)}
-                    </td>
-                  )}
+                      {
+                        col.sortOrder === 'asc' ? '▲' : 
+                        col.sortOrder === 'desc' ? '▼' : null
+                      }
+                    </span>
+                  )} */}
+                </th>
+              ))}
+              {controls.length > 0 && (
+                <th
+                  key="controls-head"
+                  scope="col"
+                  className="text-center text-nowrap px-4 py-2 cursor-default"
+                >
+                  Acciones
+                </th>
+              )}
+            </tr>
+          </thead>
+          <tbody>
+            {
+              isLoading ? (
+                <tr>
+                  <td
+                    colSpan={columns.length + (controls.length > 0 ? 1 : 0)}
+                    className="h-72 text-2xl text-center text-gray-900 font-medium bg-white"
+                  >
+                    Cargando...
+                  </td>
                 </tr>
-              ))
-            )
-          }
-        </tbody>
-      </table>
-
-      <div className='w-full'>
-          
+              ) : !isLoading && data.length === 0 ? (
+                <tr>
+                  <td
+                    colSpan={columns.length + (controls.length > 0 ? 1 : 0)}
+                    className="h-72 text-2xl text-center text-gray-900 font-medium bg-white"
+                  >
+                    No hay resultados
+                  </td>
+                </tr>
+              ) : (
+                data.map((item, index) => (
+                  <tr
+                    key={index}
+                    className="text-gray-900 border-b bg-white"
+                  >
+                    {columns.map(({ accessor }) => (
+                      <td
+                        key={String(accessor)}
+                        className="text-nowrap capitalize px-4 py-2"
+                      >
+                        {renderRow(item[accessor])}
+                      </td>
+                    ))}
+                    
+                    {controls && (
+                      <td
+                        key="controls-body"
+                        className="flex justify-center gap-2 px-4 py-2"
+                      >
+                        {controls(item)}
+                      </td>
+                    )}
+                  </tr>
+                ))
+              )
+            }
+          </tbody>
+        </table>
       </div>
+
+      <PaginationTableSSR
+        page={pagination.page}
+        totalPages={pagination.totalPages}
+      />
     </div>
   )
 }

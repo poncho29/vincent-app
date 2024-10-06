@@ -1,28 +1,36 @@
 'use server';
 
 import { Pet } from "@/interfaces";
+import next from "next";
 
 interface Props {
   limit?: number;
-  offset?: number;
+  page?: number;
   all?: boolean;
 }
 
 export const getAllPets = async ({
-  limit = 12,
-  offset = 0 ,
+  limit = 6,
+  page = 1,
   all = false,
-}: Props): Promise<{ pets: Pet[], total: number }> => {
-  console.log(limit, offset, all)
+}: Props): Promise<{ pets: Pet[], totalPages: number }> => {
+  if (isNaN(Number(limit)) || limit < 6) limit = 6;
+  if (isNaN(Number(page)) || page < 1) page = 1;
+  
+  page = (page - 1) * limit;
+
   try {
     const URL = `${process.env.API_URL_BASE}`;
     
-    const resp = await fetch(`${URL}/pets?limit=${limit}&offset=${offset}&all=${all}`, {
+    const resp = await fetch(`${URL}/pets?limit=${limit}&offset=${page}&all=${all}`, {
       method: 'GET',
       headers: {
         'Content-Type': 'application/json'
       },
-      cache: "no-cache"
+      // cache: 'no-cache',
+      // next: {
+      //   revalidate: 10
+      // }
     });
 
     if (!resp.ok) {
@@ -35,9 +43,9 @@ export const getAllPets = async ({
       pet.images = pet.images.map((image: string) => `${process.env.CLOUDINARY_URL_BUCKET}/${image}`);
     });
 
-    return { pets, total };
+    return { pets, totalPages: Math.ceil(total / limit) };
   } catch (error) {
     console.log('Error fetching pets:', error);
-    return { pets: [], total: 0 };
+    return { pets: [], totalPages: 0 };
   }
 }
