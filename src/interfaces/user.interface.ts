@@ -10,6 +10,10 @@ export interface User {
   isActive: boolean;
 }
 
+export interface UserTable extends Omit<User, 'roles'> {
+  roles: string;
+}
+
 export interface UserLogin {
   id:       string;
   email:    string;

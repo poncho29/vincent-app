@@ -18,3 +18,6 @@ export * from './sex-of-pet/get-all-sexes';
 export * from './size-of-pet/get-all-sizes';
 export * from './stage-of-pet/ge-all-stages';
 export * from './types-of-pet/get-all-types';
+
+// Users
+export * from './users/get-users';
