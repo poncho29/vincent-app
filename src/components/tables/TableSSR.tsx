@@ -1,10 +1,10 @@
-import { SearchTable } from './SearchTable';
+import { PaginationTableSSR } from './PaginationTableSSR';
+// import { SearchTable } from './SearchTable';
 import { ButtonLink } from '../common';
 import { Switch } from '../form';
 
 import { Column } from '@/interfaces';
-import React from 'react';
-import { PaginationTableSSR } from './PaginationTableSSR';
+
 
 interface Props <T>{
   data: T[];
@@ -16,7 +16,6 @@ interface Props <T>{
     textMobile?: string;
   },
   pagination: {
-    page: number;
     totalPages: number;
   }
   isLoading?: boolean;
@@ -111,16 +110,7 @@ export const TableSSR = <T,>({
           </thead>
           <tbody>
             {
-              isLoading ? (
-                <tr>
-                  <td
-                    colSpan={columns.length + (controls.length > 0 ? 1 : 0)}
-                    className="h-72 text-2xl text-center text-gray-900 font-medium bg-white"
-                  >
-                    Cargando...
-                  </td>
-                </tr>
-              ) : !isLoading && data.length === 0 ? (
+              data.length === 0 ? (
                 <tr>
                   <td
                     colSpan={columns.length + (controls.length > 0 ? 1 : 0)}
@@ -161,7 +151,6 @@ export const TableSSR = <T,>({
       </div>
 
       <PaginationTableSSR
-        page={pagination.page}
         totalPages={pagination.totalPages}
       />
     </div>

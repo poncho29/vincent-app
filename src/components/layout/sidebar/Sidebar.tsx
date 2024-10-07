@@ -54,7 +54,7 @@ export const Sidebar = () => {
 
         <hr className='w-full my-4' />
 
-        <div className="grow flex flex-col gap-1">
+        <div className="grow flex flex-col gap-1 overflow-y-auto">
           {adminMenu.map((route) => (
             <LinkSidebar
               route={route}

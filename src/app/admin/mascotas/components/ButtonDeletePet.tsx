@@ -35,11 +35,13 @@ export const ButtonDeletePet = ({ id, text }: Props) => {
 
     if (!response.ok) {
       setIsLoading(false);
+      setIsOpenModal(false);
       toast.error('Error al borrar la mascota');
       return;
     }
 
     setIsLoading(false);
+    setIsOpenModal(false);
     toast.success('Mascota borrada');
     router.refresh();
   }

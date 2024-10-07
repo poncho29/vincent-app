@@ -57,10 +57,10 @@ interface Props {
 }
 
 export default async function PetsPage({ searchParams }: Props) {
-  const limit = searchParams.limit ? Number(searchParams.limit) : 6;
+  // const limit = searchParams.limit ? Number(searchParams.limit) : 3;
   const page = searchParams.page ? Number(searchParams.page) : 1;
 
-  const { pets, totalPages } = await getAllPets({ limit, page });
+  const { pets, totalPages } = await getAllPets({ page });
 
   const dataTable: PetTable[] = pets.map((pet: Pet) => ({
     ...pet,
@@ -86,10 +86,7 @@ export default async function PetsPage({ searchParams }: Props) {
         // searcher={
         //   <SearchTable />
         // }
-        pagination={{
-          page,
-          totalPages
-        }}
+        pagination={{totalPages}}
         controls={(item) => (
           <>
             <ButtonLink

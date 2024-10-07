@@ -1,7 +1,6 @@
 'use server';
 
 import { Pet } from "@/interfaces";
-import next from "next";
 
 interface Props {
   limit?: number;
@@ -14,22 +13,22 @@ export const getAllPets = async ({
   page = 1,
   all = false,
 }: Props): Promise<{ pets: Pet[], totalPages: number }> => {
-  if (isNaN(Number(limit)) || limit < 6) limit = 6;
+  if (isNaN(Number(limit)) || limit < 3) limit = 6;
   if (isNaN(Number(page)) || page < 1) page = 1;
   
   page = (page - 1) * limit;
 
   try {
     const URL = `${process.env.API_URL_BASE}`;
-    
+
     const resp = await fetch(`${URL}/pets?limit=${limit}&offset=${page}&all=${all}`, {
       method: 'GET',
       headers: {
         'Content-Type': 'application/json'
       },
-      // cache: 'no-cache',
+      cache: 'no-cache',
       // next: {
-      //   revalidate: 10
+      //   revalidate: 60
       // }
     });
 

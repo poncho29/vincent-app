@@ -14,7 +14,7 @@ import { initialValues, validationSchema } from './pet-form.helper';
 import { urlToFile } from "@/utils";
 
 import { ImageUploader, Input, Select, Switch } from "@/components/form";
-import { Button } from "@/components/common";
+import { Button, Spinner } from '@/components/common';
 
 import { OptionSelect, Pet, PetForm as IPetForm } from '@/interfaces';
 
@@ -124,6 +124,8 @@ export const PetForm = ({
             throw new Error(resp.error || 'Error creando la mascota');
 
           toast.success('Mascota creada exitosamente.');
+          router.push('/admin/mascotas');
+          return;
         }
 
         const resp = await updatePet(newPet);
@@ -131,8 +133,10 @@ export const PetForm = ({
         if (!resp.success)
           throw new Error(resp.error || 'Error creando la mascota');
 
+        toast.success('Mascota actualizada exitosamente.');
         router.push('/admin/mascotas');
       } catch (error) {
+        console.log(error);
         toast.error('Error creando la mascota');
       } finally {
         setIsLoading(false);
@@ -309,6 +313,7 @@ export const PetForm = ({
           variant="outline"
           showIcon={false}
           disabled={isLoading}
+          className={isLoading ? 'opacity-50' : ''}
           onClick={() => router.push('/admin/mascotas')}
         >
           Cancelar
@@ -319,7 +324,8 @@ export const PetForm = ({
           showIcon={false}
           disabled={isLoading}
         >
-          {pet ? 'Actualizar' : 'Crear'}
+          {isLoading ? <Spinner className="size-6" /> : pet ? 'Actualizar' : 'Crear'}
+          {/* {pet ? 'Actualizar' : 'Crear'} */}
         </Button>
       </div>
     </form>

@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
 
-import toast, { Toaster } from 'react-hot-toast';
+import { Toaster } from 'react-hot-toast';
 
 import { AuthProvider } from "@/context";
 
@@ -20,7 +20,7 @@ export default function AdminLayout({
     <AuthProvider>
       <main className="w-full h-screen flex">
         <Sidebar />
-
+        
         { children }
       </main>
 

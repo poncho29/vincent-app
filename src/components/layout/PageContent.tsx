@@ -20,9 +20,9 @@ export const PageContent = ({
 }: Props) => {
   return (
     <div
-      className="w-full h-screen overflow-y-auto"
+      className="relative w-full h-screen overflow-y-auto"
     >
-      <div className="sticky top-0 z-40 w-full flex items-center gap-2 p-5 bg-slate-300">
+      <div className="sticky top-0 left-0 w-full h-[68px] flex items-center gap-2 p-5 bg-slate-300 z-40">
         { pageIcon }
 
         <h2 className="font-mochiypopone text-xl">
@@ -32,7 +32,7 @@ export const PageContent = ({
 
       <div
         className={cn(
-          'w-full h-auto p-4',
+          'w-full p-4',
           {
             'flex justify-center mt-20': loader,
             'flex flex-col items-center justify-center gap-5 mt-20': error && !loader,

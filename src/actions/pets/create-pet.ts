@@ -26,7 +26,7 @@ export const createPet = async (pet: PetTable): Promise<{ success: boolean, erro
     
     return { success: true, error: null };
   } catch (error) {
-    const message = error instanceof Error ? error.message : 'Error creating pet';
+    const message = error instanceof Error ? error.message : 'Error creando la mascota';
     return { success: false, error: message };
   }
 }
