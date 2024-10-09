@@ -125,10 +125,10 @@ export const TableSSR = <T,>({
                     key={index}
                     className="text-gray-900 border-b bg-white"
                   >
-                    {columns.map(({ accessor }) => (
+                    {columns.map(({ accessor, capitalize }) => (
                       <td
                         key={String(accessor)}
-                        className="text-nowrap capitalize px-4 py-2"
+                        className={`text-nowrap px-4 py-2 ${capitalize || capitalize === undefined ? 'capitalize' : ''}`}
                       >
                         {renderRow(item[accessor])}
                       </td>

@@ -21,7 +21,8 @@ const usersColumns: Column<UserTable>[] = [
   },
   {
     header: 'Correo',
-    accessor: 'email'
+    accessor: 'email',
+    capitalize: false
   },
   {
     header: 'Telefono',
@@ -29,7 +30,8 @@ const usersColumns: Column<UserTable>[] = [
   },
   {
     header: 'Roles',
-    accessor: 'roles'
+    accessor: 'roles',
+    capitalize: false
   },
   {
     header: 'Estado',
@@ -49,11 +51,9 @@ export default async function UsersPage({ searchParams }: Props) {
 
   const { users, totalPages } = await getUsers({ page });
 
-  console.log(users)
   const dataTable: UserTable[] = users.map((user: User) => ({
     ...user,
     roles: user.roles.join(', '),
-    // isActive: user.isActive ? 'Activo' : 'Inactivo'
   }))
 
   return (

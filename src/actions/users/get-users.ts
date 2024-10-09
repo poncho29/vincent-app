@@ -1,6 +1,7 @@
 'use server';
 
 import { User } from "@/interfaces";
+import { cookies } from "next/headers";
 
 interface Props {
   limit?: number;
@@ -11,6 +12,8 @@ export const getUsers = async ({
   limit = 6,
   page = 1,
 }: Props): Promise<{ users: User[], totalPages: number }> => {
+  const token = cookies().get('authToken')?.value;
+
   if (isNaN(Number(limit)) || limit < 3) limit = 6;
   if (isNaN(Number(page)) || page < 1) page = 1;
   
@@ -22,7 +25,8 @@ export const getUsers = async ({
     const resp = await fetch(`${URL}/auth/users?limit=${limit}&offset=${page}`, {
       method: 'GET',
       headers: {
-        'Content-Type': 'application/json'
+        'Content-Type': 'application/json',
+        'authorization': `Bearer ${token}`
       },
       cache: 'no-cache',
     });

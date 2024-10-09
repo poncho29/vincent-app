@@ -1,6 +1,6 @@
 import * as Yup from 'yup';
 
-import { PetForm, PetTable } from '@/interfaces';
+import { PetForm } from '@/interfaces';
 
 export const initialValues: PetForm = {
   id: '',
@@ -15,7 +15,6 @@ export const initialValues: PetForm = {
   size: '',
   stage: '',
   images: []
-  // images: ['vincent/qkmal3cyi5ianv8r75rl', 'vincent/pwxsgth0nd2paomn8alw']
 }
 
 export const validationSchema = Yup.object().shape({

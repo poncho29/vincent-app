@@ -14,6 +14,11 @@ export interface UserTable extends Omit<User, 'roles'> {
   roles: string;
 }
 
+export interface UserForm extends Omit<User, 'id' | 'roles'> {
+  id?: string;
+  roles: string;
+}
+
 export interface UserLogin {
   id:       string;
   email:    string;

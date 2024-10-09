@@ -5,7 +5,9 @@ export * from './auth/login/LoginForm';
 /**************** ADMIN SECTIONS ******************* */
 // Admin mascotas
 export * from './admin/mascotas/PetForm';
-export * from './admin/mascotas/TablePets';
+
+// Admin usuarios
+export * from './admin/usuarios/UserForm';
 
 /**************** LANDING SECTIONS ******************* */
 // Adoptar sections
