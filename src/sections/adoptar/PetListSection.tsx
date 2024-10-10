@@ -32,9 +32,9 @@ export const PetListSection = () => {
   const handleShowMore = async () => {
     setLoading(true);
 
-    const data = await getAllPets({ limit, offset: pets.length });
+    const data = await getAllPets({ limit, page: pets.length });
     const newPets = [...pets, ...data.pets];
-    const lastPets = newPets.length === data.total;
+    const lastPets = newPets.length === data.totalPages;
 
     if (lastPets) setShowButtom(false);
 
