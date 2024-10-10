@@ -133,6 +133,7 @@ export const TableSSR = <T,>({
                         {renderRow(item[accessor])}
                       </td>
                     ))}
+
                     
                     {controls && (
                       <td
@@ -142,6 +143,7 @@ export const TableSSR = <T,>({
                         {controls(item)}
                       </td>
                     )}
+                    
                   </tr>
                 ))
               )

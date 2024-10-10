@@ -20,4 +20,7 @@ export * from './stage-of-pet/ge-all-stages';
 export * from './types-of-pet/get-all-types';
 
 // Users
+export * from './users/create-user';
+export * from './users/get-user';
 export * from './users/get-users';
+export * from './users/update-user';

@@ -8,10 +8,16 @@ interface Props {
   page?: number;
 }
 
+type TUsersResponse = {
+  users: User[];
+  totalPages: number;
+  errorMessage: string | null;
+}
+
 export const getUsers = async ({
   limit = 6,
   page = 1,
-}: Props): Promise<{ users: User[], totalPages: number }> => {
+}: Props): Promise<TUsersResponse> => {
   const token = cookies().get('authToken')?.value;
 
   if (isNaN(Number(limit)) || limit < 3) limit = 6;
@@ -32,14 +38,30 @@ export const getUsers = async ({
     });
 
     if (!resp.ok) {
+      
+      if (resp.status === 403) {
+        throw new Error('No tienes permisos para realizar esta acción');
+      }
+      
+      console.log(resp);
       throw new Error('Network response was not ok');
     }
 
-    const { users, total }: { users: User[], total: number} = await resp.json();
+    const { users, total } = await resp.json();
 
-    return { users, totalPages: Math.ceil(total / limit) };
+    return {
+      users,
+      totalPages: Math.ceil(total / limit),
+      errorMessage: null
+    };
   } catch (error) {
     console.log('Error fetching users:', error);
-    return { users: [], totalPages: 0 };
+    const errorMessage = error instanceof Error ? error.message : 'Error al obtener usuarios';
+
+    return {
+      users: [],
+      totalPages: 0,
+      errorMessage
+    };
   }
 }

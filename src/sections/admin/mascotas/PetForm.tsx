@@ -149,7 +149,12 @@ export const PetForm = ({
   };
 
   if (isLoadingEdit) {
-    return <div className="w-full max-w-md lg:max-w-[1240px]">Loading...</div>
+    return (
+      <div className="w-full max-w-md flex flex-col text-center mt-20 lg:max-w-[1240px]">
+        <Spinner className="mx-auto" />
+        <span className="mt-3 font-semibold">Cargando...</span>
+      </div>
+    )
   }
 
   return (

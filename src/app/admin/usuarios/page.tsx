@@ -1,4 +1,4 @@
-import { MdEditSquare } from "react-icons/md";
+import { MdEditSquare, MdError } from "react-icons/md";
 import { IoLayers } from "react-icons/io5";
 
 import { getUsers } from "@/actions";
@@ -49,7 +49,7 @@ interface Props {
 export default async function UsersPage({ searchParams }: Props) {
   const page = searchParams.page ? Number(searchParams.page) : 1;
 
-  const { users, totalPages } = await getUsers({ page });
+  const { users, totalPages, errorMessage } = await getUsers({ page });
 
   const dataTable: UserTable[] = users.map((user: User) => ({
     ...user,
@@ -58,41 +58,51 @@ export default async function UsersPage({ searchParams }: Props) {
 
   return (
     <PageContent
-      pageName="Mascotas"
+      pageName="Usuarios"
       pageIcon={<IoLayers size={24} className="text-blackLight" />}
     >
-      <TableSSR
-        data={dataTable}
-        columns={usersColumns}
-        btnCreate={{
-          href: '/admin/usuarios/crear',
-          text: 'Crear usuario',
-          textMobile: 'Crear'
-        }}
-        // searcher={
-        //   <SearchTable />
-        // }
-        pagination={{totalPages}}
-        controls={(item) => (
-          <>
-            <ButtonLink
-              showIcon={false}
-              className={`flex items-center gap-2 !bg-yellow-500 hover:!bg-yellow-600`}
-              href={`/admin/usuarios/editar/${item.id}`}
-            >
-              { <MdEditSquare size={20} /> }
-              <span className="text-xs lg:text-base">
-                Editar
-              </span>
-            </ButtonLink>
+      {errorMessage ? (
+        <div className="h-52 flex flex-col items-center justify-center gap-2">
+          <MdError size={44} />
+          <p>{errorMessage}</p>
+        </div>
+      ) : (
+        <TableSSR
+          data={dataTable}
+          columns={usersColumns}
+          btnCreate={{
+            href: '/admin/usuarios/crear',
+            text: 'Crear usuario',
+            textMobile: 'Crear'
+          }}
+          // searcher={
+          //   <SearchTable />
+          // }
+          pagination={{totalPages}}
+          controls={(item) => {
+            return (
+            <>
+              <ButtonLink
+                showIcon={false}
+                className={`flex items-center gap-2 !bg-yellow-500 hover:!bg-yellow-600`}
+                href={`/admin/usuarios/editar/${item.id}`}
+              >
+                { <MdEditSquare size={20} /> }
+                <span className="text-xs lg:text-base">
+                  Editar
+                </span>
+              </ButtonLink>
+  
+              <ButtonDeleteUser
+                id={item.id || ''}
+                isActive={item.isActive}
+                text={item.isActive ? 'Inactivar' : 'Activar'}
+              />
+            </>
+          )}}
+        />
+      )}
 
-            <ButtonDeleteUser
-              id={item.id || ''}
-              text="Eliminar"
-            />
-          </>
-        )}
-      />
     </PageContent>
   );
 }

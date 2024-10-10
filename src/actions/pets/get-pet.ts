@@ -20,7 +20,7 @@ export const getPet = async (id: string): Promise<Pet | null> => {
 
     return pet;
   } catch (error) {
-    console.log('Error fetching pets:', error);
+    console.log('Error fetching pet:', error);
     return null;
   }
 }
