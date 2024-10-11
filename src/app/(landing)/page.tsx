@@ -10,7 +10,7 @@ import {
 } from "@/sections";
 
 export default async function LandingPage() {
-  const { pets } = await getAllPets({});
+  const { pets } = await getAllPets({ limit: 16, page: 1 });
 
   return (
     <main 

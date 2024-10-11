@@ -1,4 +1,4 @@
-import { MessageSection, PetListSection, SuccessStoriesSection } from "@/sections";
+import { MessageSection, PetListSection } from "@/sections";
 
 export default function AdoptPage() {
   return (
@@ -7,7 +7,7 @@ export default function AdoptPage() {
 
       <PetListSection />
 
-      <SuccessStoriesSection />
-  </main>
+      {/* <SuccessStoriesSection /> */}
+    </main>
   );
 }

@@ -8,7 +8,8 @@ import { Button, PetCard, Spinner } from "@/components/common";
 
 import { Pet } from "@/interfaces";
 
-const limit = 3;
+const limit = 9;
+let page = 1;
 
 export const PetListSection = () => {
   const firstRenderRef = useRef(true);
@@ -18,8 +19,9 @@ export const PetListSection = () => {
   const [showButtom, setShowButtom] = useState(true);
 
   useEffect(() => {
+    page = 1;
     const fetchPets = async () => {
-      const { pets } = await getAllPets({ limit });
+      const { pets } = await getAllPets({ limit, page });
       setPets(pets);
       setLoading(false);
 
@@ -32,9 +34,10 @@ export const PetListSection = () => {
   const handleShowMore = async () => {
     setLoading(true);
 
-    const data = await getAllPets({ limit, page: pets.length });
+    
+    const data = await getAllPets({ limit, page: page += 1 });
     const newPets = [...pets, ...data.pets];
-    const lastPets = newPets.length === data.totalPages;
+    const lastPets = page === data.totalPages;
 
     if (lastPets) setShowButtom(false);
 
