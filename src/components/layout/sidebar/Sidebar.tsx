@@ -2,6 +2,8 @@
 
 import { useEffect, useState } from "react";
 
+import { useAuth } from "@/context";
+
 import { cn } from "@/utils";
 
 import { useScreenSize } from "@/hooks";
@@ -14,7 +16,11 @@ import { ButtonMenu } from "./ButtonMenu";
 
 import { adminMenu } from "@/assets";
 
+import { Roles } from "@/interfaces";
+
 export const Sidebar = () => {
+  const { user } = useAuth();
+
   const { width } = useScreenSize();
   const isMobile = width === 0 ? false : width < 768;
   
@@ -55,16 +61,20 @@ export const Sidebar = () => {
         <hr className='w-full my-4' />
 
         <div className="grow flex flex-col gap-1 overflow-y-auto">
-          {adminMenu.map((route) => (
-            <LinkSidebar
-              route={route}
-              key={route.path}
-              toggleSidebar={toggleSidebar}
-              onToggleSidebar={() => {
-                isMobile && setToggleSidebar(!toggleSidebar);
-              }}
-            />
-          ))}
+          {adminMenu.map((route) => {
+            if (route.path === '/admin/usuarios' && !user?.roles.includes(Roles.superAdmin)) return null;
+
+            return (
+              <LinkSidebar
+                route={route}
+                key={route.path}
+                toggleSidebar={toggleSidebar}
+                onToggleSidebar={() => {
+                  isMobile && setToggleSidebar(!toggleSidebar);
+                }}
+              />
+            )
+          })}
         </div>
         
         <hr className='w-full my-4' />

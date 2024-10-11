@@ -28,15 +28,19 @@ export const login = async ({ email, password }: Props) => {
 
     return { success: true, user };
   } catch (error) {
-    let errorMessage = 'Something went wrong.';
+    let errorMessage = 'Error al iniciar sesión';
 
     if (error instanceof Error) {
       errorMessage = error.message;
+      if (errorMessage === 'Not authorized') {
+        errorMessage = 'No tienes permiso';
+      } else if (errorMessage === 'Credentials are not valid') {
+        errorMessage = 'Credenciales no validas';
+      }
     } else if (typeof error === 'string') {
       errorMessage = error;
     }
     
-    console.error('Login error:', errorMessage);
     return { success: false, message: errorMessage };
   }
 }

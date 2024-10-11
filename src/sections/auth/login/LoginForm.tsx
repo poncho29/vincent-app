@@ -37,7 +37,8 @@ export const LoginForm = () => {
         await login(email, password);
       } catch (error) {
         console.error('Login error', error);
-        setError('Error al iniciar sesión');
+        const errorMessage = error instanceof Error ? error.message : 'Error al iniciar sesión';
+        setError(errorMessage);
       } finally {
         setLoading(false);
       }
@@ -89,7 +90,7 @@ export const LoginForm = () => {
         {loading ? 'Espere...' : 'Ingresar'}
       </Button>
 
-      {error && <p className="text-red-500">{error}</p>}
+      {error && <p className="text-red-500 font-medium mt-4">{error}</p>}
     </form>
   )
 }
