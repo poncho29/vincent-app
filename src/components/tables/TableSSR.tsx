@@ -19,7 +19,7 @@ interface Props <T>{
     totalPages: number;
   }
   isLoading?: boolean;
-  // searcher: React.ReactNode,
+  searcher: React.ReactNode,
   controls?: (item: T) => React.ReactNode;
 }
 
@@ -30,7 +30,7 @@ export const TableSSR = <T,>({
   btnCreate,
   pagination,
   isLoading = false,
-  // searcher,
+  searcher,
   controls = () => null,
 }: Props<T>) => {
   const renderRow = (value: unknown): React.ReactNode => {
@@ -66,7 +66,7 @@ export const TableSSR = <T,>({
           </ButtonLink>
         )}
         
-        {/* {searcher} */}
+        {searcher}
       </div>
 
       

@@ -139,6 +139,7 @@ export const PetForm = ({
         console.log(error);
         toast.error('Error creando la mascota');
       } finally {
+        router.refresh();
         setIsLoading(false);
       }
     },

@@ -15,26 +15,29 @@ export const SearchTable = () => {
   const [value] = useDebounce(search, 300);
 
   const createQueryString = useCallback(
-    (name: string, value: string) => {
-      console.log(name, value)
-      const params = new URLSearchParams(searchParams.toString())
-      params.set(name, value)
- 
-      return params.toString()
+    (searchValue: string) => {
+      const params = new URLSearchParams(searchParams.toString());
+
+      if (searchValue) {
+        params.set('search', searchValue);
+        params.delete('page');
+      } else {
+        params.delete('search');
+      }
+
+      return params.toString();
     },
     [searchParams]
-  )
+  );
 
   const handleSetSearch = (e: React.ChangeEvent<HTMLInputElement>) => {
     setSearch(e.target.value);
   }
 
   useEffect(() => {
-    console.log(value)
-
-    const query = createQueryString('q', value)
-    console.log(query)
-    router.push(pathname + '?' + createQueryString('search', value))
+    const queryString = createQueryString(value);
+    router.push(queryString ? `${pathname}?${queryString}` : pathname);
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [value])
 
   return (

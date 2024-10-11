@@ -2,10 +2,9 @@ import { MdEditSquare, MdPets } from "react-icons/md";
 
 import { getAllPets } from "@/actions";
 
+import { SearchTable, TableSSR } from "@/components/tables";
 import { PageContent } from "@/components/layout";
 import { ButtonLink } from "@/components/common";
-import { SearchTable, TableSSR } from "@/components/tables";
-
 import { ButtonDeletePet } from "./components";
 
 import { Column, Pet, PetTable } from "@/interfaces";
@@ -53,14 +52,15 @@ interface Props {
   searchParams: {
     limit?: number;
     page?: number;
+    search?: string;
   };
 }
 
 export default async function PetsPage({ searchParams }: Props) {
-  // const limit = searchParams.limit ? Number(searchParams.limit) : 3;
   const page = searchParams.page ? Number(searchParams.page) : 1;
+  const search = searchParams.search || '';
 
-  const { pets, totalPages } = await getAllPets({ page });
+  const { pets, totalPages } = await getAllPets({ page, search });
 
   const dataTable: PetTable[] = pets.map((pet: Pet) => ({
     ...pet,
@@ -83,9 +83,9 @@ export default async function PetsPage({ searchParams }: Props) {
           text: 'Crear mascota',
           textMobile: 'Crear'
         }}
-        // searcher={
-        //   <SearchTable />
-        // }
+        searcher={
+          <SearchTable />
+        }
         pagination={{totalPages}}
         controls={(item) => (
           <>

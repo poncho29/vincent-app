@@ -3,11 +3,11 @@ import { IoLayers } from "react-icons/io5";
 
 import { getUsers } from "@/actions";
 
+import { SearchTable, TableSSR } from "@/components/tables";
 import { PageContent } from "@/components/layout";
 import { ButtonLink } from "@/components/common";
-import { TableSSR } from "@/components/tables";
-
 import { ButtonDeleteUser } from "./components";
+
 import { Column, User, UserTable } from "@/interfaces";
 
 const usersColumns: Column<UserTable>[] = [
@@ -43,18 +43,20 @@ interface Props {
   searchParams: {
     limit?: number;
     page?: number;
+    search?: string;
   };
 }
 
 export default async function UsersPage({ searchParams }: Props) {
   const page = searchParams.page ? Number(searchParams.page) : 1;
+  const search = searchParams.search || '';
 
-  const { users, totalPages, errorMessage } = await getUsers({ page });
+  const { users, totalPages, errorMessage } = await getUsers({ page, search });
 
   const dataTable: UserTable[] = users.map((user: User) => ({
     ...user,
     roles: user.roles.join(', '),
-  }))
+  }));
 
   return (
     <PageContent
@@ -75,9 +77,9 @@ export default async function UsersPage({ searchParams }: Props) {
             text: 'Crear usuario',
             textMobile: 'Crear'
           }}
-          // searcher={
-          //   <SearchTable />
-          // }
+          searcher={
+            <SearchTable />
+          }
           pagination={{totalPages}}
           controls={(item) => {
             return (

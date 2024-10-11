@@ -6,6 +6,7 @@ import { cookies } from "next/headers";
 interface Props {
   limit?: number;
   page?: number;
+  search?: string;
 }
 
 type TUsersResponse = {
@@ -17,6 +18,7 @@ type TUsersResponse = {
 export const getUsers = async ({
   limit = 6,
   page = 1,
+  search = '',
 }: Props): Promise<TUsersResponse> => {
   const token = cookies().get('authToken')?.value;
 
@@ -28,7 +30,7 @@ export const getUsers = async ({
   try {
     const URL = `${process.env.API_URL_BASE}`;
 
-    const resp = await fetch(`${URL}/auth/users?limit=${limit}&offset=${page}`, {
+    const resp = await fetch(`${URL}/auth/users?limit=${limit}&offset=${page}&search=${search}`, {
       method: 'GET',
       headers: {
         'Content-Type': 'application/json',
@@ -51,7 +53,7 @@ export const getUsers = async ({
 
     return {
       users,
-      totalPages: Math.ceil(total / limit),
+      totalPages: total === 0 ? 1 : Math.ceil(total / limit),
       errorMessage: null
     };
   } catch (error) {

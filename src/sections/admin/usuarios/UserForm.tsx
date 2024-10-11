@@ -2,7 +2,7 @@
 
 import { useEffect, useState } from "react";
 
-import { useRouter } from "next/navigation";
+import { redirect, useRouter } from "next/navigation";
 
 import toast from "react-hot-toast";
 import { useFormik } from "formik";
@@ -12,10 +12,11 @@ import { createUser, updateUser } from "@/actions";
 import { Input, Select, Switch } from "@/components/form";
 import { Button, Spinner } from "@/components/common";
 
+import { generatePassword } from "@/utils";
+
 import { initialValues, validationUserSchema } from "./user-form.helper";
 
 import { Roles, User } from "@/interfaces";
-import { generatePassword } from "@/utils";
 
 const rolesOptions = [
   { label: 'Super admin', value: Roles.superAdmin },
@@ -80,6 +81,7 @@ export const UserForm = ({
         setIsLoading(false);
         toast.success('Usuario creado');
         router.push('/admin/usuarios');
+        router.refresh();
       } else {
         const id = user?.id;
         if (body.password === '') delete body.password;
@@ -100,6 +102,7 @@ export const UserForm = ({
         setIsLoading(false);
         toast.success('Usuario actualizado exitosamente.');
         router.push('/admin/usuarios');
+        router.refresh();
       }
     }
   });

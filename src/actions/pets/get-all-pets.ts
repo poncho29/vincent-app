@@ -6,12 +6,14 @@ interface Props {
   limit?: number;
   page?: number;
   all?: boolean;
+  search?: string;
 }
 
 export const getAllPets = async ({
   limit = 6,
   page = 1,
   all = false,
+  search = '',
 }: Props): Promise<{ pets: Pet[], totalPages: number }> => {
   if (isNaN(Number(limit)) || limit < 3) limit = 6;
   if (isNaN(Number(page)) || page < 1) page = 1;
@@ -21,15 +23,12 @@ export const getAllPets = async ({
   try {
     const URL = `${process.env.API_URL_BASE}`;
 
-    const resp = await fetch(`${URL}/pets?limit=${limit}&offset=${page}&all=${all}`, {
+    const resp = await fetch(`${URL}/pets?limit=${limit}&offset=${page}&all=${all}&search=${search}`, {
       method: 'GET',
       headers: {
         'Content-Type': 'application/json'
       },
       cache: 'no-cache',
-      // next: {
-      //   revalidate: 60
-      // }
     });
 
     if (!resp.ok) {
@@ -42,7 +41,7 @@ export const getAllPets = async ({
       pet.images = pet.images.map((image: string) => `${process.env.CLOUDINARY_URL_BUCKET}/${image}`);
     });
 
-    return { pets, totalPages: Math.ceil(total / limit) };
+    return { pets, totalPages: total === 0 ? 1 : Math.ceil(total / limit) };
   } catch (error) {
     console.log('Error fetching pets:', error);
     return { pets: [], totalPages: 0 };
