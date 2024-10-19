@@ -9,7 +9,7 @@ export const metadata: Metadata = {
 
 export default function StepHomePage() {
   return (
-    <main>
+    <main className="animate-fade">
       <StepHomeSection />
 
       <HowToBeHomeSection />

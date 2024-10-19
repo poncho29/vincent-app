@@ -13,7 +13,7 @@ export const metadata: Metadata = {
 
 export default function DonatePage() {
   return (
-    <main>
+    <main className="animate-fade">
       <HelpSaveLivesSection />
   
       <WaysToDonate />

@@ -26,21 +26,25 @@ export const SliderPets = () => {
         esperando un hogar
       </h2>
 
-      <Flicking
-        align="prev"
-        bounce="100%"
-        circular={false}
-        plugins={plugins}
-      >
-        {pets.map((pet, index) => (
-          <PetCard key={index} pet={pet} />
-        ))}
+      {pets.length > 0 ? (
+        <Flicking
+          align="prev"
+          bounce="100%"
+          circular={false}
+          plugins={plugins}
+        >
+          {pets.map((pet, index) => (
+            <PetCard key={index} pet={pet} />
+          ))}
 
-        <ViewportSlot>
-          <span className="hidden flicking-arrow-prev is-circle md:block"></span>
-          <span className="hidden flicking-arrow-next is-circle md:block"></span>
-        </ViewportSlot>
-      </Flicking>
+          <ViewportSlot>
+            <span className="hidden flicking-arrow-prev is-circle md:block"></span>
+            <span className="hidden flicking-arrow-next is-circle md:block"></span>
+          </ViewportSlot>
+        </Flicking>
+      ) : (
+        <p className="text-center text-lg lg:text-3xl">No hay peluditos para mostrar</p>
+      )}
     </section>
   )
 }

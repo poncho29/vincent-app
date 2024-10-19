@@ -9,7 +9,7 @@ export const metadata: Metadata = {
 
 export default function CompaniesPage() {
   return (
-    <main>
+    <main className="animate-fade">
       <CompaniesResumeSection />
 
       <WarningSection />

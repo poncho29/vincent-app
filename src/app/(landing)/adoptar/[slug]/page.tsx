@@ -2,7 +2,8 @@ import { notFound } from "next/navigation";
 
 import { ImportantDetailSection, PetDetailSection, RequirementSection } from "@/sections";
 
-import { pets } from "@/assets";
+// import { pets } from "@/assets";
+import { getPet } from "@/actions";
 
 interface Props {
   params: {
@@ -10,16 +11,17 @@ interface Props {
   }
 }
 
-export default function PetDetailPage({ params }: Props) {
+export default async function PetDetailPage({ params }: Props) {
   const { slug } = params;
 
-  const currentPet = pets.find((pet) => pet.slug === slug);
+  // const currentPet = pets.find((pet) => pet.slug === slug);
+  const pet = await getPet(slug);
 
-  if (!currentPet) notFound();
+  if (!pet) notFound();
 
   return (
     <main>
-      <PetDetailSection pet={currentPet} />
+      <PetDetailSection pet={pet} />
 
       <RequirementSection />
 

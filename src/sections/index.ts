@@ -1,3 +1,15 @@
+/**************** AUTH SECTIONS ******************* */
+// Auth sections
+export * from './auth/login/LoginForm';
+
+/**************** ADMIN SECTIONS ******************* */
+// Admin mascotas
+export * from './admin/mascotas/PetForm';
+
+// Admin usuarios
+export * from './admin/usuarios/UserForm';
+
+/**************** LANDING SECTIONS ******************* */
 // Adoptar sections
 export * from './adoptar/MessageSection';
 export * from './adoptar/PetListSection';
@@ -35,7 +47,7 @@ export * from './home/CompanieSection';
 export * from './home/HelpSection';
 export * from './home/MisionSection';
 export * from './home/SliderPets';
-export * from './home/SupportSection';
+export * from './home/support-section/SupportSection';
 
 // Pet detail sections
 export * from './pet-detail/PetDetailSection';

@@ -50,11 +50,11 @@ export const HowWorkSection = () => {
       </h2>
 
       <div className="flex flex-col items-center justify-center gap-4 lg:flex-row">
-        <Button
+        {/* <Button
           className="w-36 h-[30px] lg:w-56 lg:h-12"
         >
           Apadrinar hoy
-        </Button>
+        </Button> */}
         <ButtonLink
           href="/adoptar"
           variant="secondary"

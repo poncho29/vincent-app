@@ -1,4 +1,4 @@
-import { Button } from '@/components/common';
+import { Button, ButtonLink } from '@/components/common';
 
 export const HelpSection = () => {
   return (
@@ -29,12 +29,13 @@ export const HelpSection = () => {
             </p>
           </div>
 
-          <Button
+          <ButtonLink
+            href='/apoyanos/voluntarios'
             showIcon={false}
             className="w-[142px] h-[30px] mx-auto text-base lg:w-[203px] lg:h-[55px] lg:text-xl"
           >
             Quiero unirme
-          </Button>
+          </ButtonLink>
         </div>
       </div>
 

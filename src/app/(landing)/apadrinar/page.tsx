@@ -7,7 +7,7 @@ import {
 
 export default function SponsorPage() {
   return (
-    <main>
+    <main className="animate-fade">
       <ChangeLivesSection />
 
       <SponsorRequirementSection />

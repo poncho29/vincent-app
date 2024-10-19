@@ -16,6 +16,7 @@ const needs = [
 export const FoundationNeedSection = () => {
   return (
     <section
+      id="needs"
       className="w-full max-w-[375px] mx-auto p-6 
       lg:max-w-section lg:p-12 xl:px-[100px] xl:pt-12 xl:pb-14"
     >

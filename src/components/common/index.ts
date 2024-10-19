@@ -3,5 +3,7 @@ export * from './Button';
 export * from './ButtonLink';
 export * from './Carousel';
 export * from './DonateItem';
+export * from './Modal';
 export * from './PetCard';
-export * from './PetNameCard'
+export * from './PetNameCard';
+export * from './Spinner';
