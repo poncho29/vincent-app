@@ -1,3 +1,5 @@
+import { getAllPets } from "@/actions";
+
 import {
   BannerSection,
   CompanieSection,
