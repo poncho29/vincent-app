@@ -5,7 +5,7 @@ import { Arrow } from "@egjs/flicking-plugins";
 
 import { PetCard } from "@/components/common";
 
-import { pets } from '@/assets';
+// import { pets } from '@/assets';
 
 import "@egjs/react-flicking/dist/flicking.css";
 import "@egjs/flicking-plugins/dist/arrow.css";
